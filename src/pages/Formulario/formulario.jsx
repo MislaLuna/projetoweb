@@ -80,6 +80,29 @@ function Formulario(){
                     <input type="checkbox" id="checkbox" name="checkbox4
                     "/> Opção 4 <br/>
                 </div>
+                <div className="form-group">
+                    <label for="radio1">Masculino</label>
+                    <input type="radio" id="radio1" name="radio"/> 
+                    <label for="radio2">Feminino</label>
+                    <input type="radio" id="radio2" name="radio"/>
+                </div>
+                <div className="form-group">
+                    <label for="select">Select</label>
+                    <select id="select" name="select">
+                    <option value="RJ">RJ</option>
+                    <option value="SP">SP</option>
+                    <option value="MG">MG</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label for="select">Descrição</label>
+                    <textarea id="textarea" name="textarea"></textarea>
+                </div>  
+                <div className="form-group">
+                    <label for="submit">Enviar</label>
+                    <button id="submit" name="submit"></button>
+                </div>
+
 
                                 
                 
