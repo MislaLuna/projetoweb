@@ -1,0 +1,204 @@
+/* Header */
+header {
+    font-family: Helvetica, Arial ,sans-serif;  
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 120px;
+    background-color: #2E8B57; /* Verde escuro, remetendo à Itália */
+    color: white;
+    border-bottom: 5px solid #FF6347; /* Vermelho tomate */
+}
+
+/* Menu de navegação */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.abas {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    padding: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.abas:hover {
+    color: #FF6347; /* Vermelho tomate ao passar o mouse */
+}
+
+/* Separador */
+.separador {
+    color: white;
+    font-size: 22px;
+}
+
+/* Logo ou imagem */
+img {
+    height: 100px;
+}
+/*div{
+border-style: dashed;
+}*/
+
+/* Estilo do conteúdo principal */
+.main-content {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2E8B57; /* Verde escuro */
+}
+
+.app-container {
+    background-color: #f4f4f9; /* Um cinza claro para destacar o formulário */
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px; /* Adiciona o espaço entre o header e o formulário */
+    
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #008000; /* Verde da bandeira */
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #008000; /* Borda verde */
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="password"]::placeholder {
+    color: #aaaaaa;
+  }
+  
+  /* Ajustar o tamanho do campo de descrição (textarea) */
+textarea {
+  height: 100px; /* Aumenta a altura do campo de descrição */
+  width: 390px;
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+/* Ajustar o tamanho do campo de preço */
+input[type="number"] {
+  width: 390px; /* Ajusta para o mesmo tamanho dos outros campos */
+  height: 50px; 
+}
+
+input::placeholder {
+  color: #aaaaaa;
+}
+  .form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2E8B57; /* Botão vermelho */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #FF6347; /* Vermelho tomate */
+  }
+  
+  .register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #2E8B57; /* Verde italiano */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+.app-container {
+  background-color: #f4f4f9;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+/* Estilo para o container de cadastro */
+.cadastro-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Estilo para o container de consulta */
+.consulta-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-grow: 2; /* Aumenta o tamanho da div de consulta */
+}
+
+button {
+  padding: 10px;
+  background-color: #2E8B57;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #FF6347;
+}
+
+hr {
+  margin: 40px 0;
+  border: 1px solid #ddd;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
