@@ -1,0 +1,24 @@
+{
+  "produto": [
+    {
+      "id": "088f",
+      "nome": "Mussarela",
+      "descricao": "Mussarela +Tomate",
+      "precovenda": "59,90"
+    },
+    {
+      "id": "ebdf",
+      "nome": "Pepperoni",
+      "descricao": "Pepperoni + Mussarela",
+      "precovenda": "65,00"
+    },
+    {
+      "id": "ae1b",
+      "nome": "Calabresa",
+      "descricao": "Calabresa + Cebola",
+      "precovenda": "65,00"
+    }
+  ],
+  "categoria": [],
+  "automovel": []
+}

@@ -1,0 +1,285 @@
+/* Estilos gerais */
+:root {
+    --body-font-family: 'League Spartan', sans-serif;
+    --h1-font-size: 62px;
+    --h2-font-size: 48px;
+    --h3-font-size: 36px;
+    --h4-font-size: 32px;
+    --h5-font-size: 24px;
+    --h6-font-size: 22px;
+    --p-font-size: 20px;
+    --btn-font-size: 16px;
+    --copyright-font-size: 14px;
+    --border-radius-large: 100px;
+    --border-radius-medium: 30px;
+    --border-radius-small: 10px;
+    --font-weight-thin: 100;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --white-color: #ffffff;
+    --dark-color:#06003b;
+    --p-color: #717275;
+  }
+  
+  body {
+    font-family: var(--body-font-family);
+    background-color: rgb(231, 226, 219); 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    flex: 2;
+    display: flex;
+    
+  }
+  
+  /*---------------------------------------
+    TYPOGRAPHY               
+  -----------------------------------------*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--dark-color);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: -0.5px;
+  }
+  
+  h1,
+  h2 {
+    letter-spacing: -1.5px;
+  }
+  
+  h1 {
+    font-size: var(--h1-font-size);
+    line-height: normal;
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h2 {
+    font-size: var(--h2-font-size);
+  }
+  
+  h3 {
+    font-size: var(--h3-font-size);
+  }
+  
+  h4 {
+    font-size: var(--h4-font-size);
+  }
+  
+  h5 {
+    font-size: var(--h5-font-size);
+  }
+  
+  h6 {
+    font-size: var(--h6-font-size);
+  }
+  
+  p {
+    color: var(--p-color);
+    font-size: var(--p-font-size);
+    font-weight: var(--font-weight-light);
+  }
+  
+  ul li {
+    color: var(--p-color);
+    font-size: var(--p-font-size);
+    font-weight: var(--font-weight-light);
+  }
+  
+
+
+  .container {
+    padding: 0rem;
+  }
+  /* Cabeçalho */
+  header {
+    background-color: var(--dark-color);
+    padding: 1rem;
+    float: left;
+    height: 742px;
+    width: 20%;
+    border-radius: 25px;
+  }
+  
+
+
+  .linha {
+    height: 1px;  
+    background-color: #cccccc88;  
+    width: calc(100% - -35px);  /* Largura ajustada para considerar a margem esquerda */
+    margin: 0;  
+    margin-left: calc(100% - 400px); 
+    padding: 0;  
+}
+
+
+
+
+  nav ul {
+    display: block;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    margin-top: 25px; /* Espaço acima */
+    margin-bottom: 20px; /* Espaço abaixo */
+
+  }
+  
+  nav ul li {
+    margin: 0 1rem;
+    display: block; /* Faz com que os itens sejam exibidos em bloco */
+    margin-bottom: 60px; /* Espaço entre os itens */
+  }
+  
+  nav ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-semibold);
+  }
+  
+  nav ul li a i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  /* Seção principal */
+
+
+  .dashboard{
+
+    background-color: #bebebe;
+    border-radius: 25px;
+    width: 100%;
+    height: 775px;
+    position: relative;
+
+
+
+  }
+  .dash-2{
+
+    background-color: #dadada;
+    border-radius: 25px;
+    width: 80%;
+    height: 640px;
+    position: sticky;
+    margin-left: 150px;
+    margin: 65px;
+    margin-left: 150px;
+
+  }
+
+
+
+  .hero {
+    background-color: #ffffff; /* Cor branca */
+    padding: 2rem;
+    border-radius: var(--border-radius-medium);
+    text-align: center;
+    margin: 2rem auto; /* Margem superior e inferior de 2rem, e centraliza horizontalmente */
+    max-width: 890px; /* Define uma largura máxima para a div */
+    
+}
+  
+  .hero h1 {
+    font-size: var(--h1-font-size);
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: var(--p-font-size);
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #8c52ff;
+    color: var(--white-color);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius-large);
+    font-size: var(--btn-font-size);
+    font-weight: var(--font-weight-semibold);
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #6e3fd1;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Altura da viewport */
+    padding: 100px;
+  }
+  
+  .feature {
+    background-color: var(--white-color);
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Altera aqui */
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-medium);
+    margin: 0 20px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+  
+  .feature i {
+    font-size: 3rem;
+    color: #8c52ff;
+    margin-bottom: 1rem;
+  }
+  
+  .feature h3 {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+  }
+  
+  .feature p {
+    font-size: var(--p-font-size);
+  }
+  
+.feature .number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--dark-color);
+}
+  
+  /* Rodapé */
+  footer {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    font-size: var(--copyright-font-size);
+    border-radius: 25px;
+  }
+  
+  
