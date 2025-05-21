@@ -168,7 +168,7 @@ const HomePage = () => {
                             <div className="footer-icons">
                                 <p className="mb-2">
                                     <i className="custom-icon bi-globe me-1"></i>
-                                    <a href="#" className="site-footer-link">www.tasknavigation.com</a>
+                                    <a href="" className="site-footer-link">www.tasknavigation.com</a>
                                 </p>
                                 <p>
                                     <i className="custom-icon bi-envelope me-1"></i>

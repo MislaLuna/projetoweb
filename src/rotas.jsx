@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from './pages/Home/inicio'; // A HomePage já contém o cabeçalho
-import Formulario from './pages/Formulario/formulario';
-import LoginPage from "./pages/Login/login";
+    import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+    import HomePage from './pages/Home/inicio';
+    import LoginPage from "./pages/Login/login";
 
-function RoutesApp() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/inicio" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/formulario" element={<Formulario />} />
-            </Routes>
-        </BrowserRouter>
-    );
-}
+    function RoutesApp() {
+        return (
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/inicio" />} />
+                    <Route path="/inicio" element={<HomePage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                   
+                </Routes>
+            </BrowserRouter>
+        );
+    }
 
-export default RoutesApp;
+    export default RoutesApp;

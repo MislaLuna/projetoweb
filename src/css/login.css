@@ -5,17 +5,20 @@ body {
     background-size: cover;
     position: relative;
     padding-top: 150px;
-    padding-bottom: 7px;
+    top: 60px;
+    padding-bottom: 70px;
     margin-left: 50px;
+    background-color: rgba(46, 33, 92, 0.76); /* Aumentar a transparência */
     animation: backgroundSlideIn 2s ease-out forwards; /* Adicionando animação para o fundo */
 }
+
+
 .overlay {
     position:fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(46, 24, 57, 0.259); /* Cor preta com 50% de opacidade */
     pointer-events: none; /* Impede que a camada de overlay bloqueie interações */
 }
 
@@ -29,19 +32,13 @@ body {
 
 /* Estilo da logo */
 .logo-link {
-    position: absolute;  /* A logo será posicionada de forma absoluta */
-    top: 20px;  /* Ajuste a posição vertical conforme necessário */
-    left: 20px;  /* Coloca a logo no canto esquerdo da tela */
-    z-index: 1000;  /* Garantir que a logo apareça acima de outros elementos */
-}
+    margin-right: 10px; /* Espaço entre a logo e o título */
+  }
 
-.logo-image {
-    width: 150px;  /* Tamanho da logo */
-    height: auto;  /* Manter proporção */
-    transition: transform 0.10s ease;  /* Efeito suave ao passar o mouse */
-    box-shadow: -5px -5px 6px rgba(117, 21, 214, 0.548);  /* Sombra apenas à esquerda e em cima */
-}
-
+  .logo-image {
+    width: 80px; /* Ajuste o tamanho da logo conforme necessário */
+    height: auto; /* Manter proporção */
+  }
 /* Efeito de hover na logo */
 .logo-link:hover .logo-image {
     transform: scale(1.1);  /* Aumenta a logo ligeiramente ao passar o mouse */
@@ -64,7 +61,7 @@ body {
     box-shadow: 0 0 40px rgba(38, 39, 40, 0.548);
     margin: auto;
     text-align: center;
-    color: #3d0e54;
+    color: #9437db;
     margin-left: auto; /* Mover para a direita */
     margin-right: 40px; /* Ajuste para não ficar colado na borda */
     background-color: rgb(255, 255, 255);
@@ -76,6 +73,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    color: #b381da;
 
 }
 
@@ -96,7 +94,7 @@ body {
 }
 
 .input-icon i {
-    color: #888;
+    color: #9437db;
     font-size: 20px;
     margin-right: 10px;
 }
@@ -150,9 +148,10 @@ body {
 
 /* Google */
 .google-btn {
-    background-color: white;
+    background-color: rgb(138, 138, 138);
     color: black;
-    border: 1px solid #ccc;
+    border: 2px solid #8c52ff;
+    border-radius: 25px; /* bordas arredondadas */
 }
 
 .google-btn i {
@@ -204,7 +203,8 @@ button {
 
 /* Estilos para o título de login */
 .login-title {
-    color: #4e96c38c;
+    text-align: center;
+    color: #FF5733; /* Altere esta cor para a desejada */
     font-size: 3rem;
     font-weight: bold;
     overflow: hidden;
@@ -213,7 +213,9 @@ button {
     position: relative;
     animation: slideInRight 2s ease-out; /* Animação do título */
 }
-
+.header .login-title {
+    color: #bfa0e4d7; /* Altere para a cor desejada */
+}
 /* Animação para o título deslizar da direita para a esquerda */
 @keyframes slideInRight {
     0% {
@@ -236,34 +238,12 @@ button {
 
 
 
-/* Definir estilo do título */
-.login-title {
-    color: #4e96c38c;
-    font-size: 3rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-    animation: slideInRight 1.5s ease-out;
+
+
+
+button{
+    background-color: #a977cf;;
 }
-
-/* Animação para o texto deslizar da direita para a esquerda */
-@keyframes slideInRight {
-    0% {
-        transform: translateX(100%); /* Começa fora da tela à direita */
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0); /* Chega ao seu lugar original */
-        opacity: 1;
-    }
-}
-
-
-
-
-
 
 
 button:hover {
@@ -273,15 +253,15 @@ button:hover {
 /* Links */
 .links {
     margin-top: 10px;
-    color: #8c52ff;;
+    color: #9437db;
 }
 
 a {
-    color: #8c52ff;;
+    color: #b786dd;
 }
 
 a:hover {
-    color: #3d0e54;
+    color: #ffffff;
 }
 
 /* Efeito de hover no botão */
@@ -291,3 +271,59 @@ a:hover {
     transform: scale(1.05); /* Aumenta ligeiramente o botão */
     transition: all 0.3s ease; /* Transição suave */
 }
+
+
+
+
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10px;
+
+  }
+  
+  .login-box {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    background-color: #151c2c96; /* Um tom de branco mais claro */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(166, 110, 184, 0.644);
+    overflow: hidden;
+
+}
+  
+  .login-left {
+    flex: 1;
+    background-color: #f4f4f4;
+  }
+  
+  .login-left .login-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .login-right {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+  
+  .login-title {
+    text-align: center;
+    color: #ffffffd8;
+    border-radius: 50px #b172b9;
+
+  }
+  .header {
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    margin-bottom: 20px; /* Espaço abaixo do cabeçalho */
+
+  }

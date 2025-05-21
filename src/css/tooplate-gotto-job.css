@@ -18,7 +18,7 @@
   --dark-color:                   #000000;
   --p-color:                      #001249;
   --border-color:                 #e9eaeb;
-  --font-family: 'League Spartan', sans-serif, ;
+  --font-family: 'League Spartan', sans-serif;
   --h1-font-size: 62px;
   --h2-font-size: 48px;
   --h3-font-size: 36px;
@@ -44,12 +44,24 @@ body {
   color: var(--primary-color); /* Cor do texto padrão */
   line-height: 1.5; /* Espaçamento entre linhas */
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: -50px;
+  padding: 0;
+  overflow-x: hidden; /* Isso evita rolagem lateral se algum elemento estourar */
+}
+
 
 /*---------------------------------------
   TYPOGRAPHY               
 -----------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'League Spartan', sans-serif; /* Fonte para títulos */
+  font-family: var(--font-family); /* Fonte para títulos */
   font-weight: 600; /* Peso da fonte para títulos */
 }
 
@@ -59,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   h1 {
-    font-family: 'League Spartan', sans-serif;
+    font-family: var(--font-family);
     font-size: 62px;
     font-weight: 700;
     color: var(--white-color); /* Certifique-se de que a cor do texto esteja visível */
@@ -81,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   h6 {
-    font-family: 'League Spartan', sans-serif;
+    font-family: var(--font-family);
     font-size: 22px;
     font-weight: 600;
     color: var(--white-color); /* Certifique-se de que a cor do texto esteja visível */
@@ -89,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 
   
 p, a, ul {
-  font-family: 'League Spartan', sans-serif; /* Fonte para parágrafos, links e listas */
+  font-family: var(--font-family); /* Fonte para parágrafos, links e listas */
   font-size: 16px; /* Tamanho de fonte para parágrafos, links e listas */
   color: var(--primary-color); /* Cor do texto para parágrafos, links e listas */
 }
@@ -118,7 +130,15 @@ strong {
 
 
 
-
+.tela-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  z-index: 9999;
+}
 
 
 
@@ -139,7 +159,7 @@ strong {
 }
 
 .section-overlay {
-  background: rgba(0, 0, 0, 0.85);
+
   background: var(--custom-btn-bg-color);
   opacity: 0.85;
   position: absolute;
@@ -187,11 +207,10 @@ strong {
 
 .instagram-block {
   position: absolute;
-  height: 700px;
+  height: 610px;
   width: 15%;
   margin: 4px;
-  border: 100%;
-  top: 1520px;
+  border-radius: 100%;
 }
 
 .instagram-block-text {
@@ -354,12 +373,12 @@ nav[aria-label="breadcrumb"] {
 
 .custom-link::after {
   content: "";
-  width: 0;
+  width: 100%;
   height: 2px;
   bottom: 0;
   position: absolute;
-  left: auto;
-  right: 0;
+  left: 0;
+  right: auto;
   z-index: -1;
   transition: width .6s cubic-bezier(.25,.8,.25,1) 0s;
   background: currentColor;
@@ -384,7 +403,7 @@ nav[aria-label="breadcrumb"] {
   CUSTOM BUTTON               
 -----------------------------------------*/
 .custom-btn {
-  font-family: 'League Spartan', sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-weight: 600;
   background-color: var(--custom-btn-bg-color);
@@ -440,15 +459,15 @@ nav[aria-label="breadcrumb"] {
 -----------------------------------------*/
 .navbar {
   background: var(--white-color);
-  padding-top: 15px;
+  padding-top: 0px;
   padding-bottom: 15px;
-  font-family: 'League Spartan', sans-serif, ;;
+  font-family: var(--font-family);
 }
 
 .navbar-brand {
   font-size: var(--h4-font-size);
   font-weight: var(--font-weight-bold);
-  font-family: 'League Spartan', sans-serif, ;
+  font-family: var(--font-family);
 }
 
 .logo-image {
@@ -462,7 +481,7 @@ nav[aria-label="breadcrumb"] {
   font-size: var(--h4-font-size);
   display: block;
   line-height: normal;
-  font-family: 'League Spartan', sans-serif, ;
+  font-family: var(--font-family);
 }
 
 .logo-slogan {
@@ -470,7 +489,7 @@ nav[aria-label="breadcrumb"] {
   font-size: 12px;
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  font-family: 'League Spartan', sans-serif, ;
+  font-family: var(--font-family);
 }
 
 .navbar-brand,
@@ -486,7 +505,7 @@ nav[aria-label="breadcrumb"] {
 }
 
 .nav-link {
-  font-family: 'League Spartan', sans-serif;
+  font-family: var(--font-family);
   font-size: 16px;
   font-weight: 600;
   color: var(--primary-color);
@@ -509,7 +528,7 @@ nav[aria-label="breadcrumb"] {
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link-text {
   color: var(--custom-btn-bg-color);
-  font-family: 'League Spartan', sans-serif ;
+  font-family: var(--font-family);
 }
 
 .dropdown-menu {
