@@ -50,7 +50,7 @@ const LoginPage = () => {
       <section className="login-wrapper">
         <div className="login-box">
           <div className="login-left">
-            <img src="src/pages/img/ebfe96c85b15693c1ffd6ff8bf906e8f.jpg" alt="Imagem Login" className="login-image" />
+            <img src="src/pages/img/633bf7a875d124d2297000448d2933f7.jpg" alt="Imagem Login" className="login-image" />
           </div>
   
           <div className="login-right">
@@ -101,7 +101,7 @@ const LoginPage = () => {
               <div className="links">
                 <Link to="/pagina3">Esqueceu a senha?</Link>
                 <span> | </span>
-                <Link to="/pagina4">Criar conta</Link>
+                <Link to="/contanova">Criar conta</Link>
               </div>
             </form>
           </div>

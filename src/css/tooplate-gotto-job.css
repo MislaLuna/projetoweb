@@ -37,7 +37,7 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 }
-body {
+.body {
   font-family: 'League Spartan', sans-serif; /* Fonte global */
   font-size: 16px; /* Tamanho de fonte padrão */
   font-weight: 400; /* Peso da fonte padrão */
@@ -1340,6 +1340,9 @@ nav[aria-label="breadcrumb"] {
 }
 .site-footer-link {
   color: var(--p-color);
+}
+.site-footer-link:hover{
+  color: #921ecc;
 }
 
 .site-footer-bottom {

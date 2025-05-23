@@ -31,15 +31,15 @@ const HomePage = () => {
 
     // Definindo as categorias
     const categories = [
-        { title: 'Home', icon: 'house', link: 'inicio.jsx' },
-        { title: 'Dashboard', icon: 'speedometer', link: 'pagina2.html' },
-        { title: 'Gestão de Usuário', icon: 'person', link: 'pagina2.html' },
-        { title: 'Gestão de Tarefas', icon: 'check2-square', link: 'pagina2.html' },
-        { title: 'Relatórios', icon: 'file-earmark-bar-graph', link: 'pagina2.html' },
+        { title: 'Home', icon: 'house', link: 'login.jsx' },
+        { title: 'Dashboard', icon: 'speedometer', link: 'login.jsx' },
+        { title: 'Gestão de Usuário', icon: 'person', link: 'login.jsx' },
+        { title: 'Gestão de Tarefas', icon: 'check2-square', link: 'login.jsx' },
+        { title: 'Relatórios', icon: 'file-earmark-bar-graph', link: 'login.jsx' },
     ];
 
     return (
-        <div>
+        <div className='bodyInicio'>
             
 
             <nav className="navbar navbar-expand-lg">
@@ -57,7 +57,7 @@ const HomePage = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav align-items-center ms-lg-5">
                             <li className="nav-item ms-lg-auto">
-                                <a className="nav-link" href="pagina4.html">Cadastrar</a>
+                                <a className="nav-link" href="/contanova">Cadastrar</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link custom-btn btn" href="/login">Login</a>
@@ -92,7 +92,7 @@ const HomePage = () => {
                             {categories.map((category, index) => (
                                 <div className="col-lg-2 col-md-4 col-6" key={index}>
                                     <div className="categories-block">
-                                        <a href={category.link} className="d-flex flex-column justify-content-center align-items-center h-100">
+                                        <a href="/login" className="d-flex flex-column justify-content-center align-items-center h-100">
                                             <i className={`categories-icon bi-${category.icon}`}></i>
                                             <small className="categories-block-title">{category.title}</small>
                                             <div className="categories-block-number d-flex flex-column justify-content-center align-items-center">
@@ -157,6 +157,19 @@ const HomePage = () => {
                     </div>
                 </section>
             </main>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+
+
+
+
 
             <footer className="site-footer" style={{ minHeight: '200px' }}>
                 <div className="container">
@@ -178,7 +191,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="site-footer-bottom" style={{ padding: '20px 0' }}>
+                <div className="site-footer-bottom" style={{ padding: '60px 0' }}>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-4 col-12 d-flex align-items-center flex-column">
