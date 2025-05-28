@@ -1,114 +1,93 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react'; // Importando useState e useEffect
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/owl.carousel.min.css';
-import '../../css/owl.theme.default.min.css';
-import '../../css/login.css';
+import '../../css/login.css'; // Caso seu CSS esteja separado
+import { useNavigate } from 'react-router-dom'; // Importando useNavigate
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate(); // Hook para navegação
+    const [data, setData] = useState([]); // Estado para armazenar dados da API
+    const [username, setUsername] = useState(''); // Estado para o nome de usuário
+    const [password, setPassword] = useState(''); // Estado para a senha
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    // Efeito para buscar dados da API
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080'); // URL da API
+                if (!response.ok) {
+                    throw new Error('Erro na rede');
+                }
+                const result = await response.json();
+                setData(result);
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+            }
+        };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+        fetchData();
+    }, []); // Executa apenas uma vez ao montar o componente
 
-    let errorMessage = "";
+    // Função para lidar com o login
+    const handleLogin = async (e) => {
+        e.preventDefault(); // Previne o comportamento padrão do formulário
 
-    const registeredEmails = [
-      "teste@email.com",
-      "usuario@empresa.com",
-      "admin@site.com"
-    ];
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+        // Aqui você deve adicionar a lógica de autenticação
+        // Exemplo de autenticação (substitua pela sua lógica)
+        if (username && password) {
+            // Simulação de login bem-sucedido
+            console.log('Usuário:', username);
+            console.log('Senha:', password);
+            // Redireciona para a página inicial após login
+            navigate('/inicio');
+        } else {
+            alert('Por favor, preencha todos os campos.');
+        }
+    };
 
-    if (!emailRegex.test(username)) {
-      errorMessage += "Digite um e-mail válido.\n";
-    } else if (!registeredEmails.includes(username)) {
-      errorMessage += "Este e-mail não está registrado.\n";
-    }
-
-    if (!password) {
-      errorMessage += "Preencha o campo Senha.\n";
-    }
-
-    if (errorMessage) {
-      alert(errorMessage);
-    } else {
-      alert("Login bem-sucedido!");
-      navigate('/pagina5');
-    }
-  };
-
-  return (
-    <div>
-      <div className="overlay"></div>
-  
-      <section className="login-wrapper">
-        <div className="login-box">
-          <div className="login-left">
-            <img src="src/pages/img/633bf7a875d124d2297000448d2933f7.jpg" alt="Imagem Login" className="login-image" />
-          </div>
-  
-          <div className="login-right">
-            <div className="header">
-              <Link to="/inicio" className="logo-link">
-                <img src="src/pages/img/image.png" alt="Logo" className="logo-image" />
-              </Link>
-              <h1 className="login-title">LOGIN</h1>
+    return (
+        <div className="login-container">
+            <div className="login-form">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin}>
+                    <div className="form-group">
+                        <div className="input-group">
+                            <i className="bi bi-person" />
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Digite seu usuário"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)} // Atualiza o estado
+                                required // Campo obrigatório
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <div className="input-group">
+                            <i className="bi bi-lock" />
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Digite sua senha"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)} // Atualiza o estado
+                                required // Campo obrigatório
+                            />
+                        </div>
+                    </div>
+                    <div className="footer-links">
+                        <a href="#" className="forgot-password-link">Esqueci a senha?</a>
+                        <a href="#" className="create-account-link">Criar Conta</a>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <label htmlFor="username">Usuário | Email</label>
-                <div className="input-icon">
-                  <i className="bi bi-person"></i>
-                  <input 
-                    type="text" 
-                    id="username" 
-                    placeholder="Digite seu usuário" 
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
-              </div>
-  
-              <div className="input-group">
-                <label htmlFor="password">Senha</label>
-                <div className="input-icon">
-                  <i className="bi bi-lock"></i>
-                  <input 
-                    type="password" 
-                    id="password" 
-                    placeholder="Digite sua senha" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-              </div>
-  
-              <div className="form-actions">
-                <button type="submit">Entrar</button>
-              </div>
-  
-              <div className="links">
-                <Link to="/pagina3">Esqueceu a senha?</Link>
-                <span> | </span>
-                <Link to="/contanova">Criar conta</Link>
-              </div>
-            </form>
-          </div>
+            <div className="login-image">
+                <img src="src/pages/img/mulher-usando-um-tablet-isolado-na-parede-branca_53419-9802.avif" alt="Imagem de Login" />
+            </div>
         </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 export default LoginPage;

@@ -4,6 +4,7 @@ import './css/owl.carousel.min.css';
 import './css/owl.theme.default.min.css';
 import './css/tooplate-gotto-job.css';
 import './css/bootstrap-icons.css';
+import './css/login.css';
 
 function App() {
   return (
