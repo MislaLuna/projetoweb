@@ -1,130 +1,108 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState } from 'react';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/owl.carousel.min.css';
-import '../../css/owl.theme.default.min.css';
-import '../../css/login.css';
+import '../../css/login.css'; // Seu CSS
+import { useNavigate } from 'react-router-dom';
 
-function CriarConta() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
+const RegisterPage = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
-        const name = event.target.name.value.trim();
-        const email = event.target.email.value.trim();
-        const password = event.target.password.value.trim();
-        const confirmPassword = event.target.confirmPassword.value.trim();
-
-        if (!name) {
-            alert("Por favor, digite seu nome completo.");
-            return;
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        if (username && password && email) {
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem. Tente novamente.');
+                return;
+            }
+            try {
+                const response = await fetch('http://localhost:8080/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        nome: username,
+                        email: email,
+                        senha: password,
+                    }),
+                });
+    
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    alert(`Erro: ${errorData.message || 'Erro ao registrar'}`);
+                    return; // Não continue se houve erro
+                }
+    
+                console.log('Usuário registrado com sucesso');
+                // Aqui está a mudança
+                navigate('/login'); // Altere para a rota desejada
+            } catch (error) {
+                console.error('Erro ao registrar:', error);
+                alert('Ocorreu um erro. Tente novamente mais tarde.');
+            }
+        } else {
+            alert('Por favor, preencha todos os campos.');
         }
-
-        if (password !== confirmPassword) {
-            alert("As senhas não coincidem.");
-            return;
-        }
-
-        alert("Conta criada com sucesso!");
-        window.location.href = "/login"; // Altere conforme sua rota
     };
 
     return (
-        <div className="login-wrapper">
-            <div className="login-box">
-
-                {/* Lado esquerdo com imagem */}
-                <div className="login-left">
-                    <img
-                        src="src/pages/img/21866ebfe16d551434bacf1af464cc2e.jpg"
-                        className="login-image"
-                        alt="Imagem criar conta"
-                    />
-                </div>
-
-                {/* Lado direito com formulário */}
-                <div className="login-right">
-                    <a href="/login" className="logo-link">
-                        <img src="/images/T.jpg" alt="Logo" className="logo-image" />
-                    </a>
-
-                    <h2 className="login-title" style={{ color: '#3d0e54d8' }}>CRIAR CONTA</h2>
-
-                    <form onSubmit={handleSubmit}>
-
-                        <div className="input-group">
-                            <label htmlFor="name">Nome Completo</label>
-                            <div className="input-icon">
-                                <i className="material-icons">person</i>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    placeholder="Digite seu nome"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="input-group">
-                            <label htmlFor="email">Email</label>
-                            <div className="input-icon">
-                                <i className="material-icons">email</i>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Digite seu email"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="input-group">
-                            <label htmlFor="password">Senha</label>
-                            <div className="input-icon">
-                                <i className="material-icons">lock</i>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Digite sua senha"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="input-group">
-                            <label htmlFor="confirmPassword">Confirmar Senha</label>
-                            <div className="input-icon">
-                                <i className="material-icons">lock</i>
-                                <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    placeholder="Confirme sua senha"
-                                    required
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-actions">
-                            <button type="submit">Criar Conta</button>
-                        </div>
-
-                        <br />
-
-                        
-
-                        <div className="links">
-                            <Link to="/login">Já tem uma conta? Faça login</Link>
-                        </div>
-                    </form>
+        <div className="login-container">
+            <div className="login-form">
+                <h2>Criar Conta</h2>
+                <form onSubmit={handleRegister}>
+                    <div className="input-group">
+                        <i className="bi bi-person"></i>
+                        <input 
+                            type="text" 
+                            placeholder="Nome de Usuário" 
+                            value={username} 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="input-group">
+                        <i className="bi bi-lock"></i>
+                        <input 
+                            type="password" 
+                            placeholder="Senha" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="input-group">
+                        <i className="bi bi-lock"></i>
+                        <input 
+                            type="password" 
+                            placeholder="Confirme a Senha" 
+                            value={confirmPassword} 
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <div className="input-group">
+                        <i className="bi bi-envelope"></i>
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                        />
+                    </div>
+                    <button type="submit">Criar Conta</button>
+                </form>
+                <div className="footer-links">
+                    <a href="/login" className="create-account-link">Já tem uma conta? Faça login</a>
+                    <a href="/forgot-password" className="forgot-password-link">Esqueceu a senha?</a>
                 </div>
             </div>
         </div>
     );
-}
+};
 
-export default CriarConta;
+export default RegisterPage;

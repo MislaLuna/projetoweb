@@ -18,7 +18,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8080'); // Corrigido
+                const response = await fetch('http://localhost:8080/'); // Corrigido
                 const result = await response.json();
                 setData(result);
             } catch (error) {

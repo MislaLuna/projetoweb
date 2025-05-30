@@ -29,22 +29,35 @@ const LoginPage = () => {
     }, []); // Executa apenas uma vez ao montar o componente
 
     // Função para lidar com o login
-    const handleLogin = async (e) => {
-        e.preventDefault(); // Previne o comportamento padrão do formulário
+ const handleLogin = async (e) => {
+    e.preventDefault(); // Previne o comportamento padrão do formulário
 
-        // Aqui você deve adicionar a lógica de autenticação
-        // Exemplo de autenticação (substitua pela sua lógica)
-        if (username && password) {
-            // Simulação de login bem-sucedido
-            console.log('Usuário:', username);
-            console.log('Senha:', password);
-            // Redireciona para a página inicial após login
-            navigate('/inicio');
-        } else {
-            alert('Por favor, preencha todos os campos.');
+    if (username && password) {
+        try {
+            const response = await fetch('http://localhost:8080/usuarios', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao fazer login');
+            }
+
+            const result = await response.json();
+            // Supondo que a API retorne um token ou uma confirmação
+            console.log('Login bem-sucedido:', result);
+            navigate('/inicio'); // Redireciona para a página inicial
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            alert('Login falhou! Verifique suas credenciais.');
         }
-    };
-
+    } else {
+        alert('Por favor, preencha todos os campos.');
+    }
+};
     return (
         <div className="login-container">
             <div className="login-form">
@@ -78,7 +91,7 @@ const LoginPage = () => {
                     </div>
                     <div className="footer-links">
                         <a href="#" className="forgot-password-link">Esqueci a senha?</a>
-                        <a href="#" className="create-account-link">Criar Conta</a>
+                        <a href="/contanova" className="forgot-password-link">Criar Conta</a>
                     </div>
                     <button type="submit">Entrar</button>
                 </form>
