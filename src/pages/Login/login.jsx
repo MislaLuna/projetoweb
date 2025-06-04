@@ -1,97 +1,72 @@
-import React, { useState, useEffect } from 'react'; // Importando useState e useEffect
+import React, { useState } from 'react';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/login.css'; // Caso seu CSS esteja separado
-import { useNavigate } from 'react-router-dom'; // Importando useNavigate
+import '../../css/login.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const navigate = useNavigate(); // Hook para navegação
-    const [data, setData] = useState([]); // Estado para armazenar dados da API
-    const [username, setUsername] = useState(''); // Estado para o nome de usuário
-    const [password, setPassword] = useState(''); // Estado para a senha
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    // Efeito para buscar dados da API
-    useEffect(() => {
-        const fetchData = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        if (email && password) {
             try {
-                const response = await fetch('http://localhost:8080'); // URL da API
-                if (!response.ok) {
-                    throw new Error('Erro na rede');
+                const response = await fetch('http://localhost:8080/usuarios/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, senha: password }),
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+                    console.log('Login bem-sucedido:', user);
+                    navigate('/inicio');
+                } else {
+                    const error = await response.text();
+                    alert(`Erro ao fazer login: ${error}`);
                 }
-                const result = await response.json();
-                setData(result);
             } catch (error) {
-                console.error('Erro ao buscar dados:', error);
+                console.error('Erro ao fazer login:', error);
+                alert('Erro de conexão. Tente novamente.');
             }
-        };
-
-        fetchData();
-    }, []); // Executa apenas uma vez ao montar o componente
-
-    // Função para lidar com o login
- const handleLogin = async (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
-
-    if (username && password) {
-        try {
-            const response = await fetch('http://localhost:8080/usuarios', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao fazer login');
-            }
-
-            const result = await response.json();
-            // Supondo que a API retorne um token ou uma confirmação
-            console.log('Login bem-sucedido:', result);
-            navigate('/inicio'); // Redireciona para a página inicial
-        } catch (error) {
-            console.error('Erro ao fazer login:', error);
-            alert('Login falhou! Verifique suas credenciais.');
+        } else {
+            alert('Por favor, preencha todos os campos.');
         }
-    } else {
-        alert('Por favor, preencha todos os campos.');
-    }
-};
+    };
+
     return (
         <div className="login-container">
             <div className="login-form">
                 <h2>Login</h2>
                 <form onSubmit={handleLogin}>
-                    <div className="form-group">
-                        <div className="input-group">
-                            <i className="bi bi-person" />
-                            <input
-                                type="text"
-                                id="username"
-                                placeholder="Digite seu usuário"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)} // Atualiza o estado
-                                required // Campo obrigatório
-                            />
-                        </div>
+                    <div className="input-group">
+                        <i className="bi bi-envelope" />
+                        <input
+                            type="email"
+                            placeholder="Digite seu e-mail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
                     </div>
-                    <div className="form-group">
-                        <div className="input-group">
-                            <i className="bi bi-lock" />
-                            <input
-                                type="password"
-                                id="password"
-                                placeholder="Digite sua senha"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)} // Atualiza o estado
-                                required // Campo obrigatório
-                            />
-                        </div>
+                    <div className="input-group">
+                        <i className="bi bi-lock" />
+                        <input
+                            type="password"
+                            placeholder="Digite sua senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
                     </div>
                     <div className="footer-links">
-                        <a href="#" className="forgot-password-link">Esqueci a senha?</a>
-                        <a href="/contanova" className="forgot-password-link">Criar Conta</a>
+                        <a href="/contanova">Criar Conta</a>
+                        <a href="#">Esqueci minha senha</a>
                     </div>
                     <button type="submit">Entrar</button>
                 </form>
