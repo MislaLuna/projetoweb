@@ -14,12 +14,11 @@ const LoginPage = () => {
 
         if (email && password) {
             try {
-                const response = await fetch('http://localhost:8080/usuarios/login', {
-                    method: 'POST',
+                const response = await fetch(`http://localhost:8080/usuarios/login?email=${encodeURIComponent(email)}&senha=${encodeURIComponent(password)}`, {
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, senha: password }),
                 });
 
                 if (response.ok) {
@@ -65,8 +64,8 @@ const LoginPage = () => {
                         />
                     </div>
                     <div className="footer-links">
-                        <a href="/contanova">Criar Conta</a>
-                        <a href="#">Esqueci minha senha</a>
+                        <a href="/contanova"><b>Criar Conta</b></a>
+                        <a href="/esqueceusenha"><b>Esqueci minha senha</b></a>
                     </div>
                     <button type="submit">Entrar</button>
                 </form>

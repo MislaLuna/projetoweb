@@ -2,7 +2,6 @@ body {
   font-family: 'League Spartan', sans-serif;
   font-size: 16px;
   color: #3d0e54; /* Cor primária */
-
   margin: 0;
   padding: 0;
   background-color: #f3f3f3; /* Cor primária */
@@ -25,15 +24,33 @@ body {
     margin-right: 20px;
     width: 500px;
     height: 420px;
+    margin-top: -50px;
 }
 .login-form-register {
     background: #edebf1; /* Fundo do formulário */
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
+    margin-right: 25px;
+    margin-top: -50px;
     width: 500px;
-    height: 450px;
+    height: 480px;
+}
+.login-form input,
+.login-form-register input {
+    border: none; /* Remove a borda */
+    outline: none; /* Remove contorno ao focar */
+    flex: 1;
+    font-size: 20px;
+    color: #001249;
+    background-color: transparent;
+}
+
+/* Para garantir que o Bootstrap não sobreponha */
+.login-form input:focus,
+.login-form-register input:focus {
+    box-shadow: none;
+    border: none;
 }
 
 
@@ -86,9 +103,35 @@ body {
     background: #bc9aff; /* Cor ao passar o mouse */
 }
 
+
+
+.login-form-register  button{
+    width: 100%;
+    padding: 10px;
+    background: #873fca; /* Cor do botão */
+    color: #ffffff; /* Cor do texto do botão */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 35px;
+}
+.login-form-register button:hover{
+    background: #bc9aff; /* Cor ao passar o mouse */
+}
+
+
+
+
+
+
+
 .login-image img {
     max-width: 67%;
     border-radius: 30px;
+    margin-right: 5px;
+    margin-top: -50px;
+    margin-left: 90px;
 }
 
 .footer-links {

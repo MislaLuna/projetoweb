@@ -30,16 +30,15 @@ const RegisterPage = () => {
                         senha: password,
                     }),
                 });
-    
+
                 if (!response.ok) {
                     const errorData = await response.json();
                     alert(`Erro: ${errorData.message || 'Erro ao registrar'}`);
-                    return; // Não continue se houve erro
+                    return;
                 }
-    
+
                 console.log('Usuário registrado com sucesso');
-                // Aqui está a mudança
-                navigate('/login'); // Altere para a rota desejada
+                navigate('/login');
             } catch (error) {
                 console.error('Erro ao registrar:', error);
                 alert('Ocorreu um erro. Tente novamente mais tarde.');
@@ -51,7 +50,7 @@ const RegisterPage = () => {
 
     return (
         <div className="login-container">
-            <div className="login-form">
+            <div className="login-form-register" >
                 <h2>Criar Conta</h2>
                 <form onSubmit={handleRegister}>
                     <div className="input-group">
@@ -96,10 +95,17 @@ const RegisterPage = () => {
                     </div>
                     <button type="submit">Criar Conta</button>
                 </form>
-                <div className="footer-links">
-                    <a href="/login" className="create-account-link">Já tem uma conta? Faça login</a>
-                    <a href="/forgot-password" className="forgot-password-link">Esqueceu a senha?</a>
+                <div className="footer-links" style={{ marginTop: '15px' }}>
+                    <a href="/login" className="create-account-link">Já tem uma conta? Faça login</a><br/>
+                    <a href="/esqueceusenha" className="forgot-password-link">Esqueceu a senha?</a>
                 </div>
+            </div>
+            <div className="login-image" style={{ flex: 1, maxWidth: '500px', padding: '20px' }}>
+                <img 
+                    src="src/pages/img/Design sem nome.png" 
+                    alt="Imagem Registro" 
+                    style={{ width: '100%', borderRadius: '10px', objectFit: 'cover' }}
+                />
             </div>
         </div>
     );
