@@ -24,7 +24,7 @@ const LoginPage = () => {
                 if (response.ok) {
                     const user = await response.json();
                     console.log('Login bem-sucedido:', user);
-                    navigate('/inicio');
+                    navigate('/home2');
                 } else {
                     const error = await response.text();
                     alert(`Erro ao fazer login: ${error}`);
