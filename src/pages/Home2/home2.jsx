@@ -20,7 +20,7 @@ function Home2() {
       </a>
     </div>
     <ul className="menu">
-      <li><a href="#"><i className="bi bi-house-door-fill"></i> Início</a></li>
+      <li><a href="/inicio"><i className="bi bi-house-door-fill"></i> Início</a></li>
       <li><a href="#"><i className="bi bi-list-task"></i> Gestão de tarefas</a></li>
       <li><a href="#"><i className="bi bi-building"></i> Gestão de departamentos</a></li>
       <li><a href="#"><i className="bi bi-people-fill"></i> Gestão de usuários</a></li>
