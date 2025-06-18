@@ -11,23 +11,23 @@ const ForgotPasswordPage = () => {
     const handleForgotPassword = async (e) => {
         e.preventDefault();
 
-        if (!email) {
+        if (!email.trim()) {
             alert('Por favor, preencha seu e-mail.');
             return;
         }
 
         try {
-            const response = await fetch('http://localhost:8080/recuperar-senha', {
+            const response = await fetch('http://localhost:8080/usuarios/recuperar-senha', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: email }),
+                body: JSON.stringify({ email: email.trim() }),
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                alert(`Erro: ${errorData.message || 'Erro ao solicitar recuperação'}`);
+                const errorText = await response.text(); // Corrigido para ler como texto simples
+                alert(`Erro: ${errorText}`);
                 return;
             }
 
@@ -43,7 +43,9 @@ const ForgotPasswordPage = () => {
         <div className="login-container">
             <div className="login-form">
                 <h2>Recuperar Senha</h2>
-                <p style={{ marginBottom: '15px' }}>Informe seu e-mail cadastrado para receber o link de redefinição de senha.</p>
+                <p style={{ marginBottom: '15px' }}>
+                    Informe seu e-mail cadastrado para receber o link de redefinição de senha.
+                </p>
                 <form onSubmit={handleForgotPassword}>
                     <div className="input-group">
                         <i className="bi bi-envelope"></i>

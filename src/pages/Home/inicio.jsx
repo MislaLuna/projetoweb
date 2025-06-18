@@ -132,7 +132,7 @@ const HomePage = () => {
                                 <div className="instagram-block">
                                     <img src={socialImage} className="about-image custom-border-radius-end img-fluid" alt="grupo" />
                                     <div className="instagram-block-text">
-                                        <a href="https://instagram.com/" className="custom-btn btn">
+                                        <a href="https://www.instagram.com/tasknavigation_/?next=%2F" className="custom-btn btn">
                                             <i className="categories-icon bi-instagram me-1"></i>
                                             @TaskNavigation
                                         </a>
@@ -205,7 +205,7 @@ const HomePage = () => {
                             <div className="col-lg-4 col-12 mt-2 mt-lg-0">
                                 <ul className="social-icon">
                                     <li className="social-icon-item">
-                                        <a href="#" className="social-icon-link bi-instagram"></a>
+                                        <a href="https://www.instagram.com/tasknavigation_/?next=%2F" className="social-icon-link bi-instagram"></a>
                                     </li>
                                     <li className="social-icon-item">
                                         <a href="#" className="social-icon-link bi bi-envelope"></a>

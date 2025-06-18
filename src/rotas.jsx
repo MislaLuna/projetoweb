@@ -6,7 +6,7 @@
     import Home2 from "./pages/Home2/home2";
 
     function RoutesApp() {
-        return (
+        return (    
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Navigate to="/inicio" />} />

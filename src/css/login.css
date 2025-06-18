@@ -1,23 +1,26 @@
-body {
-  font-family: 'League Spartan', sans-serif;
-  font-size: 16px;
-  color: #3d0e54; /* Cor primária */
-  margin: 0;
-  padding: 0;
-  background-color: #f3f3f3; /* Cor primária */
-}
+/* Estilos isolados para a página de login */
 
-.login-container {
+.login-page {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 16px;
+    color: #3d0e54; /* Cor primária */
+    background-color: #f3f3f3; /* Cor primária */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 30px auto;
     margin-top: 300px;
     margin-left: 50px;
-}
-
-.login-form {
-    background: #edebf1; /* Fundo do formulário */
+  }
+  
+  .login-form {
+    background: #d3d1d8;
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -25,140 +28,102 @@ body {
     width: 500px;
     height: 420px;
     margin-top: -50px;
-}
-.login-form-register {
-    background: #edebf1; /* Fundo do formulário */
+  }
+  
+  .login-form-register {
+    background: #d3d1d8;
     border-radius: 30px;
     padding: 40px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-right: 25px;
-    margin-top: -50px;
+    margin-top: -80px;
     width: 500px;
-    height: 480px;
-}
-.login-form input,
-.login-form-register input {
-    border: none; /* Remove a borda */
-    outline: none; /* Remove contorno ao focar */
+    height: 550px;
+  }
+  
+  .login-form input,
+  .login-form-register input {
+    border: none;
+    outline: none;
     flex: 1;
     font-size: 20px;
     color: #001249;
     background-color: transparent;
-}
-
-/* Para garantir que o Bootstrap não sobreponha */
-.login-form input:focus,
-.login-form-register input:focus {
+  }
+  
+  .login-form input:focus,
+  .login-form-register input:focus {
     box-shadow: none;
     border: none;
-}
-
-
-.login-form h2 {
+  }
+  
+  .login-form h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #3d0e54; /* Cor primária */
-}
-
-.login-form .form-group {
+    color: #3d0e54;
+  }
+  
+  .login-form .form-group {
     margin-bottom: 20px;
-}
-
-.input-group {
+  }
+  
+  .input-group {
     display: flex;
-    align-items: center; /* Alinha verticalmente o ícone e o input */
-    background-color: #ffffff; /* Cor de fundo do input */
-    border: 2px solid #e9eaeb; /* Cor da borda */
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #e9eaeb;
     border-radius: 10px;
-    padding: 10px; /* Espaçamento interno */
-}
-
-.input-group i {
-    margin-right: 8px; /* Espaçamento entre o ícone e o input */
-    font-size: 20px; /* Tamanho do ícone */
-    color: #3d0e54; /* Cor do ícone */
-}
-
-.login-form input {
-    border: none; /* Remove a borda do input */
-    outline: none; /* Remove o contorno ao focar */
-    flex: 1; /* Faz o input ocupar o espaço restante */
+    margin-top: 25px;
+    padding: 10px;
+  }
+  
+  .input-group i {
+    margin-right: 8px;
     font-size: 20px;
-    color: #001249; /* Cor do texto */
-}
-
-.login-form button {
+    color: #3d0e54;
+  }
+  
+  .login-form button,
+  .login-form-register button {
     width: 100%;
     padding: 10px;
-    background: #873fca; /* Cor do botão */
-    color: #ffffff; /* Cor do texto do botão */
+    background: #873fca;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
     margin-top: 35px;
-}
-
-.login-form button:hover {
-    background: #bc9aff; /* Cor ao passar o mouse */
-}
-
-
-
-.login-form-register  button{
-    width: 100%;
-    padding: 10px;
-    background: #873fca; /* Cor do botão */
-    color: #ffffff; /* Cor do texto do botão */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 35px;
-}
-.login-form-register button:hover{
-    background: #bc9aff; /* Cor ao passar o mouse */
-}
-
-
-
-
-
-
-
-.login-image img {
+  }
+  
+  .login-form button:hover,
+  .login-form-register button:hover {
+    background: #bc9aff;
+  }
+  
+  .login-image img {
     max-width: 67%;
     border-radius: 30px;
     margin-right: 5px;
     margin-top: -50px;
     margin-left: 90px;
-}
-
-.footer-links {
+  }
+  
+  .footer-links {
     display: flex;
-    justify-content: space-between; /* Alinha os itens nas extremidades */
+    justify-content: space-between;
     margin-top: 20px;
-}
-
-.create-account-link {
-    color: #3d0e54; /* Cor primária */
-    text-decoration: none; /* Remove sublinhado */
-    font-weight: bold; /* Destaca o texto */
-    
-}
-
-.create-account-link:hover {
-    text-decoration: underline; /* Sublinha ao passar o mouse */
-}
-
-.forgot-password-link {
-    color: #3d0e54; /* Cor primária */
+  }
+  
+  .create-account-link,
+  .forgot-password-link {
+    color: #3d0e54;
     text-decoration: none;
-    margin-top: 1px; /* Espaçamento acima do link */
-    font-weight: bold; /* Destaca o texto */
-}
-
-.forgot-password-link:hover {
-    text-decoration: underline; /* Sublinha ao passar o mouse */
-    
-}
+    font-weight: bold;
+  }
+  
+  .create-account-link:hover,
+  .forgot-password-link:hover {
+    text-decoration: underline;
+  }
+  
