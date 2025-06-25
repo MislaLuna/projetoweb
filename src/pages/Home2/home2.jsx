@@ -24,7 +24,7 @@ function Home2() {
   <hr className="sidebar-separator" />
 
   <ul className="menu">
-    <li><a href="/home2"><i className="bi bi-house-door-fill"></i> InícioTESTE</a></li>
+    <li><a href="/home2"><i className="bi bi-house-door-fill"></i> Início</a></li>
     <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> Gestão de tarefas</a></li>
     <li><a href="#"><i className="bi bi-building"></i> Gestão de departamentos</a></li>
     <li><a href="#"><i className="bi bi-people-fill"></i> Gestão de usuários</a></li>
