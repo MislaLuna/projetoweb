@@ -4,6 +4,8 @@
     import RegisterPage from "./pages/CriarConta/contanova";
     import ForgotPasswordPage from "./pages/EsqueceuSenha/esqueceusenha";
     import Home2 from "./pages/Home2/home2";
+    import GestaoTarefas from "./pages/GestaoTarefas/gestaotarefas";
+    
 
     function RoutesApp() {
         return (    
@@ -15,6 +17,7 @@
                     <Route path="/contanova" element={<RegisterPage />} />
                     <Route path="/esqueceusenha" element={<ForgotPasswordPage />} />
                     <Route path="/home2" element={<Home2 />} />
+                    <Route path="/gestaotarefas" element={<GestaoTarefas />} />
                 </Routes>
             </BrowserRouter>
         );

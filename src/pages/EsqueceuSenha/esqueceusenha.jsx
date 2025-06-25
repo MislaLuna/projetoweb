@@ -64,7 +64,7 @@ const ForgotPasswordPage = () => {
                     <a href="/register" className="forgot-password-link">Criar uma Conta</a>
                 </div>
             </div>
-            <div className="login-image" style={{ flex: 1, maxWidth: '500px', padding: '20px' }}>
+            <div className="login-image" style={{ flex: 1, maxWidth: '500px', padding: '150px', borderRadius: '200px', }}>
                 <img
                     src="src/pages/img/7f5c7cd30efc2190db8c19614d073516.png"
                     alt="Imagem Recuperação"

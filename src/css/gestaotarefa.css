@@ -1,0 +1,191 @@
+:root {
+  --body-font-family: 'League Spartan', sans-serif;
+  --h1-font-size: 62px;
+  --h2-font-size: 48px;
+  --h3-font-size: 36px;
+  --p-font-size: 20px;
+  --btn-font-size: 16px;
+  --copyright-font-size: 14px;
+  --border-radius-medium: 30px;
+  --border-radius-large: 100px;
+  --font-weight-light: 300;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --white-color: #ffffff;
+  --dark-color: #3d0e54;
+  --p-color: #717275;
+}
+
+/* Container base */
+.gestaoTarefasContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  font-family: var(--body-font-family);
+  background-color: rgb(230, 230, 231);
+}
+
+/* Sidebar lateral */
+.gestaoTarefasContainer .sidebar {
+  background-color: var(--dark-color);
+  padding: 1rem;
+  width: 20%;
+  height: 100vh;
+  border-radius: 25px;
+  color: var(--white-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.gestaoTarefasContainer .logo img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.gestaoTarefasContainer .menu {
+  list-style-type: none;
+  padding: 10;
+  margin-top: 50px;
+}
+
+.gestaoTarefasContainer .menu li {
+  margin-bottom: 70px;
+}
+
+.gestaoTarefasContainer .menu li a {
+  color: var(--white-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-semibold);
+  font-size: 18px;
+}
+
+.gestaoTarefasContainer .menu li a i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Conteúdo principal */
+.gestaoTarefasContainer .main {
+  margin-left: 22%;
+  flex: 1;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Dashboard */
+.gestaoTarefasContainer .dashboard {
+  background-color: #c7c7c798;
+  border-radius: 25px;
+  padding: 2rem;
+}
+
+.gestaoTarefasContainer .dash-2 {
+  background-color: #dadada;
+  border-radius: 25px;
+  padding: 2rem;
+}
+
+/* Hero */
+.gestaoTarefasContainer .hero {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  text-align: center;
+  max-width: 890px;
+  margin: 2rem auto;
+}
+
+.gestaoTarefasContainer .hero h1 {
+  font-size: var(--h1-font-size);
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+  font-weight: var(--font-weight-bold);
+}
+
+.gestaoTarefasContainer .hero p {
+  font-size: var(--p-font-size);
+  color: var(--p-color);
+  font-weight: var(--font-weight-light);
+}
+
+/* Tabela */
+.gestaoTarefasContainer .table-wrapper {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.gestaoTarefasContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+}
+
+.gestaoTarefasContainer thead {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: left;
+}
+
+.gestaoTarefasContainer th,
+.gestaoTarefasContainer td {
+  padding: 1rem;
+  font-size: var(--p-font-size);
+  border-bottom: 1px solid #ddd;
+}
+
+.gestaoTarefasContainer select {
+  padding: 0.4rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.gestaoTarefasContainer .edit-btn,
+.gestaoTarefasContainer .delete-btn {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.gestaoTarefasContainer .edit-btn i {
+  color: rgb(41, 123, 212);
+}
+
+.gestaoTarefasContainer .delete-btn i {
+  color: rgb(196, 35, 35);
+}
+
+/* Footer */
+.gestaoTarefasContainer .footer-container {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 25px;
+  margin-top: 2rem;
+}
+
+.gestaoTarefasContainer .footer-container p {
+  font-size: var(--copyright-font-size);
+  margin: 0.5rem 0;
+  font-weight: var(--font-weight-light);
+}
+
+.gestaoTarefasContainer .policy-title {
+  color: rgb(69, 142, 224);
+  font-size: var(--h3-font-size);
+  margin-top: 1rem;
+}
+
+.gestaoTarefasContainer .policy-text p {
+  font-size: 16px;
+  color: var(--white-color);
+  margin: 0.3rem 0;
+}

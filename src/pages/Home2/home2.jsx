@@ -3,32 +3,37 @@ import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
 import '../../css/owl.carousel.min.css';
 import '../../css/owl.theme.default.min.css';
-import '../../css/home2.css'; // ou home2.module.css se estiver usando CSS Modules
+import '../../css/home2.css'; 
 import logo from '../img/image.png';
 
 function Home2() {
   return (
     <div className="homeContainer">
-  <div className="sidebar">
-    <div className="logo">
-      <a href="/inicio" className="logo-link">
-        <img 
-          src={logo} 
-          alt="Logo TaskNavigation" 
-          style={{ width: '50%', display: 'block', margin: '0 auto' }} 
-        />
-      </a>
-    </div>
-    <ul className="menu">
-      <li><a href="/inicio"><i className="bi bi-house-door-fill"></i> Início</a></li>
-      <li><a href="#"><i className="bi bi-list-task"></i> Gestão de tarefas</a></li>
-      <li><a href="#"><i className="bi bi-building"></i> Gestão de departamentos</a></li>
-      <li><a href="#"><i className="bi bi-people-fill"></i> Gestão de usuários</a></li>
-      <li><a href="#"><i className="bi bi-speedometer2"></i> DashBoard</a></li>
-      <li><a href="#"><i className="bi bi-graph-up"></i> Relatórios</a></li>
-      <li><a href="#"><i className="bi bi-gear-fill"></i> Configurações</a></li>
-    </ul>
+<div className="sidebar">
+  <div className="logo">
+    <a href="/inicio" className="logo-link">
+      <img 
+        src={logo} 
+        alt="Logo TaskNavigation" 
+        style={{ width: '50%', display: 'block', margin: '0 auto' }} 
+      />
+    </a>
   </div>
+
+  {/* Linha separadora */}
+  <hr className="sidebar-separator" />
+
+  <ul className="menu">
+    <li><a href="/home2"><i className="bi bi-house-door-fill"></i> InícioTESTE</a></li>
+    <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> Gestão de tarefas</a></li>
+    <li><a href="#"><i className="bi bi-building"></i> Gestão de departamentos</a></li>
+    <li><a href="#"><i className="bi bi-people-fill"></i> Gestão de usuários</a></li>
+    <li><a href="#"><i className="bi bi-speedometer2"></i> DashBoard</a></li>
+    <li><a href="#"><i className="bi bi-graph-up"></i> Relatórios</a></li>
+    <li><a href="#"><i className="bi bi-gear-fill"></i> Configurações</a></li>
+  </ul>
+</div>
+ 
 
   <div className="main">
     <div className="dashboard">
