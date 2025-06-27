@@ -1,231 +1,318 @@
-:root {
-  --body-font-family: 'League Spartan', sans-serif;
-  --h1-font-size: 62px;
-  --h2-font-size: 48px;
-  --h3-font-size: 36px;
-  --p-font-size: 20px;
-  --btn-font-size: 16px;
-  --copyright-font-size: 14px;
-  --border-radius-medium: 30px;
-  --border-radius-large: 100px;
-  --font-weight-light: 300;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --white-color: #ffffff;
-  --dark-color: #3d0e54;
-  --p-color: #717275;
-}
+  :root {
+    --body-font-family: 'League Spartan', sans-serif;
+    --h1-font-size: 62px;
+    --h2-font-size: 48px;
+    --h3-font-size: 36px;
+    --p-font-size: 20px;
+    --btn-font-size: 16px;
+    --copyright-font-size: 14px;
+    --border-radius-medium: 30px;
+    --border-radius-large: 100px;
+    --font-weight-light: 300;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --white-color: #ffffff;
+    --dark-color: #3d0e54;
+    --p-color: #717275;
 
-/* Container base */
-.gestaoTarefasContainer {
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  font-family: var(--body-font-family);
-  background-color: rgb(230, 230, 231);
-}
+    /* Cores personalizadas para botão */
+    --primary-button-color: #6c63ff;
+    --primary-button-hover: #574dcf;
+  }
 
-/* Sidebar lateral */
-.gestaoTarefasContainer .sidebar {
-  background-color: var(--dark-color);
-  padding: 1rem;
-  width: 20%;
-  height: 100vh;
-  border-radius: 25px;
-  color: var(--white-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-}
+  /* Container base */
+  .gestaoTarefasContainer {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    font-family: var(--body-font-family);
+    background-color: rgb(230, 230, 231);
+  }
 
-.gestaoTarefasContainer .logo img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-}
+  /* Sidebar lateral */
+  .gestaoTarefasContainer .sidebar {
+    background-color: var(--dark-color);
+    padding: 1rem;
+    width: 100px;
+    height: 100vh;
+    border-radius: 25px;
+    color: var(--white-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
 
-.gestaoTarefasContainer .menu {
-  list-style-type: none;
-  padding: 10;
-  margin-top: 50px;
-}
+  .gestaoTarefasContainer .logo img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
 
-.gestaoTarefasContainer .menu li {
-  margin-bottom: 70px;
-}
+  .gestaoTarefasContainer .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0px;
+  }
 
-.gestaoTarefasContainer .menu li a {
-  color: var(--white-color);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  font-weight: var(--font-weight-semibold);
-  font-size: 18px;
-}
+  .gestaoTarefasContainer .menu li {
+    margin-bottom: 70px;
+  }
 
-.gestaoTarefasContainer .menu li a i {
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
+  .gestaoTarefasContainer .menu li a {
+    color: var(--white-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: 18px;
+  }
 
-/* Conteúdo principal */
-.gestaoTarefasContainer .main {
-  margin-left: 22%;
-  flex: 1;
-  padding: 2rem;
-  box-sizing: border-box;
-}
+  .gestaoTarefasContainer .menu li a i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
 
-/* Dashboard */
-.gestaoTarefasContainer .dashboard {
-  background-color: #c7c7c798;
-  border-radius: 25px;
-  padding: 2rem;
-}
+  /* Conteúdo principal */
+  .gestaoTarefasContainer .main {
+    margin-left: 22%;
+    flex: 1;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
 
-.gestaoTarefasContainer .dash-2 {
-  background-color: #dadada;
-  border-radius: 25px;
-  padding: 2rem;
-}
+  /* Dashboard */
+  .gestaoTarefasContainer .dashboard {
+    background-color: #c7c7c798;
+    border-radius: 25px;
+    padding: 2rem;
+  }
 
-/* Hero */
-.gestaoTarefasContainer .hero {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  text-align: center;
-  max-width: 890px;
-  margin: 2rem auto;
-}
+  .gestaoTarefasContainer .dash-2 {
+    background-color: #dadada;
+    border-radius: 25px;
+    padding: 2rem;
+  }
 
-.gestaoTarefasContainer .hero h1 {
-  font-size: var(--h1-font-size);
-  margin-bottom: 1rem;
-  color: var(--dark-color);
-  font-weight: var(--font-weight-bold);
-}
+  /* Hero */
+  .gestaoTarefasContainer .hero {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: var(--border-radius-medium);
+    text-align: center;
+    max-width: 890px;
+    margin: 2rem auto;
+  }
 
-.gestaoTarefasContainer .hero p {
-  font-size: var(--p-font-size);
-  color: var(--p-color);
-  font-weight: var(--font-weight-light);
-}
+  .gestaoTarefasContainer .hero h1 {
+    font-size: var(--h1-font-size);
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    font-weight: var(--font-weight-bold);
+  }
 
-/* Tabela */
-.gestaoTarefasContainer .table-wrapper {
-  overflow-x: auto;
-  margin-top: 2rem;
-}
+  .gestaoTarefasContainer .hero p {
+    font-size: var(--p-font-size);
+    color: var(--p-color);
+    font-weight: var(--font-weight-light);
+  }
 
-.gestaoTarefasContainer table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--white-color);
-  border-radius: var(--border-radius-medium);
-  overflow: hidden;
-}
+  /* Tabela */
+  .gestaoTarefasContainer .table-wrapper {
+    overflow-x: auto;
+    margin-top: 2rem;
+  }
 
-.gestaoTarefasContainer thead {
-  background-color: var(--dark-color);
-  color: var(--white-color);
-  text-align: left;
-}
+  .gestaoTarefasContainer table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+  }
 
-.gestaoTarefasContainer th,
-.gestaoTarefasContainer td {
-  padding: 1rem;
-  font-size: var(--p-font-size);
-  border-bottom: 1px solid #ddd;
-}
+  .gestaoTarefasContainer thead {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: left;
+  }
 
-.gestaoTarefasContainer select {
-  padding: 0.4rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+  .gestaoTarefasContainer th,
+  .gestaoTarefasContainer td {
+    padding: 1rem;
+    font-size: var(--p-font-size);
+    border-bottom: 1px solid #ddd;
+  }
 
-.gestaoTarefasContainer .edit-btn,
-.gestaoTarefasContainer .delete-btn {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-right: 0.5rem;
-}
+  .gestaoTarefasContainer select {
+    padding: 0.4rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
 
-.gestaoTarefasContainer .edit-btn i {
-  color: rgb(41, 123, 212);
-}
+  .gestaoTarefasContainer .edit-btn,
+  .gestaoTarefasContainer .delete-btn {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
 
-.gestaoTarefasContainer .delete-btn i {
-  color: rgb(196, 35, 35);
-}
+  .gestaoTarefasContainer .edit-btn i {
+    color: rgb(41, 123, 212);
+  }
 
-/* Footer */
-.gestaoTarefasContainer .footer-container {
-  background-color: var(--dark-color);
-  color: var(--white-color);
-  text-align: center;
-  padding: 2rem;
-  border-radius: 25px;
-  margin-top: 2rem;
-}
+  .gestaoTarefasContainer .delete-btn i {
+    color: rgb(196, 35, 35);
+  }
 
-.gestaoTarefasContainer .footer-container p {
-  font-size: var(--copyright-font-size);
-  margin: 0.5rem 0;
-  font-weight: var(--font-weight-light);
-}
+  /* Botão Criar nova tarefa personalizado */
+  .botao-criar-tarefa {
+    background-color: var(--primary-button-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: var(--font-weight-bold);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
 
-.gestaoTarefasContainer .policy-title {
-  color: rgb(69, 142, 224);
-  font-size: var(--h3-font-size);
-  margin-top: 1rem;
-}
+  .botao-criar-tarefa:hover {
+    background-color: var(--primary-button-hover);
+  }
 
-.gestaoTarefasContainer .policy-text p {
-  font-size: 16px;
-  color: var(--white-color);
-  margin: 0.3rem 0;
-}
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
+  /* Footer */
+  .gestaoTarefasContainer .footer-container {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 2rem;
+    border-radius: 25px;
+    margin-top: 2rem;
+  }
 
-.modal-form {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  position: relative;
-}
+  .gestaoTarefasContainer .footer-container p {
+    font-size: var(--copyright-font-size);
+    margin: 0.5rem 0;
+    font-weight: var(--font-weight-light);
+  }
 
-.modal-form h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--dark-color);
-}
+  .gestaoTarefasContainer .policy-title {
+    color: rgb(69, 142, 224);
+    font-size: var(--h3-font-size);
+    margin-top: 1rem;
+  }
 
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  color: #777;
-  cursor: pointer;
-}
-    
+  .gestaoTarefasContainer .policy-text p {
+    font-size: 16px;
+    color: var(--white-color);
+    margin: 0.3rem 0;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  .modal-form h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+  }
+
+  .botao-criar-tarefa {
+    background-color: #3d0e54; /* roxo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .botao-criar-tarefa:hover {
+    background-color: #574dcf; /* tom mais escuro no hover */
+  }
+  /* Sidebar recolhida por padrão */
+  .sidebar {
+    width: 92px; /* largura padrão (menu recolhido) */
+    transition: width 0.3s ease;
+    overflow-y: auto;
+    height: 100vh;
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .sidebar:hover {
+    width: 320px; /* expande quando passa o mouse */
+  }
+
+  /* Oculta o texto do menu */
+  .sidebar .menu-text {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* Mostra o texto do menu quando hover */
+  .sidebar:hover .menu-text {
+    opacity: 1;
+  }
+
+
+  /* Para garantir que o ícone e texto não quebrem */
+  .sidebar a {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Logo se ajustar ao tamanho também */
+  .sidebar .logo img {
+    transition: all 0.3s ease;
+    width: 90px;
+  }
+
+  .sidebar:hover .logo img {
+    width: 50%;
+  }
+  .close-btn {
+    background-color: #dc3545; /* vermelho Bootstrap */
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .close-btn:hover {
+    background-color: #c82333; /* vermelho mais escuro */
+  }
+  

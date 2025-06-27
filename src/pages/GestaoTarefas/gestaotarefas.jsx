@@ -45,64 +45,56 @@ function GestaoTarefas() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (modoEdicao && idEditando !== null) {
-      // Atualizar tarefa localmente
-      setTarefas(prev =>
-        prev.map(t =>
-          t.id === idEditando
-            ? {
-                ...t,
-                titulo,
-                descricao,
-                prazo,
-                status,
-                prioridade,
-                usuario: {
-                  id: usuarioId,
-                  nome: usuarios.find(u => u.id === parseInt(usuarioId))?.nome || '---'
-                }
-              }
-            : t
-        )
-      );
-    } else {
-      try {
-        const novaTarefa = {
-          titulo,
-          descricao,
-          prazo,
-          status,
-          prioridade,
-          usuario: { id: usuarioId },
-          projeto: null
-        };
-        await axios.post('http://localhost:8080/tarefas', novaTarefa);
-        const res = await axios.get('http://localhost:8080/tarefas');
-        setTarefas(res.data);
-      } catch (error) {
-        console.error('Erro ao criar tarefa:', error);
-      }
-    }
+    const payload = {
+      titulo,
+      descricao,
+      prazo,
+      status,
+      prioridade,
+      usuario: { id: Number(usuarioId) },
+      projeto: null
+    };
 
-    resetForm();
-    setShowForm(false);
+    try {
+      if (modoEdicao && idEditando !== null) {
+        await axios.put(`http://localhost:8080/tarefas/${idEditando}`, {
+          ...payload,
+          idTarefa: idEditando
+        });
+      } else {
+        await axios.post('http://localhost:8080/tarefas', payload);
+      }
+
+      const res = await axios.get('http://localhost:8080/tarefas');
+      setTarefas(res.data);
+      resetForm();
+      setShowForm(false);
+    } catch (error) {
+      console.error('Erro ao salvar tarefa:', error);
+    }
   };
 
-  const handleDeleteLocal = (id) => {
-    // Excluir apenas a tarefa clicada da tela
-    setTarefas(prev => prev.filter(t => String(t.id) !== String(id)));
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(`http://localhost:8080/tarefas/${id}`);
+      if (res.status === 204 || res.status === 200) {
+        setTarefas(prev => prev.filter(t => t.idTarefa !== id));
+      }
+    } catch (error) {
+      console.error('Erro ao deletar tarefa:', error);
+    }
   };
 
   const handleEdit = (tarefa) => {
     setShowForm(true);
     setModoEdicao(true);
-    setIdEditando(tarefa.id);
+    setIdEditando(tarefa.idTarefa);
     setTitulo(tarefa.titulo);
     setDescricao(tarefa.descricao);
     setPrazo(tarefa.prazo);
     setStatus(tarefa.status);
     setPrioridade(tarefa.prioridade);
-    setUsuarioId(tarefa.usuario?.id || '');
+    setUsuarioId(tarefa.usuario?.id?.toString() || '');
   };
 
   return (
@@ -110,17 +102,17 @@ function GestaoTarefas() {
       <aside className="sidebar">
         <div className="logo">
           <a href="/home2" className="logo-link">
-            <img src={logo} alt="Logo TaskNavigation" style={{ width: '50%', display: 'block', margin: '0 auto' }} />
+            <img src={logo} alt="Logo TaskNavigation" />
           </a>
         </div>
         <ul className="menu">
-          <li><a href="/home2"><i className="bi bi-house-door-fill"></i> Início</a></li>
-          <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> Gestão de tarefas</a></li>
-          <li><a href="#"><i className="bi bi-building"></i> Gestão de departamentos</a></li>
-          <li><a href="/pagina8"><i className="bi bi-people-fill"></i> Gestão de usuários</a></li>
-          <li><a href="/pagina6"><i className="bi bi-speedometer2"></i> DashBoard</a></li>
-          <li><a href="#"><i className="bi bi-graph-up"></i> Relatórios</a></li>
-          <li><a href="#"><i className="bi bi-gear-fill"></i> Configurações</a></li>
+          <li><a href="/home2"><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></a></li>
+          <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></a></li>
+          <li><a href="#"><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></a></li>
+          <li><a href="/pagina8"><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></a></li>
+          <li><a href="/pagina6"><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></a></li>
+          <li><a href="#"><i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span></a></li>
+          <li><a href="#"><i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span></a></li>
         </ul>
       </aside>
 
@@ -134,7 +126,7 @@ function GestaoTarefas() {
               </div>
 
               <div className="table-wrapper">
-                <button onClick={() => { resetForm(); setShowForm(true); }} className="btn btn-primary mb-3">
+                <button onClick={() => { resetForm(); setShowForm(true); }} className="botao-criar-tarefa mb-3">
                   Criar nova tarefa
                 </button>
 
@@ -151,8 +143,8 @@ function GestaoTarefas() {
                     </tr>
                   </thead>
                   <tbody>
-                    {tarefas.map((tarefa) => (
-                      <tr key={`tarefa-${tarefa.id}`}>
+                    {tarefas.map(tarefa => (
+                      <tr key={tarefa.idTarefa}>
                         <td>{tarefa.usuario?.nome || '---'}</td>
                         <td>{tarefa.titulo}</td>
                         <td>{tarefa.descricao}</td>
@@ -175,7 +167,7 @@ function GestaoTarefas() {
                           <button className="edit-btn me-1" onClick={() => handleEdit(tarefa)}>
                             <i className="bi bi-pencil-fill"></i>
                           </button>
-                          <button className="delete-btn" onClick={() => handleDeleteLocal(tarefa.id)}>
+                          <button className="delete-btn" onClick={() => handleDelete(tarefa.idTarefa)}>
                             <i className="bi bi-trash-fill"></i>
                           </button>
                         </td>
@@ -208,24 +200,29 @@ function GestaoTarefas() {
             <button className="close-btn" onClick={() => setShowForm(false)}>×</button>
             <form onSubmit={handleSubmit}>
               <h3>{modoEdicao ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h3>
+
               <select className="form-control mb-2" value={usuarioId} onChange={e => setUsuarioId(e.target.value)} required>
                 <option value="">Selecione o usuário</option>
                 {usuarios.map(u => (
                   <option key={u.id} value={u.id}>{u.nome}</option>
                 ))}
               </select>
+
               <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
               <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-              <input type="date" className="form-control mb-2" value={prazo} onChange={e => setPrazo(e.target.value)} required />
+              <input type="date" className="form-control mb-2" value={prazo ? prazo.slice(0, 10) : ''} onChange={e => setPrazo(e.target.value)} required />
+
               <select className="form-control mb-2" value={status} onChange={e => setStatus(e.target.value)} required>
                 <option value="Pendente">Pendente</option>
                 <option value="Concluída">Concluída</option>
               </select>
+
               <select className="form-control mb-3" value={prioridade} onChange={e => setPrioridade(e.target.value)} required>
                 <option value="Alta">Alta</option>
                 <option value="Média">Média</option>
                 <option value="Baixa">Baixa</option>
               </select>
+
               <button type="submit" className="btn btn-success w-100">
                 {modoEdicao ? 'Atualizar' : 'Salvar'}
               </button>
@@ -238,4 +235,3 @@ function GestaoTarefas() {
 }
 
 export default GestaoTarefas;
-  

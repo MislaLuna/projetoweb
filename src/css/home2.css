@@ -1,180 +1,425 @@
-  :root {
-    --body-font-family: 'League Spartan', sans-serif;
-    --h1-font-size: 62px;
-    --h2-font-size: 48px;
-    --h3-font-size: 36px;
-    --p-font-size: 20px;
-    --btn-font-size: 16px;
-    --copyright-font-size: 14px;
-    --border-radius-medium: 30px;
-    --border-radius-large: 100px;
-    --font-weight-light: 300;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --white-color: #ffffff;
-    --dark-color:  #3d0e54;
-    --p-color: #717275;
-  }
+:root {
+  /* Fontes e tamanhos */
+  --body-font-family: 'League Spartan', sans-serif;
+  --h1-font-size: 62px;
+  --h2-font-size: 48px;
+  --h3-font-size: 36px;
+  --h4-font-size: 24px;
+  --p-font-size: 20px;
+  --btn-font-size: 16px;
+  --copyright-font-size: 14px;
 
-  /* Aplica estilo base somente quando usado explicitamente */
-  .homeContainer {
-    font-family: var(--body-font-family);
-    background-color: rgb(230, 230, 231);
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-  }
+  /* Bordas */
+  --border-radius-small: 10px;
+  --border-radius-medium: 30px;
+  --border-radius-large: 100px;
 
-  /* Sidebar */
+  /* Peso fonte */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Cores */
+  --white-color: #ffffff;
+  --dark-color: #3d0e54;
+  --primary-color: #ffffff; /* azul dos ícones */
+  --primary-hover: #2c5bbf;
+  --background-color: rgb(230, 230, 231);
+  --text-color: #717275;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* RESET básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: var(--body-font-family);
+  background-color: var(--background-color);
+  height: 100%;
+  color: var(--text-color);
+}
+
+/* Container geral flex para sidebar + main */
+.homeContainer, .gestaoTarefasContainer {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+}
+
+/* Sidebar fixa */
+.sidebar {
+  background-color: var(--dark-color);
+  padding: 1.5rem 1rem;
+  width: 230px;
+  height: 100vh;
+  border-radius: var(--border-radius-medium);
+  color: var(--white-color);
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 15px var(--shadow-color);
+  z-index: 10;
+}
+
+/* Logo na sidebar */
+.logo img {
+  max-width: 140px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+/* Linha separadora da sidebar */
+.sidebar-separator {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Menu sidebar */
+.menu {
+  list-style: none;
+  width: 100%;
+}
+
+.menu li {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.menu li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white-color);
+  font-weight: var(--font-weight-semibold);
+  font-size: 18px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.menu li a i {
+  font-size: 1.4rem;
+  margin-right: 12px;
+  color: var(--primary-color);
+}
+
+.menu li a:hover,
+.menu li a.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--primary-color);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Main content respeitando sidebar fixa */
+.main {
+  margin-left: 260px; /* sidebar + margem */
+  padding: 2rem 3rem;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+/* Dashboard geral */
+.dashboard {
+  background-color: #c7c7c798;
+  border-radius: var(--border-radius-medium);
+  padding: 2rem;
+  min-height: 85vh;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+/* Container interno da dash */
+.dash2 {
+  background-color: #dadada;
+  border-radius: var(--border-radius-medium);
+  padding: 2rem;
+}
+
+/* Hero section */
+.hero {
+  background-color: var(--white-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-medium);
+  text-align: center;
+  max-width: 890px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.hero h1 {
+  font-size: var(--h1-font-size);
+  color: var(--dark-color);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: var(--p-font-size);
+  color: var(--text-color);
+  font-weight: var(--font-weight-light);
+}
+
+/* Features (cards) */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 0 1rem 2rem;
+}
+
+.feature {
+  background-color: var(--white-color);
+  padding: 1.5rem 2rem;
+  border-radius: var(--border-radius-medium);
+  text-align: center;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  flex: 1 1 250px;
+  max-width: 300px;
+  min-width: 250px;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature i {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.feature h3 {
+  font-size: var(--h3-font-size);
+  color: var(--dark-color);
+  margin-bottom: 1rem;
+}
+
+.feature p {
+  font-size: var(--p-font-size);
+  color: var(--text-color);
+}
+
+/* Botões padrão (caso use) */
+button, .btn {
+  font-family: var(--body-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius-small);
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Tabela estilo (se usar) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+thead {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+thead th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  font-size: 16px;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+tbody td {
+  padding: 12px 15px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+/* Footer estilizado */
+.footerContainer {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-medium);
+  margin-top: 3rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.footerContainer p {
+  font-size: var(--copyright-font-size);
+  margin: 0.5rem 0;
+  font-weight: var(--font-weight-light);
+  color: #dadada;
+}
+
+.policyTitle {
+  color: var(--primary-color);
+  font-size: var(--h4-font-size);
+  margin-top: 1rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.policyText p {
+  font-size: 16px;
+  color: var(--white-color);
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+/* Responsividade simples */
+@media (max-width: 900px) {
   .sidebar {
-    background-color: var(--dark-color);
-    padding: 1rem;
-    width: 20%;
-    height: 100vh;
-    border-radius: 25px;
-    color: var(--white-color);
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
-
-  .logo img {
-    display: block;
-    margin: 0 auto;
-    max-width: 50%;
-  }
-
-  .menu {
-    list-style-type: none;
-    padding: 10;
-    margin-top: 50px;
-  }
-
-  .menu li {
-    margin-bottom: 70px;
+    width: 180px;
+    padding: 1rem 0.5rem;
   }
 
   .menu li a {
-    color: var(--white-color);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-weight: var(--font-weight-semibold);
-    font-size: 18px;
+    font-size: 16px;
+    padding: 8px 10px;
   }
 
-  .menu li a i {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-
-  /* Main */
   .main {
-    margin-left: 22%;
-    flex: 1;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-
-  /* Dashboard */
-  .dashboard {
-    background-color: #c7c7c798;
-    border-radius: 25px;
-    padding: 2rem;
-    height: 100%;
-  }
-
-  .dash2 {
-    background-color: #dadada;
-    border-radius: 25px;
-    padding: 2rem;
-  }
-
-  /* Hero */
-  .hero {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: var(--border-radius-medium);
-    text-align: center;
-    max-width: 890px;
-    margin: 2rem auto;
+    margin-left: 200px;
+    padding: 1.5rem 1.5rem;
   }
 
   .hero h1 {
-    font-size: var(--h1-font-size);
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-    font-weight: var(--font-weight-bold);
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .homeContainer {
+    flex-direction: column;
   }
 
-  .hero p {
-    font-size: var(--p-font-size);
-    color: var(--p-color);
-    font-weight: var(--font-weight-light);
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    padding: 1rem;
+    box-shadow: none;
+    flex-direction: row;
+    justify-content: space-around;
   }
 
-  /* Features */
-  .features {
+  .menu {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem;
-    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 0;
+    width: auto;
+  }
+
+  .menu li {
+    margin-bottom: 0;
+    margin-left: 10px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .feature {
-    background-color: var(--white-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius-medium);
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    min-width: 250px;
-    max-width: 300px;
+    max-width: 100%;
   }
+}
+/* Complemento para sidebar - mantém o estilo atual e adiciona melhorias visuais */
 
-  .feature i {
-    font-size: 3rem;
-    color: rgb(69, 142, 224);
-    margin-bottom: 1rem;
-  }
+/* Aumenta largura e adiciona sombra mais suave */
+.sidebar {
+  width: 20px; /* aumenta um pouco a largura */
+  box-shadow: 0 8px 20px var(--shadow-color);
+  padding: 2rem 1.5rem;
+  left: 20px;
+  top: 20px;
+}
 
-  .feature h3 {
-    font-size: var(--h3-font-size);
-    color: var(--dark-color);
-    margin-bottom: 1rem;
-  }
+/* Logo com maior destaque */
+.logo img {
+  max-width: 160px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 3px #7f6ecc);
+}
 
-  .feature p {
-    font-size: var(--p-font-size);
-    color: var(--p-color);
-  }
+/* Menu links com padding maior e hover suavizado */
+.menu li a {
+  padding: 12px 20px;
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
 
-  /* Footer */
-  .footerContainer {
-    background-color: var(--dark-color);
-    color: var(--white-color);
-    text-align: center;
-    padding: 2rem;
-    border-radius: 25px;
-    margin-top: 2rem;
-  }
+.menu li a i {
+  font-size: 1.5rem;
+  margin-right: 16px;
+  color: var(--primary-color);
+  transition: color 0.25s ease;
+}
 
-  .footerContainer p {
-    font-size: var(--copyright-font-size);
-    margin: 0.5rem 0;
-    font-weight: var(--font-weight-light);
-  }
+.menu li a:hover,
+.menu li a.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--primary-hover);
+  font-weight: var(--font-weight-bold);
+}
 
-  .policyTitle {
-    color: rgb(69, 142, 224);
-    font-size: var(--h4-font-size);
-    margin-top: 1rem;
-  }
+.menu li a:hover i,
+.menu li a.active i {
+  color: var(--primary-hover);
+}
 
-  .policyText p {
-    font-size: 16px;
-    color: var(--white-color);
-    margin: 0.3rem 0;
-  }
+/* Suaviza a sombra da sidebar */
+.sidebar {
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+.gestaoTarefasContainer:hover .main {
+  margin-left: 320px;
+}
+
+.sidebar:not(:hover) ~ .main {
+  margin-left: 92px; /* ou 100px, dependendo do width recolhido */
+}
