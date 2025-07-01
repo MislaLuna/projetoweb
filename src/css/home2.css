@@ -1,4 +1,4 @@
-:root {
+.home2Container {
   /* Fontes e tamanhos */
   --body-font-family: 'League Spartan', sans-serif;
   --h1-font-size: 62px;
@@ -11,8 +11,8 @@
 
   /* Bordas */
   --border-radius-small: 10px;
-  --border-radius-medium: 30px;
-  --border-radius-large: 100px;
+  --border-radius-medium: 10px;
+  --border-radius-large: 50px;
 
   /* Peso fonte */
   --font-weight-light: 300;
@@ -24,38 +24,25 @@
   --white-color: #ffffff;
   --dark-color: #3d0e54;
   --primary-color: #ffffff; /* azul dos ícones */
-  --primary-hover: #2c5bbf;
+  --primary-hover: #ded4ee;
   --background-color: rgb(230, 230, 231);
   --text-color: #717275;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-/* RESET básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  font-family: var(--body-font-family);
-  background-color: var(--background-color);
-  height: 100%;
-  color: var(--text-color);
-}
 
 /* Container geral flex para sidebar + main */
-.homeContainer, .gestaoTarefasContainer {
+.home2Container {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
 }
 
-/* Sidebar fixa */
-.sidebar {
+/* Sidebar fixa - recolhida e expandida ao hover */
+.home2Container .sidebar {
   background-color: var(--dark-color);
-  padding: 1.5rem 1rem;
-  width: 230px;
+  padding: 0.5rem 0.5rem;
+  width: 92px; /* largura recolhida */
   height: 100vh;
   border-radius: var(--border-radius-medium);
   color: var(--white-color);
@@ -64,73 +51,118 @@ body, html {
   top: 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* centraliza ícones no recolhido */
   box-shadow: 0 0 15px var(--shadow-color);
   z-index: 10;
+  overflow: hidden;
+  transition: width 0.3s ease, padding 0.3s ease, align-items 0.3s ease;
+}
+
+.home2Container .sidebar:hover {
+  width: 320px; /* largura expandida */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  align-items: flex-start; /* texto alinhado à esquerda */
+  overflow: visible;
 }
 
 /* Logo na sidebar */
-.logo img {
-  max-width: 140px;
-  display: block;
-  margin: 0 auto 1.5rem;
+.home2Container .logo img {
+  max-width: 90px;
+  margin-bottom: 1.5rem;
+  transition: max-width 0.3s ease, margin 0.3s ease;
+}
+
+.home2Container .sidebar:hover .logo img {
+  max-width: 160px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 3px #7f6ecc);
 }
 
 /* Linha separadora da sidebar */
-.sidebar-separator {
+.home2Container .sidebar-separator {
   width: 100%;
   border: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 1.5rem;
 }
 
 /* Menu sidebar */
-.menu {
+.home2Container .menu {
   list-style: none;
   width: 100%;
+  padding-left: 0;
 }
 
-.menu li {
+/* Itens do menu */
+.home2Container .menu li {
   margin-bottom: 25px;
   width: 100%;
 }
 
-.menu li a {
+/* Links do menu */
+.home2Container .menu li a {
+  padding: 12px 12px;
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.25s ease, color 0.25s ease;
   display: flex;
   align-items: center;
-  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
   color: var(--white-color);
-  font-weight: var(--font-weight-semibold);
-  font-size: 18px;
-  padding: 10px 14px;
-  border-radius: var(--border-radius-small);
-  transition: background-color 0.3s ease;
-  width: 100%;
+  text-decoration: none;
 }
 
-.menu li a i {
-  font-size: 1.4rem;
+/* Ícones do menu */
+.home2Container .menu li a i {
+  width: 28px; /* largura fixa para manter alinhamento */
+  flex-shrink: 0;
+  font-size: 1.5rem;
   margin-right: 12px;
   color: var(--primary-color);
+  transition: color 0.25s ease;
 }
 
-.menu li a:hover,
-.menu li a.active {
+/* Texto do link - escondido quando sidebar recolhida */
+.home2Container .menu li a span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Ao expandir sidebar, mostra o texto */
+.home2Container .sidebar:hover .menu li a span {
+  opacity: 1;
+}
+
+/* Efeitos hover e ativo */
+.home2Container .menu li a:hover,
+.home2Container .menu li a.active {
   background-color: rgba(255, 255, 255, 0.15);
-  color: var(--primary-color);
+  color: var(--primary-hover);
   font-weight: var(--font-weight-bold);
 }
 
-/* Main content respeitando sidebar fixa */
-.main {
-  margin-left: 260px; /* sidebar + margem */
+.home2Container .menu li a:hover i,
+.home2Container .menu li a.active i {
+  color: var(--primary-hover);
+}
+
+/* Main content respeitando sidebar recolhida/expandida */
+.home2Container .main {
+  margin-left: 92px; /* distância inicial (sidebar recolhida) */
   padding: 2rem 3rem;
   flex-grow: 1;
   box-sizing: border-box;
+  transition: margin-left 0.3s ease;
+}
+
+/* Quando sidebar é expandida, main acompanha */
+.home2Container .sidebar:hover ~ .main {
+  margin-left: 320px;
 }
 
 /* Dashboard geral */
-.dashboard {
-  background-color: #c7c7c798;
+.home2Container .dashboard {
+  background-color: #c5b2c3;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
   min-height: 85vh;
@@ -138,38 +170,38 @@ body, html {
 }
 
 /* Container interno da dash */
-.dash2 {
-  background-color: #dadada;
+.home2Container .dash-2 {
+  background-color: #fafafa;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
 }
 
 /* Hero section */
-.hero {
-  background-color: var(--white-color);
+.home2Container .hero {
+
   padding: 2.5rem;
-  border-radius: var(--border-radius-medium);
+
   text-align: center;
   max-width: 890px;
   margin: 0 auto 3rem;
-  box-shadow: 0 2px 10px var(--shadow-color);
+
 }
 
-.hero h1 {
+.home2Container .hero h1 {
   font-size: var(--h1-font-size);
   color: var(--dark-color);
   font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
-.hero p {
+.home2Container .hero p {
   font-size: var(--p-font-size);
   color: var(--text-color);
   font-weight: var(--font-weight-light);
 }
 
 /* Features (cards) */
-.features {
+.home2Container .features {
   display: flex;
   justify-content: center;
   gap: 2rem;
@@ -177,7 +209,7 @@ body, html {
   padding: 0 1rem 2rem;
 }
 
-.feature {
+.home2Container .feature {
   background-color: var(--white-color);
   padding: 1.5rem 2rem;
   border-radius: var(--border-radius-medium);
@@ -190,29 +222,30 @@ body, html {
   cursor: default;
 }
 
-.feature:hover {
+.home2Container .feature:hover {
   transform: translateY(-5px);
 }
 
-.feature i {
+.home2Container .feature i {
   font-size: 3.5rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
 
-.feature h3 {
+.home2Container .feature h3 {
   font-size: var(--h3-font-size);
   color: var(--dark-color);
   margin-bottom: 1rem;
 }
 
-.feature p {
+.home2Container .feature p {
   font-size: var(--p-font-size);
   color: var(--text-color);
 }
 
 /* Botões padrão (caso use) */
-button, .btn {
+.home2Container button,
+.home2Container .btn {
   font-family: var(--body-font-family);
   font-size: var(--btn-font-size);
   font-weight: var(--font-weight-semibold);
@@ -225,12 +258,13 @@ button, .btn {
   transition: background-color 0.3s ease;
 }
 
-button:hover, .btn:hover {
+.home2Container button:hover,
+.home2Container .btn:hover {
   background-color: var(--primary-hover);
 }
 
 /* Tabela estilo (se usar) */
-table {
+.home2Container table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
@@ -240,36 +274,36 @@ table {
   box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-thead {
+.home2Container thead {
   background-color: var(--dark-color);
   color: var(--white-color);
 }
 
-thead th {
+.home2Container thead th {
   padding: 12px 15px;
   text-align: left;
   font-weight: var(--font-weight-semibold);
   font-size: 16px;
 }
 
-tbody tr {
+.home2Container tbody tr {
   border-bottom: 1px solid #ddd;
   transition: background-color 0.2s ease;
 }
 
-tbody tr:hover {
+.home2Container tbody tr:hover {
   background-color: #f3f3f3;
   cursor: pointer;
 }
 
-tbody td {
+.home2Container tbody td {
   padding: 12px 15px;
   font-size: 16px;
   color: var(--text-color);
 }
 
 /* Footer estilizado */
-.footerContainer {
+.home2Container .footer-container {
   background-color: var(--dark-color);
   color: var(--white-color);
   text-align: center;
@@ -279,21 +313,21 @@ tbody td {
   box-shadow: 0 2px 10px var(--shadow-color);
 }
 
-.footerContainer p {
+.home2Container .footer-container p {
   font-size: var(--copyright-font-size);
   margin: 0.5rem 0;
   font-weight: var(--font-weight-light);
   color: #dadada;
 }
 
-.policyTitle {
+.home2Container .policy-title {
   color: var(--primary-color);
   font-size: var(--h4-font-size);
   margin-top: 1rem;
   font-weight: var(--font-weight-semibold);
 }
 
-.policyText p {
+.home2Container .policy-text p {
   font-size: 16px;
   color: var(--white-color);
   margin: 0.3rem 0;
@@ -302,32 +336,32 @@ tbody td {
 
 /* Responsividade simples */
 @media (max-width: 900px) {
-  .sidebar {
+  .home2Container .sidebar {
     width: 180px;
     padding: 1rem 0.5rem;
   }
 
-  .menu li a {
+  .home2Container .menu li a {
     font-size: 16px;
     padding: 8px 10px;
   }
 
-  .main {
+  .home2Container .main {
     margin-left: 200px;
     padding: 1.5rem 1.5rem;
   }
 
-  .hero h1 {
+  .home2Container .hero h1 {
     font-size: 40px;
   }
 }
 
 @media (max-width: 600px) {
-  .homeContainer {
+  .home2Container {
     flex-direction: column;
   }
 
-  .sidebar {
+  .home2Container .sidebar {
     position: relative;
     width: 100%;
     height: auto;
@@ -338,88 +372,33 @@ tbody td {
     justify-content: space-around;
   }
 
-  .menu {
+  .home2Container .menu {
     display: flex;
     flex-direction: row;
     margin-top: 0;
     width: auto;
   }
 
-  .menu li {
+  .home2Container .menu li {
     margin-bottom: 0;
     margin-left: 10px;
   }
 
-  .main {
+  .home2Container .main {
     margin-left: 0;
     padding: 1rem;
   }
 
-  .hero h1 {
+  .home2Container .hero h1 {
     font-size: 32px;
   }
 
-  .features {
+  .home2Container .features {
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .feature {
+  .home2Container .feature {
     max-width: 100%;
   }
-}
-/* Complemento para sidebar - mantém o estilo atual e adiciona melhorias visuais */
-
-/* Aumenta largura e adiciona sombra mais suave */
-.sidebar {
-  width: 20px; /* aumenta um pouco a largura */
-  box-shadow: 0 8px 20px var(--shadow-color);
-  padding: 2rem 1.5rem;
-  left: 20px;
-  top: 20px;
-}
-
-/* Logo com maior destaque */
-.logo img {
-  max-width: 160px;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 0 3px #7f6ecc);
-}
-
-/* Menu links com padding maior e hover suavizado */
-.menu li a {
-  padding: 12px 20px;
-  border-radius: var(--border-radius-small);
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-.menu li a i {
-  font-size: 1.5rem;
-  margin-right: 16px;
-  color: var(--primary-color);
-  transition: color 0.25s ease;
-}
-
-.menu li a:hover,
-.menu li a.active {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: var(--primary-hover);
-  font-weight: var(--font-weight-bold);
-}
-
-.menu li a:hover i,
-.menu li a.active i {
-  color: var(--primary-hover);
-}
-
-/* Suaviza a sombra da sidebar */
-.sidebar {
-  box-shadow: 0 0 15px var(--shadow-color);
-}
-.gestaoTarefasContainer:hover .main {
-  margin-left: 320px;
-}
-
-.sidebar:not(:hover) ~ .main {
-  margin-left: 92px; /* ou 100px, dependendo do width recolhido */
 }

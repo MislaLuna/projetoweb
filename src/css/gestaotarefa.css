@@ -1,318 +1,405 @@
-  :root {
-    --body-font-family: 'League Spartan', sans-serif;
-    --h1-font-size: 62px;
-    --h2-font-size: 48px;
-    --h3-font-size: 36px;
-    --p-font-size: 20px;
-    --btn-font-size: 16px;
-    --copyright-font-size: 14px;
-    --border-radius-medium: 30px;
-    --border-radius-large: 100px;
-    --font-weight-light: 300;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --white-color: #ffffff;
-    --dark-color: #3d0e54;
-    --p-color: #717275;
+.gestaoTarefasContainer {
+  --body-font-family: 'League Spartan', sans-serif;
+  --h1-font-size: 62px;
+  --h2-font-size: 48px;
+  --h3-font-size: 36px;
+  --h4-font-size: 24px;
+  --p-font-size: 20px;
+  --btn-font-size: 16px;
+  --copyright-font-size: 14px;
 
-    /* Cores personalizadas para botão */
-    --primary-button-color: #6c63ff;
-    --primary-button-hover: #574dcf;
-  }
+  --border-radius-small: 10px;
+  --border-radius-medium: 10px;
+  --border-radius-large: 50px;
 
-  /* Container base */
-  .gestaoTarefasContainer {
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    font-family: var(--body-font-family);
-    background-color: rgb(230, 230, 231);
-  }
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-  /* Sidebar lateral */
+  --white-color: #ffffff;
+  --dark-color: #3d0e54;
+  --primary-color: #ecebff;
+  --primary-hover: #ded4ee;
+  --background-color: rgb(230, 230, 231);
+  --text-color: #606163;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Layout base */
+.gestaoTarefasContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  font-family: var(--body-font-family);
+  background-color: var(--background-color);
+}
+
+/* Sidebar */
+.gestaoTarefasContainer .sidebar {
+  background-color: var(--dark-color);
+  padding: 0.5rem;
+  width: 92px;
+  height: 100vh;
+  border-radius: var(--border-radius-medium);
+  color: var(--white-color);
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 15px var(--shadow-color);
+  z-index: 10;
+  overflow: hidden;
+  transition: width 0.3s ease, padding 0.3s ease, align-items 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover {
+  width: 320px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  align-items: flex-start;
+  overflow: visible;
+}
+.botao-criar-tarefa {
+--primary-color: #3d0e54; /* verde */
+
+
+}
+/* Logo */
+.gestaoTarefasContainer .logo img {
+  max-width: 90px;
+  margin-bottom: 1.5rem;
+  transition: max-width 0.3s ease, margin 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover .logo img {
+  max-width: 160px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 3px #7f6ecc);
+}
+
+/* Menu */
+.gestaoTarefasContainer .menu {
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.gestaoTarefasContainer .menu li {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.gestaoTarefasContainer .menu li a {
+  padding: 12px 12px;
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.25s ease, color 0.25s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--white-color);
+  text-decoration: none;
+}
+
+.gestaoTarefasContainer .menu li a i {
+  width: 28px;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  margin-right: 12px;
+  color: var(--primary-color);
+  transition: color 0.25s ease;
+}
+
+.gestaoTarefasContainer .menu li a span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover .menu li a span {
+  opacity: 1;
+}
+
+.gestaoTarefasContainer .menu li a:hover,
+.gestaoTarefasContainer .menu li a.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--primary-hover);
+  font-weight: var(--font-weight-bold);
+}
+
+.gestaoTarefasContainer .menu li a:hover i,
+.gestaoTarefasContainer .menu li a.active i {
+  color: var(--primary-hover);
+}
+
+/* Conteúdo principal */
+.gestaoTarefasContainer .main {
+  margin-left: 92px;
+  padding: 2rem 3rem;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease;
+  box-sizing: border-box;
+}
+
+.gestaoTarefasContainer .sidebar:hover ~ .main {
+  margin-left: 320px;
+}
+
+/* Hero */
+.gestaoTarefasContainer .hero {
+
+  padding: 2.5rem;
+
+  text-align: center;
+  max-width: 890px;
+  margin: 0 auto 3rem;
+
+}
+
+.gestaoTarefasContainer .hero h1 {
+  font-size: var(--h1-font-size);
+  color: var(--dark-color);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+}
+
+.gestaoTarefasContainer .hero p {
+  font-size: var(--p-font-size);
+  color: var(--text-color);
+  font-weight: var(--font-weight-light);
+}
+
+/* Dashboard */
+.gestaoTarefasContainer .dashboard,
+.gestaoTarefasContainer .dash-2 {
+  background-color: #c5b2c3;
+  border-radius: var(--border-radius-medium);
+  padding: 2rem;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  min-height: 85vh;
+}
+
+/* Tabela */
+.gestaoTarefasContainer .table-wrapper {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.gestaoTarefasContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-small);
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.gestaoTarefasContainer thead {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+.gestaoTarefasContainer thead th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  font-size: 16px;
+}
+
+.gestaoTarefasContainer tbody td {
+  padding: 12px 15px;
+  font-size: 16px;
+  color: var(--text-color);
+  border-bottom: 1px solid #ddd;
+}
+
+.gestaoTarefasContainer tbody tr:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+/* Botões editar/deletar */
+.gestaoTarefasContainer .edit-btn,
+.gestaoTarefasContainer .delete-btn {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.gestaoTarefasContainer .edit-btn i {
+  color: rgb(41, 123, 212);
+}
+
+.gestaoTarefasContainer .delete-btn i {
+  color: rgb(196, 35, 35);
+}
+
+/* Botão principal */
+.botao-criar-tarefa {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botao-criar-tarefa:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.modal-form h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+/* Botão fechar modal */
+.close-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+  background-color: #c82333;
+}
+
+/* Footer */
+.gestaoTarefasContainer .footer-container {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-medium);
+  margin-top: 3rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.gestaoTarefasContainer .footer-container p {
+  font-size: var(--copyright-font-size);
+  margin: 0.5rem 0;
+  font-weight: var(--font-weight-light);
+  color: #dadada;
+}
+
+.gestaoTarefasContainer .policy-title {
+  color: var(--primary-color);
+  font-size: var(--h4-font-size);
+  margin-top: 1rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.gestaoTarefasContainer .policy-text p {
+  font-size: 16px;
+  color: var(--white-color);
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+
+
+
+
+
+
+.gestaoTarefasContainer .dash-2 {
+  background-color: #fafafa;
+  border-radius: var(--border-radius-medium);
+  padding: 2rem;
+}
+
+
+
+
+
+/* Responsividade */
+@media (max-width: 900px) {
   .gestaoTarefasContainer .sidebar {
-    background-color: var(--dark-color);
-    padding: 1rem;
-    width: 100px;
-    height: 100vh;
-    border-radius: 25px;
-    color: var(--white-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-
-  .gestaoTarefasContainer .logo img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
+    width: 180px;
+    padding: 1rem 0.5rem;
   }
 
-  .gestaoTarefasContainer .menu {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 0px;
-  }
-
-  .gestaoTarefasContainer .menu li {
-    margin-bottom: 70px;
-  }
-
-  .gestaoTarefasContainer .menu li a {
-    color: var(--white-color);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-weight: var(--font-weight-semibold);
-    font-size: 18px;
-  }
-
-  .gestaoTarefasContainer .menu li a i {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-
-  /* Conteúdo principal */
   .gestaoTarefasContainer .main {
-    margin-left: 22%;
-    flex: 1;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-
-  /* Dashboard */
-  .gestaoTarefasContainer .dashboard {
-    background-color: #c7c7c798;
-    border-radius: 25px;
-    padding: 2rem;
-  }
-
-  .gestaoTarefasContainer .dash-2 {
-    background-color: #dadada;
-    border-radius: 25px;
-    padding: 2rem;
-  }
-
-  /* Hero */
-  .gestaoTarefasContainer .hero {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: var(--border-radius-medium);
-    text-align: center;
-    max-width: 890px;
-    margin: 2rem auto;
+    margin-left: 200px;
+    padding: 1.5rem 1.5rem;
   }
 
   .gestaoTarefasContainer .hero h1 {
-    font-size: var(--h1-font-size);
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-    font-weight: var(--font-weight-bold);
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .gestaoTarefasContainer {
+    flex-direction: column;
   }
 
-  .gestaoTarefasContainer .hero p {
-    font-size: var(--p-font-size);
-    color: var(--p-color);
-    font-weight: var(--font-weight-light);
-  }
-
-  /* Tabela */
-  .gestaoTarefasContainer .table-wrapper {
-    overflow-x: auto;
-    margin-top: 2rem;
-  }
-
-  .gestaoTarefasContainer table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--white-color);
-    border-radius: var(--border-radius-medium);
-    overflow: hidden;
-  }
-
-  .gestaoTarefasContainer thead {
-    background-color: var(--dark-color);
-    color: var(--white-color);
-    text-align: left;
-  }
-
-  .gestaoTarefasContainer th,
-  .gestaoTarefasContainer td {
-    padding: 1rem;
-    font-size: var(--p-font-size);
-    border-bottom: 1px solid #ddd;
-  }
-
-  .gestaoTarefasContainer select {
-    padding: 0.4rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-  }
-
-  .gestaoTarefasContainer .edit-btn,
-  .gestaoTarefasContainer .delete-btn {
-    border: none;
-    background: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-right: 0.5rem;
-  }
-
-  .gestaoTarefasContainer .edit-btn i {
-    color: rgb(41, 123, 212);
-  }
-
-  .gestaoTarefasContainer .delete-btn i {
-    color: rgb(196, 35, 35);
-  }
-
-  /* Botão Criar nova tarefa personalizado */
-  .botao-criar-tarefa {
-    background-color: var(--primary-button-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-weight: var(--font-weight-bold);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .botao-criar-tarefa:hover {
-    background-color: var(--primary-button-hover);
-  }
-
-  /* Footer */
-  .gestaoTarefasContainer .footer-container {
-    background-color: var(--dark-color);
-    color: var(--white-color);
-    text-align: center;
-    padding: 2rem;
-    border-radius: 25px;
-    margin-top: 2rem;
-  }
-
-  .gestaoTarefasContainer .footer-container p {
-    font-size: var(--copyright-font-size);
-    margin: 0.5rem 0;
-    font-weight: var(--font-weight-light);
-  }
-
-  .gestaoTarefasContainer .policy-title {
-    color: rgb(69, 142, 224);
-    font-size: var(--h3-font-size);
-    margin-top: 1rem;
-  }
-
-  .gestaoTarefasContainer .policy-text p {
-    font-size: 16px;
-    color: var(--white-color);
-    margin: 0.3rem 0;
-  }
-
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-
-  .modal-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  .gestaoTarefasContainer .sidebar {
     position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    padding: 1rem;
+    box-shadow: none;
+    flex-direction: row;
+    justify-content: space-around;
   }
 
-  .modal-form h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--dark-color);
-  }
-
-  .botao-criar-tarefa {
-    background-color: #3d0e54; /* roxo */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-weight: 700;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .botao-criar-tarefa:hover {
-    background-color: #574dcf; /* tom mais escuro no hover */
-  }
-  /* Sidebar recolhida por padrão */
-  .sidebar {
-    width: 92px; /* largura padrão (menu recolhido) */
-    transition: width 0.3s ease;
-    overflow-y: auto;
-    height: 100vh;
-    background-color: var(--dark-color);
-    color: var(--white-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-
-  .sidebar:hover {
-    width: 320px; /* expande quando passa o mouse */
-  }
-
-  /* Oculta o texto do menu */
-  .sidebar .menu-text {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  /* Mostra o texto do menu quando hover */
-  .sidebar:hover .menu-text {
-    opacity: 1;
-  }
-
-
-  /* Para garantir que o ícone e texto não quebrem */
-  .sidebar a {
+  .gestaoTarefasContainer .menu {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    margin-top: 0;
+    width: auto;
   }
 
-  /* Logo se ajustar ao tamanho também */
-  .sidebar .logo img {
-    transition: all 0.3s ease;
-    width: 90px;
+  .gestaoTarefasContainer .menu li {
+    margin-bottom: 0;
+    margin-left: 10px;
   }
 
-  .sidebar:hover .logo img {
-    width: 50%;
+  .gestaoTarefasContainer .main {
+    margin-left: 0;
+    padding: 1rem;
   }
-  .close-btn {
-    background-color: #dc3545; /* vermelho Bootstrap */
-    color: white;
-    border: none;
-    font-size: 24px;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  .gestaoTarefasContainer .hero h1 {
+    font-size: 32px;
   }
-  
-  .close-btn:hover {
-    background-color: #c82333; /* vermelho mais escuro */
-  }
-  
+}

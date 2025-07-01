@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import '../../css/gestaotarefa.css';
@@ -9,6 +10,9 @@ import '../../css/owl.theme.default.min.css';
 import logo from '../img/image.png';
 
 function GestaoTarefas() {
+  const location = useLocation();
+
+  // Estados
   const [usuarios, setUsuarios] = useState([]);
   const [tarefas, setTarefas] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -21,6 +25,7 @@ function GestaoTarefas() {
   const [prioridade, setPrioridade] = useState('Média');
   const [usuarioId, setUsuarioId] = useState('');
 
+  // Busca usuários e tarefas no backend
   useEffect(() => {
     axios.get('http://localhost:8080/usuarios')
       .then(res => setUsuarios(res.data))
@@ -31,6 +36,7 @@ function GestaoTarefas() {
       .catch(err => console.error('Erro ao buscar tarefas:', err));
   }, []);
 
+  // Reseta o formulário
   const resetForm = () => {
     setTitulo('');
     setDescricao('');
@@ -42,6 +48,7 @@ function GestaoTarefas() {
     setModoEdicao(false);
   };
 
+  // Submete o formulário (cria ou atualiza)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -52,14 +59,14 @@ function GestaoTarefas() {
       status,
       prioridade,
       usuario: { id: Number(usuarioId) },
-      projeto: null
+      projeto: null,
     };
 
     try {
       if (modoEdicao && idEditando !== null) {
         await axios.put(`http://localhost:8080/tarefas/${idEditando}`, {
           ...payload,
-          idTarefa: idEditando
+          idTarefa: idEditando,
         });
       } else {
         await axios.post('http://localhost:8080/tarefas', payload);
@@ -74,6 +81,7 @@ function GestaoTarefas() {
     }
   };
 
+  // Deleta tarefa
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(`http://localhost:8080/tarefas/${id}`);
@@ -85,6 +93,7 @@ function GestaoTarefas() {
     }
   };
 
+  // Preenche formulário para edição
   const handleEdit = (tarefa) => {
     setShowForm(true);
     setModoEdicao(true);
@@ -99,23 +108,53 @@ function GestaoTarefas() {
 
   return (
     <div className="gestaoTarefasContainer">
+      {/* Sidebar com navegação */}
       <aside className="sidebar">
         <div className="logo">
-          <a href="/home2" className="logo-link">
+          <Link to="/home2" className="logo-link">
             <img src={logo} alt="Logo TaskNavigation" />
-          </a>
+          </Link>
         </div>
         <ul className="menu">
-          <li><a href="/home2"><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></a></li>
-          <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></a></li>
-          <li><a href="#"><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></a></li>
-          <li><a href="/pagina8"><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></a></li>
-          <li><a href="/pagina6"><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></a></li>
-          <li><a href="#"><i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span></a></li>
-          <li><a href="#"><i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span></a></li>
+          <li>
+            <Link to="/home2" className={location.pathname === '/home2' ? 'active' : ''}>
+              <i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaotarefas" className={location.pathname === '/gestaotarefas' ? 'active' : ''}>
+              <i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaodepartamento" className={location.pathname === '/gestaodepartamento' ? 'active' : ''}>
+              <i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/pagina8" className={location.pathname === '/pagina8' ? 'active' : ''}>
+              <i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/pagina6" className={location.pathname === '/pagina6' ? 'active' : ''}>
+              <i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/relatorios" className={location.pathname === '/relatorios' ? 'active' : ''}>
+              <i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/configuracoes" className={location.pathname === '/configuracoes' ? 'active' : ''}>
+              <i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span>
+            </Link>
+          </li>
         </ul>
       </aside>
 
+      {/* Conteúdo principal */}
       <main className="main">
         <div className="dashboard">
           <div className="dash-2">
@@ -126,7 +165,10 @@ function GestaoTarefas() {
               </div>
 
               <div className="table-wrapper">
-                <button onClick={() => { resetForm(); setShowForm(true); }} className="botao-criar-tarefa mb-3">
+                <button
+                  onClick={() => { resetForm(); setShowForm(true); }}
+                  className="botao-criar-tarefa mb-3"
+                >
                   Criar nova tarefa
                 </button>
 
@@ -162,7 +204,7 @@ function GestaoTarefas() {
                             {tarefa.prioridade}
                           </span>
                         </td>
-                        <td>{tarefa.prazo}</td>
+                        <td>{tarefa.prazo?.slice(0, 10)}</td>
                         <td>
                           <button className="edit-btn me-1" onClick={() => handleEdit(tarefa)}>
                             <i className="bi bi-pencil-fill"></i>
@@ -194,6 +236,7 @@ function GestaoTarefas() {
         </div>
       </main>
 
+      {/* Modal de formulário para criar/editar */}
       {showForm && (
         <div className="modal-overlay">
           <div className="modal-form">
@@ -201,23 +244,56 @@ function GestaoTarefas() {
             <form onSubmit={handleSubmit}>
               <h3>{modoEdicao ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h3>
 
-              <select className="form-control mb-2" value={usuarioId} onChange={e => setUsuarioId(e.target.value)} required>
+              <select
+                className="form-control mb-2"
+                value={usuarioId}
+                onChange={e => setUsuarioId(e.target.value)}
+                required
+              >
                 <option value="">Selecione o usuário</option>
                 {usuarios.map(u => (
                   <option key={u.id} value={u.id}>{u.nome}</option>
                 ))}
               </select>
 
-              <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
-              <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-              <input type="date" className="form-control mb-2" value={prazo ? prazo.slice(0, 10) : ''} onChange={e => setPrazo(e.target.value)} required />
+              <input
+                className="form-control mb-2"
+                placeholder="Título"
+                value={titulo}
+                onChange={e => setTitulo(e.target.value)}
+                required
+              />
+              <input
+                className="form-control mb-2"
+                placeholder="Descrição"
+                value={descricao}
+                onChange={e => setDescricao(e.target.value)}
+                required
+              />
+              <input
+                type="date"
+                className="form-control mb-2"
+                value={prazo ? prazo.slice(0, 10) : ''}
+                onChange={e => setPrazo(e.target.value)}
+                required
+              />
 
-              <select className="form-control mb-2" value={status} onChange={e => setStatus(e.target.value)} required>
+              <select
+                className="form-control mb-2"
+                value={status}
+                onChange={e => setStatus(e.target.value)}
+                required
+              >
                 <option value="Pendente">Pendente</option>
                 <option value="Concluída">Concluída</option>
               </select>
 
-              <select className="form-control mb-3" value={prioridade} onChange={e => setPrioridade(e.target.value)} required>
+              <select
+                className="form-control mb-3"
+                value={prioridade}
+                onChange={e => setPrioridade(e.target.value)}
+                required
+              >
                 <option value="Alta">Alta</option>
                 <option value="Média">Média</option>
                 <option value="Baixa">Baixa</option>
