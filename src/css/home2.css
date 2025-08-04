@@ -22,9 +22,9 @@
 
   /* Cores */
   --white-color: #ffffff;
-  --dark-color: #3d0e54;
+  --dark-color: #240046;
   --primary-color: #ffffff; /* azul dos ícones */
-  --primary-hover: #ded4ee;
+  --primary-hover: #e0aaff;
   --background-color: rgb(230, 230, 231);
   --text-color: #717275;
   --shadow-color: rgba(0, 0, 0, 0.1);
@@ -162,7 +162,7 @@
 
 /* Dashboard geral */
 .home2Container .dashboard {
-  background-color: #c5b2c3;
+  background-color: #e4c1f900;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
   min-height: 85vh;
@@ -171,7 +171,7 @@
 
 /* Container interno da dash */
 .home2Container .dash-2 {
-  background-color: #fafafa;
+  background-color: #e0aaff42;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
 }

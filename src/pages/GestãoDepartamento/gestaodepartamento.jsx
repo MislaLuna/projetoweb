@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/gestaotarefa.css'; // Usa o mesmo da gestão de tarefas
+import '../../css/gestaotarefa.css'; // Reutilizando o CSS principal
 import logo from '../img/image.png';
-import { useNavigate } from 'react-router-dom';
 
 function GestaoDepartamentos() {
   const [departamentos, setDepartamentos] = useState([]);
@@ -13,7 +12,6 @@ function GestaoDepartamentos() {
   const [modoEdicao, setModoEdicao] = useState(false);
   const [idEditando, setIdEditando] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     buscarDepartamentos();
@@ -37,16 +35,13 @@ function GestaoDepartamentos() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = { nome, descricao };
-
     try {
       if (modoEdicao) {
         await axios.put(`http://localhost:8080/departamentos/${idEditando}`, { id: idEditando, ...payload });
       } else {
         await axios.post('http://localhost:8080/departamentos', payload);
       }
-
       await buscarDepartamentos();
       resetForm();
       setShowForm(false);
@@ -83,9 +78,9 @@ function GestaoDepartamentos() {
         <ul className="menu">
           <li><a href="/home2"><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></a></li>
           <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></a></li>
-          <li><a  href="/gestaodepartamento"><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></a></li>
+          <li><a href="/gestaodepartamento"><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></a></li>
           <li><a href="/pagina8"><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></a></li>
-          <li><a href="/pagina6"><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></a></li>
+          <li><a href="/dashboard"><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></a></li>
           <li><a href="#"><i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span></a></li>
           <li><a href="#"><i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span></a></li>
         </ul>

@@ -1,0 +1,300 @@
+.dashboardContainer {
+  --body-font-family: 'League Spartan', sans-serif;
+  --h1-font-size: 52px;
+  --h2-font-size: 36px;
+  --p-font-size: 18px;
+
+  --border-radius-medium: 15px;
+
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  --white-color: #ffffff;
+  --dark-color: #240046;
+  --primary-color: #ecebff;
+  --primary-hover: #e0aaff;
+  --background-color: #f7f5fb;
+  --text-color: #404040;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Layout base */
+.dashboardContainer {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  font-family: var(--body-font-family);
+  background-color: var(--background-color);
+}
+
+/* Sidebar */
+.dashboardContainer .sidebar {
+  background-color: var(--dark-color);
+  padding: 1rem 0.5rem;
+  width: 100px;
+  height: 100vh;
+  border-radius: var(--border-radius-medium);
+  color: var(--white-color);
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 15px var(--shadow-color);
+  z-index: 10;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.dashboardContainer .sidebar:hover {
+  width: 280px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+/* Logo */
+.dashboardContainer .logo img {
+  max-width: 90px;
+  margin-bottom: 1.8rem;
+  transition: max-width 0.3s ease, margin 0.3s ease;
+}
+
+.dashboardContainer .sidebar:hover .logo img {
+  max-width: 160px;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 4px #7f6ecc);
+}
+
+/* Menu */
+.dashboardContainer .menu {
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.dashboardContainer .menu li {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.dashboardContainer .menu li a {
+  padding: 12px 12px;
+  border-radius: 12px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--white-color);
+  text-decoration: none;
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+}
+
+.dashboardContainer .menu li a i {
+  width: 28px;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  margin-right: 14px;
+  color: var(--primary-color);
+  transition: color 0.25s ease;
+}
+
+.dashboardContainer .menu li a span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dashboardContainer .sidebar:hover .menu li a span {
+  opacity: 1;
+}
+
+.dashboardContainer .menu li a:hover,
+.dashboardContainer .menu li a.active {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--primary-hover);
+  font-weight: var(--font-weight-bold);
+}
+
+.dashboardContainer .menu li a:hover i,
+.dashboardContainer .menu li a.active i {
+  color: var(--primary-hover);
+}
+
+/* Conteúdo principal */
+.dashboardContainer .main {
+  margin-left: 100px;
+  padding: 2rem 3rem;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease;
+  box-sizing: border-box;
+}
+
+.dashboardContainer .sidebar:hover ~ .main {
+  margin-left: 280px;
+}
+
+/* Hero */
+.dashboardContainer .hero {
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+}
+
+.dashboardContainer .hero h1 {
+  font-size: var(--h1-font-size);
+  color: var(--dark-color);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+}
+
+.dashboardContainer .hero p {
+  font-size: var(--p-font-size);
+  color: var(--text-color);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Features / Métricas */
+.dashboardContainer .features {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboardContainer .feature {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 3px 8px var(--shadow-color);
+  padding: 2rem 2.5rem;
+  flex: 1 1 220px;
+  max-width: 280px;
+  text-align: center;
+  cursor: default;
+  transition: box-shadow 0.3s ease;
+}
+
+.dashboardContainer .feature:hover {
+  box-shadow: 0 5px 15px rgba(120, 65, 255, 0.3);
+}
+
+.dashboardContainer .feature i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.dashboardContainer .feature h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+  color: var(--dark-color);
+}
+
+.dashboardContainer .feature p {
+  font-size: 2.2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-hover);
+  margin: 0;
+}
+
+/* Footer */
+.dashboardContainer .footer-container {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-medium);
+  margin-top: 3rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboardContainer .footer-container p {
+  font-size: 14px;
+  margin: 0.5rem 0;
+  font-weight: var(--font-weight-regular);
+  color: #dadada;
+}
+
+.dashboardContainer .policy-title {
+  color: var(--primary-color);
+  font-size: 20px;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.dashboardContainer .policy-text p {
+  font-size: 15px;
+  color: var(--white-color);
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .dashboardContainer .sidebar {
+    width: 180px;
+    padding: 1rem 0.5rem;
+  }
+
+  .dashboardContainer .main {
+    margin-left: 180px;
+    padding: 1.5rem 1.5rem;
+  }
+
+  .dashboardContainer .hero h1 {
+    font-size: 36px;
+  }
+
+  .dashboardContainer .features {
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .dashboardContainer .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    padding: 1rem;
+    box-shadow: none;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .dashboardContainer .menu {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    width: auto;
+  }
+
+  .dashboardContainer .menu li {
+    margin-bottom: 0;
+    margin-left: 10px;
+  }
+
+  .dashboardContainer .main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .dashboardContainer .hero h1 {
+    font-size: 28px;
+  }
+
+  .dashboardContainer .features {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

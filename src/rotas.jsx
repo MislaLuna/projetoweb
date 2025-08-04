@@ -6,6 +6,7 @@
         import Home2 from "./pages/Home2/home2";
         import GestaoTarefas from "./pages/GestaoTarefas/gestaotarefas";
         import GestaoDepartamentos from "./pages/GestãoDepartamento/gestaodepartamento";
+        import Dashboard from "./pages/DashBoard/dashboard";
         
 
         function RoutesApp() {
@@ -20,6 +21,7 @@
                         <Route path="/home2" element={<Home2 />} />
                         <Route path="/gestaotarefas" element={<GestaoTarefas />} />
                         <Route path="/gestaodepartamento" element={<GestaoDepartamentos />} />
+                        <Route path="dashboard" element={<Dashboard />} />
                     </Routes>
                 </BrowserRouter>
             );

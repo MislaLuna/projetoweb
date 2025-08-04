@@ -18,9 +18,9 @@
   --font-weight-bold: 700;
 
   --white-color: #ffffff;
-  --dark-color: #3d0e54;
+  --dark-color: #240046;
   --primary-color: #ecebff;
-  --primary-hover: #ded4ee;
+  --primary-hover: #e0aaff;
   --background-color: rgb(230, 230, 231);
   --text-color: #606163;
   --shadow-color: rgba(0, 0, 0, 0.1);
@@ -63,7 +63,7 @@
   overflow: visible;
 }
 .botao-criar-tarefa {
---primary-color: #3d0e54; /* verde */
+--primary-color: #240046; /* verde */
 
 
 }
@@ -174,11 +174,11 @@
 /* Dashboard */
 .gestaoTarefasContainer .dashboard,
 .gestaoTarefasContainer .dash-2 {
-  background-color: #c5b2c3;
+  background-color: #e4c1f900;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
-  box-shadow: 0 2px 6px var(--shadow-color);
   min-height: 85vh;
+  box-shadow: 0 2px 6px var(--shadow-color);
 }
 
 /* Tabela */
@@ -340,7 +340,7 @@
 
 
 .gestaoTarefasContainer .dash-2 {
-  background-color: #fafafa;
+  background-color: #e0aaff42;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
 }
@@ -402,4 +402,31 @@
   .gestaoTarefasContainer .hero h1 {
     font-size: 32px;
   }
+}
+.gestaoTarefasContainer .sidebar {
+  width: 92px;
+  transition: width 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover {
+  width: 320px;
+}
+
+.gestaoTarefasContainer .sidebar .menu-text {
+  display: none;
+  transition: opacity 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover .menu-text {
+  display: inline;
+  opacity: 1;
+}
+
+.gestaoTarefasContainer .main {
+  margin-left: 92px;
+  transition: margin-left 0.3s ease;
+}
+
+.gestaoTarefasContainer .sidebar:hover ~ .main {
+  margin-left: 320px;
 }

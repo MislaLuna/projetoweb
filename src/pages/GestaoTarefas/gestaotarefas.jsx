@@ -137,7 +137,7 @@ function GestaoTarefas() {
             </Link>
           </li>
           <li>
-            <Link to="/pagina6" className={location.pathname === '/pagina6' ? 'active' : ''}>
+            <Link to="/dashboard" className={location.pathname === '/pagina6' ? 'active' : ''}>
               <i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span>
             </Link>
           </li>
