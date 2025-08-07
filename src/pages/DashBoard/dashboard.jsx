@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
 import '../../css/owl.carousel.min.css';
 import '../../css/owl.theme.default.min.css';
-import '../../css/dashboard.css'; // CSS exclusivo para o Dashboard
+import '../../css/dashboard.css';
 import logo from '../img/image.png';
 
 function Dashboard() {
@@ -21,20 +22,23 @@ function Dashboard() {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const [usuariosRes, tarefasFinalizadasRes, tarefasTotalRes] = await Promise.all([
-          fetch('/api/usuarios/ativos'),
-          fetch('/api/tarefas/finalizadas'),
-          fetch('/api/tarefas/total'),
+        const [usuariosRes, tarefasRes] = await Promise.all([
+          axios.get('http://localhost:8080/usuarios'),
+          axios.get('http://localhost:8080/tarefas'),
         ]);
+    
 
-        const usuariosData = await usuariosRes.json();
-        const tarefasFinalizadasData = await tarefasFinalizadasRes.json();
-        const tarefasTotalData = await tarefasTotalRes.json();
+        const usuarios = usuariosRes.data;
+        const tarefas = tarefasRes.data;
+
+        const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
+        const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
+        const tarefasCriadas = tarefas.length;
 
         setStats({
-          usuariosAtivos: usuariosData.count || 0,
-          tarefasFinalizadas: tarefasFinalizadasData.count || 0,
-          tarefasCriadas: tarefasTotalData.count || 0,
+          usuariosAtivos,
+          tarefasFinalizadas,
+          tarefasCriadas,
         });
       } catch (error) {
         console.error('Erro ao buscar dados do dashboard:', error);

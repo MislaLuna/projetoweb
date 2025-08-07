@@ -65,7 +65,10 @@ function Home2() {
           <div className="dash-2">
             <div className="hero">
               <h1>Bem-vindo ao TN-ADM</h1>
-              <p>Gerencie suas tarefas e equipe de forma eficiente.</p>
+              <p style={{ color: '#240046' }}>
+  Gerencie suas tarefas e equipe de forma eficiente.
+</p>
+
             </div>
 
             <section className="features">

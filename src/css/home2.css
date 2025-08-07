@@ -21,14 +21,16 @@
   --font-weight-bold: 700;
 
   /* Cores */
-  --white-color: #ffffff;
+  --white-color: #240046;
   --dark-color: #240046;
   --primary-color: #ffffff; /* azul dos ícones */
   --primary-hover: #e0aaff;
   --background-color: rgb(230, 230, 231);
-  --text-color: #717275;
+  --text-color: #ffffff;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
+
+
 
 
 /* Container geral flex para sidebar + main */
@@ -171,7 +173,7 @@
 
 /* Container interno da dash */
 .home2Container .dash-2 {
-  background-color: #e0aaff42;
+  background-color: #c8b6ff;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
 }
@@ -234,7 +236,7 @@
 
 .home2Container .feature h3 {
   font-size: var(--h3-font-size);
-  color: var(--dark-color);
+  color: #e0aaff;
   margin-bottom: 1rem;
 }
 

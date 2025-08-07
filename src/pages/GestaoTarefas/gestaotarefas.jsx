@@ -161,7 +161,7 @@ function GestaoTarefas() {
             <div className="task-container">
               <div className="hero">
                 <h1>Gestão de Tarefas</h1>
-                <p>Visualização e gerenciamento de todas as tarefas</p>
+                <p style={{ color: '#240046' }}>Visualização e gerenciamento de todas as tarefas</p>
               </div>
 
               <div className="table-wrapper">
