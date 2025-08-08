@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link, useLocation } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
 import '../../css/gestaotarefa.css'; // Reutilizando o CSS principal
@@ -12,6 +13,7 @@ function GestaoDepartamentos() {
   const [modoEdicao, setModoEdicao] = useState(false);
   const [idEditando, setIdEditando] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const location = useLocation(); // Hook para obter a localização atual
 
   useEffect(() => {
     buscarDepartamentos();
@@ -67,22 +69,24 @@ function GestaoDepartamentos() {
     }
   };
 
+  const isActive = (path) => (location.pathname === path ? 'active' : '');
+
   return (
     <div className="gestaoTarefasContainer">
       <aside className="sidebar">
         <div className="logo">
-          <a href="/home2" className="logo-link">
+          <Link to="/home2" className="logo-link">
             <img src={logo} alt="Logo TaskNavigation" />
-          </a>
+          </Link>
         </div>
         <ul className="menu">
-          <li><a href="/home2"><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></a></li>
-          <li><a href="/gestaotarefas"><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></a></li>
-          <li><a href="/gestaodepartamento"><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></a></li>
-          <li><a href="/pagina8"><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></a></li>
-          <li><a href="/dashboard"><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></a></li>
-          <li><a href="#"><i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span></a></li>
-          <li><a href="#"><i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span></a></li>
+          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></Link></li>
+          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></Link></li>
+          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></Link></li>
+          <li><Link to="/pagina8" className={isActive('/pagina8')}><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></Link></li>
+          <li><Link to="/dashboard" className={isActive('/dashboard')}><i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span></Link></li>
+          <li><Link to="#" className={isActive('/relatorios')}><i className="bi bi-graph-up"></i> <span className="menu-text">Relatórios</span></Link></li>
+          <li><Link to="/configuracao" className={isActive('/configuracao')}><i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span></Link></li>
         </ul>
       </aside>
 

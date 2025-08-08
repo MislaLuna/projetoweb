@@ -147,7 +147,7 @@ function GestaoTarefas() {
             </Link>
           </li>
           <li>
-            <Link to="/configuracoes" className={location.pathname === '/configuracoes' ? 'active' : ''}>
+            <Link to="/configuracao" className={location.pathname === '/configuracoes' ? 'active' : ''}>
               <i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span>
             </Link>
           </li>

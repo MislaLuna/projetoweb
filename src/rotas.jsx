@@ -8,7 +8,9 @@
         import GestaoDepartamentos from "./pages/GestãoDepartamento/gestaodepartamento";
         import Dashboard from "./pages/DashBoard/dashboard";
         import VerifyCodePage from "./pages/VerificarCodigoNovaSenha/verificaCodigo";
-        import ResetPasswordPage from "./pages/CriaNovaSenha/criaNovasenha";
+        import ResetPasswordPage from "./pages/CriarConta/contanova";
+        import ConfigurationPage from "./pages/Configuracao/configuracao";
+        
 
         function RoutesApp() {
             return (    
@@ -25,6 +27,7 @@
                         <Route path="/gestaotarefas" element={<GestaoTarefas />} />
                         <Route path="/gestaodepartamento" element={<GestaoDepartamentos />} />
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/configuracao" element={<ConfigurationPage />} />
                         
                     </Routes>
                 </BrowserRouter>

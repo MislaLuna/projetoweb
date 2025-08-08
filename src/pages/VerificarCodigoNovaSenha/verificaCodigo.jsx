@@ -15,7 +15,8 @@ const VerifyCodePage = () => {
       const response = await fetch('http://localhost:8080/usuarios/verificar-codigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, token: code }),
+        body: JSON.stringify({ email, codigo: code }),
+
       });
 
       if (!response.ok) {
@@ -24,37 +25,42 @@ const VerifyCodePage = () => {
       }
 
       // Navega para redefinir senha, passando email e token para confirmar
-      navigate('/redefinir-senha', { state: { email, token: code } });
+      navigate('/crianovasenha', { state: { email, token: code } });
     } catch (err) {
       alert('Erro ao verificar código.');
     }
   };
 
-  return (
-    <div className="verify-code-page">
-      <div className="verify-code-container">
-        <div className="verify-code-form">
-          <h2>Verificar Código</h2>
-          <p style={{ marginBottom: '15px' }}>
-            Digite o código de 6 dígitos enviado para o seu e-mail:
-          </p>
-          <form onSubmit={handleVerify}>
-            <div className="verify-code-input-group">
-              <input
-                type="text"
-                placeholder="Código de verificação"
-                maxLength="6"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Verificar</button>
-          </form>
+  // ... seu import e lógica continuam iguais
+
+return (
+  <div className="verify-code-page">
+    <div className="verify-code-container">
+      <div className="verify-code-form">
+        <h2>Verificar Código</h2>
+
+        <div className="email-info">
+          Digite o código de 6 dígitos enviado para o seu e-mail: <strong>{email}</strong>
         </div>
+
+        <form onSubmit={handleVerify}>
+          <div className="verify-code-input-group">
+            <input
+              type="text"
+              placeholder="Código de verificação"
+              maxLength="6"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Verificar</button>
+        </form>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default VerifyCodePage;

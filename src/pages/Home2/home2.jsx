@@ -53,7 +53,7 @@ function Home2() {
             </Link>
           </li>
           <li>
-            <Link to="/configuracoes" className={isActive('/configuracoes')}>
+            <Link to="/configuracao" className={isActive('/configuracoes')}>
               <i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span>
             </Link>
           </li>

@@ -93,7 +93,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
-    margin-top: 35px;
+    margin-top: 20px;
   }
   
   .login-form button:hover,

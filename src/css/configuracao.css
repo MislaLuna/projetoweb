@@ -1,0 +1,89 @@
+.configuration-page {
+    display: flex;
+    height: 100vh;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+  
+  .sidebar {
+    background-color: #240046;
+    color: #fff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-bottom: 2rem;
+  }
+  
+  .logo-link img {
+    width: 100px;
+    height: auto;
+  }
+  
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .menu li {
+    margin-bottom: 1rem;
+  }
+  
+  .menu li a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .menu li a.active {
+    background-color: #3c096c;
+  }
+  
+  .menu-text {
+    margin-left: 0.5rem;
+  }
+  
+  .main {
+    flex-grow: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .configuration-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .theme-section,
+  .notifications-section {
+    margin-bottom: 2rem;
+  }
+  
+  .theme-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .notification-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+  
+  .notification-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
