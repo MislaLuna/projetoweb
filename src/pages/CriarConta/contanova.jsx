@@ -47,7 +47,7 @@ const RegisterPage = () => {
   return (
     <div className="login-container">
       <div className="login-form">
-        <h2>Criar Conta</h2>
+        <h2>Criar Contaaaa</h2>
         <form onSubmit={handleCadastro}>
           <div className="input-group">
             <i className="bi bi-person" />

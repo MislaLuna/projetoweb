@@ -8,7 +8,7 @@
         import GestaoDepartamentos from "./pages/GestãoDepartamento/gestaodepartamento";
         import Dashboard from "./pages/DashBoard/dashboard";
         import VerifyCodePage from "./pages/VerificarCodigoNovaSenha/verificaCodigo";
-        import ResetPasswordPage from "./pages/CriarConta/contanova";
+        import ResetPasswordPage from "./pages/CriaNovaSenha/crianovasenha";
         import ConfigurationPage from "./pages/Configuracao/configuracao";
         
 

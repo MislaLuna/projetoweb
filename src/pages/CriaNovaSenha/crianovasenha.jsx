@@ -52,9 +52,9 @@ const ResetPasswordPage = () => {
           <h2>Redefinir Senha</h2>
 
           {email && (
-            <p className="email-info">
-              Redefinindo a senha do usuário: <strong>{email}</strong>
-            </p>
+            <div className="email-info">
+              Digite a nova senha para o usuário: <strong>{email}</strong>
+            </div>
           )}
 
           <form onSubmit={handleReset}>

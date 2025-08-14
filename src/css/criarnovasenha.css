@@ -1,85 +1,93 @@
 /* Estilos isolados só para a página de redefinir senha */
 
 .reset-password-page {
-    font-family: 'League Spartan', sans-serif;
-    font-size: 16px;
-    color: #3d0e54;
-    background-color: #eaeaeb;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .reset-password-container {
-    background: #eaeaeb;
-    border-radius: 30px;
-    padding: 40px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    width: 400px;
-    max-width: 90vw;
-    height: auto;
-  }
-  
-  .reset-password-form h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #3d0e54;
-  }
-  
-  .reset-password-form form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input-group {
-    background-color: #fff;
-    border: 2px solid #e9eaeb;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    padding: 10px;
-  }
-  
-  .input-group input {
-    border: none;
-    outline: none;
-    font-size: 18px;
-    width: 100%;
-    background: transparent;
-    color: #001249;
-  }
-  
-  .input-group input::placeholder {
-    color: #999;
-  }
-  
-  button {
-    width: 100%;
-    padding: 12px;
-    background: #873fca;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    transition: background 0.3s ease;
-  }
-  
-  button:hover {
-    background: #bc9aff;
-  }
-  .email-info {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 18px;
-    color: #3d0e54;
-    background: #f0e6ff;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1.5px solid #873fca;
-  }
-  
-  
+  font-family: 'League Spartan', sans-serif;
+  font-size: 16px;
+  color: #3d0e54;
+  background-color: #eaeaeb;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset-password-container {
+  background: #eaeaeb;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 400px;
+  max-width: 90vw;
+  height: auto;
+}
+
+.reset-password-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3d0e54;
+}
+
+.reset-password-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  background-color: #fff;
+  border: 2px solid #e9eaeb;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  font-size: 18px;
+  width: 100%;
+  background: transparent;
+  color: #001249;
+}
+
+.input-group input::placeholder {
+  color: #999;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #873fca;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background: #bc9aff;
+  transform: scale(1.02);
+}
+
+/* Texto com e-mail destacado */
+.email-info {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #3d0e54;
+  background: linear-gradient(90deg, #f3e9ff, #e8d6ff);
+  padding: 14px;
+  border-radius: 12px;
+  border: 1.5px solid #873fca;
+  box-shadow: 0 2px 6px rgba(135, 63, 202, 0.15);
+}
+
+.email-info strong {
+  color: #873fca;
+  font-weight: 700;
+}

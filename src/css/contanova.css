@@ -1,68 +1,74 @@
-/* Corpo da página */
-body {
+/* ===============================
+   Fundo e Overlay
+   =============================== */
+   body {
     background-image: url('../images/yosemite-922757.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
-    padding-top: 150px;
-    padding-bottom: 7px;
-    margin-left: 50px;
-    animation: backgroundSlideIn 2s ease-out forwards; /* Adicionando animação para o fundo */
-    color: #fff; /* Ajuste a cor do texto conforme necessário */
-      
+    padding: 150px 0 7px 50px;
+    margin: 0;
+    font-family: 'League Spartan', sans-serif;
+    color: #fff;
+    animation: backgroundSlideIn 2s ease-out forwards;
 }
 
 .overlay {
-    position:fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(91, 13, 133, 0.393); /* Cor preta com 50% de opacidade */
-    pointer-events: none; /* Impede que a camada de overlay bloqueie interações */
+    position: fixed;
+    inset: 0;
+    background-color: rgba(91, 13, 133, 0.393);
+    pointer-events: none;
 }
 
-/* Conteúdo da página */
 .container {
     position: relative;
-    z-index: 10;  /* Garante que o conteúdo fique acima do overlay */
+    z-index: 10;
 }
 
-
+/* ===============================
+   Logo
+   =============================== */
 .logo-link {
-    position: absolute; /* Garante que fique acima do conteúdo */
-    top: 20px; /* Distância do topo */
-    left: 20px; /* Distância da esquerda */
-    z-index: 9999; /* Coloca a imagem acima de todos os elementos */
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
 }
 
 .logo-image {
-    width: 150px;  /* Tamanho da logo */
-    height: auto;  /* Manter proporção */
-    transition: transform 0.10s ease;  /* Efeito suave ao passar o mouse */
-    box-shadow: -5px -5px 6px rgba(172, 118, 225, 0.548);  /* Sombra apenas à esquerda e em cima */
+    width: 150px;
+    height: auto;
+    transition: transform 0.1s ease;
+    box-shadow: -5px -5px 6px rgba(172, 118, 225, 0.548);
 }
 
-
-
+/* ===============================
+   Containers de formulário
+   =============================== */
 .top-container {
     margin-bottom: 20px;
 }
 
-.top-div {
+.top-div,
+.login-container {
     width: 500px;
-    padding: 14px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
     box-shadow: 0 0 40px rgba(38, 39, 40, 0.548);
     margin: auto;
+    transform: translateY(-90px);
     text-align: center;
-    color: rgb(197, 197, 197);
-    margin-left: auto; /* Mover para a direita */
-    margin-right: 40px; /* Ajuste para não ficar colado na borda */
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    transform: translate(-0%, -90px);
 }
 
+.login-container {
+    background-color: rgba(248, 248, 248, 0.934);
+    padding: 90px;
+    color: #2f2d2d;
+}
+
+/* ===============================
+   Inputs
+   =============================== */
 .input-group {
     display: flex;
     flex-direction: column;
@@ -71,7 +77,6 @@ body {
 
 .input-group label {
     text-align: left;
-    width: 100%;
     padding: 2px;
 }
 
@@ -97,40 +102,43 @@ body {
     width: 100%;
     padding: 8px;
     font-size: 16px;
-    text-align: left;
     height: 30px;
 }
 
-/* Estilo da caixa de login */
-.login-container {
-    width: 500px; /* Mantém o tamanho fixo */
-    padding: 90px;
-    box-shadow: 0 0 40px rgba(38, 39, 40, 0.548);
-    background-color: rgba(248, 248, 248, 0.934);
-    text-align: center;
-    margin-left: auto; /* Empurra para a direita */
-    border-radius: 10px;
-    margin-right: 50px; /* Ajuste opcional para não colar na borda */
-    color:#2f2d2d;
-    transform: translate(-0%, -90px);
+/* ===============================
+   Botões
+   =============================== */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
-/* Estilos dos botões sociais */
+
+button:hover {
+    background-color: #3d0e54;
+    transform: scale(1.03);
+}
+
+/* Botões sociais */
 .social-login {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espaçamento entre os botões */
+    gap: 10px;
 }
 
 .social-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
     font-weight: bold;
     transition: background 0.3s ease;
 }
@@ -139,16 +147,15 @@ body {
     margin-right: 10px;
 }
 
-/* Facebook */
 .facebook-btn {
     background-color: #1877F2;
+    color: white;
 }
 
 .facebook-btn:hover {
     background-color: #1559C1;
 }
 
-/* Google */
 .google-btn {
     background-color: white;
     color: black;
@@ -159,130 +166,56 @@ body {
     color: #DB4437;
 }
 
-/* Estilo do botão de login */
-button {
-    width: 100%;
-    padding: 10px;
-    background-color:  #8c52ff;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    display: block;
-}
-
-
-
-
-
-
-
-
-
-@keyframes colorOverlay {
-    0% {
-        background-color: rgba(0, 0, 0, 0); /* Começa sem cor */
-    }
-    100% {
-        background-color: rgba(0, 0, 0, 0.921); /* Finaliza com a cor preta semitransparente */
-    }
-}
-/* Animação para o background deslizar da direita para a esquerda */
-@keyframes backgroundSlideIn {
-    100% {
-        background-position: 10% center; /* Começa do lado direito */
-    }
-    100% {
-        background-position: center center; /* Move para o centro */
-    }
-}
-
-/* Estilos para o título de login */
-.login-title {
-    color: #4e96c38c;
-    font-size: 3rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-    animation: slideInRight 2s ease-out; /* Animação do título */
-}
-
-/* Animação para o título deslizar da direita para a esquerda */
-@keyframes slideInRight {
-    0% {
-        transform: translateX(100%); /* Começa fora da tela à direita */
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0); /* Chega ao seu lugar original */
-        opacity: 1;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* Definir estilo do título */
-.login-title {
-    color: #4e96c38c;
-    font-size: 3rem;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-    display: inline-block;
-    position: relative;
-    animation: slideInRight 1.5s ease-out;
-}
-
-/* Animação para o texto deslizar da direita para a esquerda */
-@keyframes slideInRight {
-    0% {
-        transform: translateX(100%); /* Começa fora da tela à direita */
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0); /* Chega ao seu lugar original */
-        opacity: 1;
-    }
-}
-
-
-
-
-
-
-
-button:hover {
-    background-color: #3d0e54;;
-}
-
-/* Links */
+/* ===============================
+   Links
+   =============================== */
 .links {
     margin-top: 10px;
-    color: #8c52ff;;
+    color: #8c52ff;
 }
 
 a {
-    color: #8c52ff;;
+    color: #8c52ff;
 }
 
 a:hover {
     color: #3d0e54;
 }
 
-/* Efeito de hover no botão */
 .nav-link.custom-btn:hover {
-    background-color: #9000ff; /* Cor de fundo ao passar o mouse */
-    color: white; /* Cor do texto */
-    transform: scale(1.05); /* Aumenta ligeiramente o botão */
-    transition: all 0.3s ease; /* Transição suave */
+    background-color: #9000ff;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ===============================
+   Título animado
+   =============================== */
+.login-title {
+    color: #4e96c38c;
+    font-size: 3rem;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    animation: slideInRight 1.5s ease-out;
+}
+
+/* ===============================
+   Animações
+   =============================== */
+@keyframes backgroundSlideIn {
+    0% { background-position: 10% center; }
+    100% { background-position: center center; }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
