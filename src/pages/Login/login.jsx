@@ -2,78 +2,85 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/login.css';
- 
+import '../../css/login-exclusive.css'; // CSS exclusivo do login
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
+
   const handleLogin = async (e) => {
     e.preventDefault();
- 
-    if (email && password) {
-      try {
-        const response = await fetch('http://localhost:8080/usuarios/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, senha: password }),
-        });
- 
-        if (response.ok) {
-          const user = await response.json();
-          console.log('Login bem-sucedido:', user);
-          navigate('/home2');
-        } else {
-          const error = await response.text();
-          alert(`Erro ao fazer login: ${error}`);
-        }
-      } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        alert('Erro de conexão. Tente novamente.');
-      }
-    } else {
+
+    if (!email || !password) {
       alert('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/usuarios/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha: password }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Erro ao fazer login');
+      }
+
+      const user = await response.json();
+      console.log('Usuário logado:', user);
+
+      navigate('/home2'); // redireciona após login
+      
+    } catch (err) {
+      alert(err.message);
     }
   };
- 
+
   return (
-    <div className="login-container">
-      <div className="login-form">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="input-group">
-            <i className="bi bi-envelope" />
-            <input
-              type="email"
-              placeholder="Digite seu e-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <i className="bi bi-lock" />
-            <input
-              type="password"
-              placeholder="Digite sua senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="footer-links">
-            <a href="/contanova"><b>Criar Conta</b></a>
-            <a href="/esqueceusenha"><b>Esqueci minha senha</b></a>
-          </div>
-          <button type="submit">Entrar</button>
-        </form>
-      </div>
-      <div className="login-image">
-        <img src="src/pages/img/mulher-usando-um-tablet-isolado-na-parede-branca_53419-9802.avif" alt="Imagem de Login" />
+    <div className="login-page-exclusive">
+      <div className="login-container-exclusive">
+        <div className="login-form-exclusive">
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div className="input-group-exclusive">
+              <i className="bi bi-envelope"></i>
+              <input
+                type="email"
+                placeholder="Digite seu e-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-group-exclusive">
+              <i className="bi bi-lock"></i>
+              <input
+                type="password"
+                placeholder="Digite sua senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="footer-links-exclusive">
+              <a href="/contanova">Criar Conta</a>
+              <a href="/esqueceusenha">Esqueci minha senha</a>
+            </div>
+            <button type="submit">Entrar</button>
+          </form>
+        </div>
+        <div className="login-image-exclusive">
+          <img 
+            src="/src/pages/img/mulher-usando-um-tablet-isolado-na-parede-branca_53419-9802.avif" 
+            alt="Imagem de Login" 
+          />
+        </div>
       </div>
     </div>
   );
 };
- 
+
 export default LoginPage;

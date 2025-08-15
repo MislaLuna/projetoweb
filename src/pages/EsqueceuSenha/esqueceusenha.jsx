@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/login.css'; 
+import '../../css/forgot-password.css'; // CSS exclusivo da página
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -38,12 +38,10 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form">
-        <h2>Recuperar Senha</h2>
-        <p style={{ marginBottom: '15px' }}>
-          Informe seu e-mail cadastrado para receber o código de recuperação.
-        </p>
+    <div className="forgot-password-page">
+      <div className="forgot-password-container">
+        <h2 className="forgot-password-title">Recuperar Senha</h2>
+        <p>Informe seu e-mail cadastrado para receber o código de recuperação.</p>
         <form onSubmit={handleForgotPassword}>
           <div className="input-group">
             <i className="bi bi-envelope"></i>
@@ -57,17 +55,13 @@ const ForgotPasswordPage = () => {
           </div>
           <button type="submit">Enviar Código</button>
         </form>
-        <div className="footer-links" style={{ marginTop: '15px' }}>
-          <a href="/login" className="create-account-link">Voltar ao Login</a><br />
-          <a href="/register" className="forgot-password-link">Criar uma Conta</a>
+        <div className="footer-links">
+          <a href="/login">Voltar ao Login</a>
+          <a href="/register">Criar uma Conta</a>
         </div>
       </div>
-      <div className="login-image" style={{ flex: 1, maxWidth: '500px', padding: '150px', borderRadius: '200px' }}>
-        <img
-          src="src/pages/img/7f5c7cd30efc2190db8c19614d073516.png"
-          alt="Imagem Recuperação"
-          style={{ width: '100%', borderRadius: '10px', objectFit: 'cover' }}
-        />
+      <div className="forgot-password-image">
+        <img src="src/pages/img/recuperacao.png" alt="Recuperação" />
       </div>
     </div>
   );

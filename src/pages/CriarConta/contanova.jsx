@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../css/contanova.css';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/contanova.css';
+import '../../css/auth-pages.css'
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -39,7 +40,6 @@ const RegisterPage = () => {
         alert(`Erro ao cadastrar: ${error}`);
       }
     } catch (error) {
-      console.error('Erro ao cadastrar:', error);
       alert('Erro de conexão. Tente novamente.');
     }
   };
@@ -52,43 +52,19 @@ const RegisterPage = () => {
           <form onSubmit={handleCadastro}>
             <div className="input-group">
               <i className="bi bi-person" />
-              <input
-                type="text"
-                placeholder="Digite seu nome"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-                required
-              />
+              <input type="text" placeholder="Digite seu nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
             </div>
             <div className="input-group">
               <i className="bi bi-envelope" />
-              <input
-                type="email"
-                placeholder="Digite seu e-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <input type="email" placeholder="Digite seu e-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="input-group">
               <i className="bi bi-lock" />
-              <input
-                type="password"
-                placeholder="Digite sua senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required
-              />
+              <input type="password" placeholder="Digite sua senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
             </div>
             <div className="input-group">
               <i className="bi bi-lock-fill" />
-              <input
-                type="password"
-                placeholder="Confirme sua senha"
-                value={confirmSenha}
-                onChange={(e) => setConfirmSenha(e.target.value)}
-                required
-              />
+              <input type="password" placeholder="Confirme sua senha" value={confirmSenha} onChange={(e) => setConfirmSenha(e.target.value)} required />
             </div>
             <button type="submit">Cadastrar</button>
           </form>
