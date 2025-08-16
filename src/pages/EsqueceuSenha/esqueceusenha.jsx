@@ -61,7 +61,7 @@ const ForgotPasswordPage = () => {
         </div>
       </div>
       <div className="forgot-password-image">
-        <img src="src/pages/img/recuperacao.png" alt="Recuperação" />
+        <img src="src/pages/img/cadeadofoto.png" alt="Recuperação" />
       </div>
     </div>
   );

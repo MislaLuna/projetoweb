@@ -99,7 +99,7 @@
 /* Imagem lateral */
 .login-image-exclusive img {
   max-width: 350px;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 /* Responsividade */

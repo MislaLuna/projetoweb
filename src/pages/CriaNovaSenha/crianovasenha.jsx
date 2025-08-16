@@ -47,15 +47,16 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="reset-password-page">
+      {/* Container flex para alinhar lado a lado */}
       <div className="reset-password-container">
+
+        {/* Formulário à esquerda */}
         <div className="reset-password-form">
           <h2>Redefinir Senha</h2>
 
-          {email && (
-            <div className="email-info">
-              Digite a nova senha para o usuário: <strong>{email}</strong>
-            </div>
-          )}
+          <div className="email-info">
+            Digite a nova senha para o e-mail: <strong>{email}</strong>
+          </div>
 
           <form onSubmit={handleReset}>
             <div className="input-group">
@@ -80,6 +81,11 @@ const ResetPasswordPage = () => {
             </div>
             <button type="submit">Redefinir Senha</button>
           </form>
+        </div>
+
+        {/* Imagem à direita */}
+        <div className="reset-password-image">
+          <img src="src/pages/img/chavefoto.png" alt="Ilustração segurança" />
         </div>
       </div>
     </div>
