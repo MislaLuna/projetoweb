@@ -57,11 +57,11 @@ const ForgotPasswordPage = () => {
         </form>
         <div className="footer-links">
           <a href="/login">Voltar ao Login</a>
-          <a href="/register">Criar uma Conta</a>
+          <a href="/contanova">Criar uma Conta</a>
         </div>
       </div>
       <div className="forgot-password-image">
-        <img src="src/pages/img/cadeadofoto.png" alt="Recuperação" />
+        <img src="src/pages/img/codig.png" alt="Recuperação" />
       </div>
     </div>
   );

@@ -11,30 +11,63 @@
     font-family: 'League Spartan', sans-serif;
     font-size: 16px;
     color: #3d0e54;
-    background-color: #eaeaeb;
+    background-color: #f0f0f5;
     min-height: 100vh;
     margin: 0;
     padding: 0;
   }
   
   /* Container centralizado */
+  /* Container com duas colunas centralizadas */
+.register-container {
+  display: flex;
+  justify-content: center;   /* centraliza as divs no meio */
+  align-items: center;       /* alinha verticalmente */
+  gap: 50px;                 /* controla a distância entre form e imagem */
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Card do formulário */
+.register-form {
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 500px;
+  text-align: center;
+}
+
+/* Div da imagem */
+.register-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;   /* evita a imagem "esticar" no flex */
+}
+
+/* Imagem dentro da div */
+.register-image img {
+  width: 400px;   /* define o tamanho fixo */
+  height: auto;   /* mantém proporção */
+  object-fit: contain; /* garante que não distorce */
+  border-radius: 20px;
+}
+
+/* Responsivo (celular/tablet) */
+@media (max-width: 900px) {
   .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Garante centralização vertical total */
-    margin: 0; /* remove margens extras */
+    flex-direction: column; /* empilha o form e a imagem */
+    gap: 30px; /* espaço entre eles */
   }
-  /* Card do formulário */
-  .register-form {
-    background: #eaeaeb;
-    border-radius: 30px;
-    padding: 40px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    height: auto;
+
+  .register-image img {
+    width: 60%;  /* ocupa parte da largura da tela */
+    max-width: 300px;
   }
-  
+}
+
+
   /* Título */
   .register-form h2 {
     text-align: center;

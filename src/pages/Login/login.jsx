@@ -74,7 +74,7 @@ const LoginPage = () => {
         </div>
         <div className="login-image-exclusive">
           <img 
-            src="/src/pages/img/mulher-usando-um-tablet-isolado-na-parede-branca_53419-9802.avif" 
+            src="/src/pages/img/Design sem nome (3).png" 
             alt="Imagem de Login" 
           />
         </div>

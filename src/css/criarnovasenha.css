@@ -7,23 +7,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 60px; /* distância entre form e imagem */
+  padding: 20px;
 }
 
-.reset-password-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+/* Formulário */
+.reset-password-form {
   background: #fff;
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 900px;
+  max-width: 400px;
   width: 100%;
-}
-
-/* Formulário à esquerda */
-.reset-password-form {
-  flex: 1;
 }
 
 .reset-password-form h2 {
@@ -32,7 +27,6 @@
   color: #3d0e54;
 }
 
-/* Bloco do email destacado */
 .email-info {
   text-align: center;
   margin-bottom: 25px;
@@ -51,7 +45,6 @@
   font-weight: 700;
 }
 
-/* Inputs */
 .input-group {
   background-color: #fff;
   border: 2px solid #e9eaeb;
@@ -87,9 +80,8 @@ button:hover {
   transform: scale(1.02);
 }
 
-/* Imagem à direita */
+/* Imagem */
 .reset-password-image {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,16 +89,16 @@ button:hover {
 
 .reset-password-image img {
   width: 320px;
-  max-width: 100%;
+  max-width: 88%;
   border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .reset-password-container {
+  .reset-password-page {
     flex-direction: column;
-    text-align: center;
+    gap: 30px;
   }
 
   .reset-password-image img {

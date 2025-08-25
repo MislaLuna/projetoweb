@@ -47,47 +47,45 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="reset-password-page">
-      {/* Container flex para alinhar lado a lado */}
-      <div className="reset-password-container">
 
-        {/* Formulário à esquerda */}
-        <div className="reset-password-form">
-          <h2>Redefinir Senha</h2>
+      {/* Div do formulário */}
+      <div className="reset-password-form">
+        <h2>Redefinir Senha</h2>
 
-          <div className="email-info">
-            Digite a nova senha para o e-mail: <strong>{email}</strong>
+        <div className="email-info">
+          Digite a nova senha para o e-mail: <strong>{email}</strong>
+        </div>
+
+        <form onSubmit={handleReset}>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Nova senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              minLength={6}
+            />
           </div>
-
-          <form onSubmit={handleReset}>
-            <div className="input-group">
-              <input
-                type="password"
-                placeholder="Nova senha"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required
-                minLength={6}
-              />
-            </div>
-            <div className="input-group">
-              <input
-                type="password"
-                placeholder="Confirmar nova senha"
-                value={confirmar}
-                onChange={(e) => setConfirmar(e.target.value)}
-                required
-                minLength={6}
-              />
-            </div>
-            <button type="submit">Redefinir Senha</button>
-          </form>
-        </div>
-
-        {/* Imagem à direita */}
-        <div className="reset-password-image">
-          <img src="src/pages/img/chavefoto.png" alt="Ilustração segurança" />
-        </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Confirmar nova senha"
+              value={confirmar}
+              onChange={(e) => setConfirmar(e.target.value)}
+              required
+              minLength={6}
+            />
+          </div>
+          <button type="submit">Redefinir Senha</button>
+        </form>
       </div>
+
+      {/* Div da imagem */}
+      <div className="reset-password-image">
+        <img src="src/pages/img/Design sem nome (5).png" alt="Ilustração segurança" />
+      </div>
+
     </div>
   );
 };
