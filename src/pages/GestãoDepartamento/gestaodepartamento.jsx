@@ -139,9 +139,17 @@ function GestaoDepartamentos() {
             </div>
           </div>
 
-          <footer className="footer-container">
+        <footer className="footer-container">
             <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-            <p>Este módulo permite organizar os setores da empresa com eficiência.</p>
+            <p>Este sistema foi desenvolvido para facilitar a gestão de tarefas e usuários.</p>
+            <div className="privacy-policy">
+              <h4 className="policy-title">Política de Privacidade</h4>
+              <div className="policy-text">
+                <p>Coletamos e armazenamos dados pessoais apenas para fornecer nossos serviços.</p>
+                <p>Utilizamos tecnologias de segurança para proteger suas informações.</p>
+                <p>Entre em contato conosco para dúvidas sobre seus dados.</p>
+              </div>
+            </div>
           </footer>
         </div>
       </main>

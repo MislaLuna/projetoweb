@@ -1,4 +1,4 @@
-.gestaoTarefasContainer {
+.configuration-page {
   --body-font-family: 'League Spartan', sans-serif;
   --h1-font-size: 62px;
   --h2-font-size: 48px;
@@ -24,10 +24,7 @@
   --background-color: rgb(230, 230, 231);
   --text-color: #606163;
   --shadow-color: rgba(0, 0, 0, 0.1);
-}
 
-/* Layout base */
-.gestaoTarefasContainer {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
@@ -35,8 +32,10 @@
   background-color: var(--background-color);
 }
 
-/* Sidebar */
-.gestaoTarefasContainer .sidebar {
+/* ===========================
+   Sidebar
+=========================== */
+.configuration-page .sidebar {
   background-color: var(--dark-color);
   padding: 0.5rem;
   width: 92px;
@@ -55,44 +54,41 @@
   transition: width 0.3s ease, padding 0.3s ease, align-items 0.3s ease;
 }
 
-.gestaoTarefasContainer .sidebar:hover {
+.configuration-page .sidebar:hover {
   width: 320px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   align-items: flex-start;
   overflow: visible;
 }
-.botao-criar-tarefa {
---primary-color: #240046; /* verde */
 
-
-}
-/* Logo */
-.gestaoTarefasContainer .logo img {
+.configuration-page .logo img {
   max-width: 90px;
   margin-bottom: 1.5rem;
   transition: max-width 0.3s ease, margin 0.3s ease;
 }
 
-.gestaoTarefasContainer .sidebar:hover .logo img {
+.configuration-page .sidebar:hover .logo img {
   max-width: 160px;
   margin-bottom: 2rem;
   filter: drop-shadow(0 0 3px #7f6ecc);
 }
 
-/* Menu */
-.gestaoTarefasContainer .menu {
+/* ===========================
+   Menu
+=========================== */
+.configuration-page .menu {
   list-style: none;
   padding-left: 0;
   width: 100%;
 }
 
-.gestaoTarefasContainer .menu li {
+.configuration-page .menu li {
   margin-bottom: 25px;
   width: 100%;
 }
 
-.gestaoTarefasContainer .menu li a {
+.configuration-page .menu li a {
   padding: 12px 12px;
   border-radius: var(--border-radius-small);
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -104,7 +100,7 @@
   text-decoration: none;
 }
 
-.gestaoTarefasContainer .menu li a i {
+.configuration-page .menu li a i {
   width: 28px;
   flex-shrink: 0;
   font-size: 1.5rem;
@@ -113,29 +109,31 @@
   transition: color 0.25s ease;
 }
 
-.gestaoTarefasContainer .menu li a span {
+.configuration-page .menu li a span {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.gestaoTarefasContainer .sidebar:hover .menu li a span {
+.configuration-page .sidebar:hover .menu li a span {
   opacity: 1;
 }
 
-.gestaoTarefasContainer .menu li a:hover,
-.gestaoTarefasContainer .menu li a.active {
+.configuration-page .menu li a:hover,
+.configuration-page .menu li a.active {
   background-color: rgba(255, 255, 255, 0.15);
   color: var(--primary-hover);
   font-weight: var(--font-weight-bold);
 }
 
-.gestaoTarefasContainer .menu li a:hover i,
-.gestaoTarefasContainer .menu li a.active i {
+.configuration-page .menu li a:hover i,
+.configuration-page .menu li a.active i {
   color: var(--primary-hover);
 }
 
-/* Conteúdo principal */
-.gestaoTarefasContainer .main {
+/* ===========================
+   Conteúdo principal
+=========================== */
+.configuration-page .main {
   margin-left: 92px;
   padding: 2rem 3rem;
   flex-grow: 1;
@@ -143,168 +141,111 @@
   box-sizing: border-box;
 }
 
-.gestaoTarefasContainer .sidebar:hover ~ .main {
+.configuration-page .sidebar:hover ~ .main {
   margin-left: 320px;
 }
 
-/* Hero */
-.gestaoTarefasContainer .hero {
-
+/* ===========================
+   Hero
+=========================== */
+.configuration-page .hero {
   padding: 2.5rem;
-
   text-align: center;
   max-width: 890px;
   margin: 0 auto 3rem;
-
 }
 
-.gestaoTarefasContainer .hero h1 {
+.configuration-page .hero h1 {
   font-size: var(--h1-font-size);
   color: var(--dark-color);
   font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
-.gestaoTarefasContainer .hero p {
+.configuration-page .hero p {
   font-size: var(--p-font-size);
   color: var(--text-color);
   font-weight: var(--font-weight-light);
 }
 
-/* Dashboard */
-.gestaoTarefasContainer .dashboard,
-.gestaoTarefasContainer .dash-2 {
-  background-color: #e4c1f900;
-  border-radius: var(--border-radius-medium);
-  padding: 2rem;
-  min-height: 85vh;
-  box-shadow: 0 2px 6px var(--shadow-color);
-}
-
-/* Tabela */
-.gestaoTarefasContainer .table-wrapper {
-  overflow-x: auto;
-  margin-top: 2rem;
-}
-
-.gestaoTarefasContainer table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
+/* ===========================
+   Cartão de configuração
+=========================== */
+.configuration-page .config-container {
   background-color: var(--white-color);
-  border-radius: var(--border-radius-small);
-  overflow: hidden;
+  border-radius: var(--border-radius-medium);
   box-shadow: 0 2px 8px var(--shadow-color);
+  padding: 2rem;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
-.gestaoTarefasContainer thead {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+/* Tabela e botões */
+.configuration-page .table-responsive .btn {
+  margin-right: 8px; /* espaço entre Editar e Excluir */
 }
 
-.gestaoTarefasContainer thead th {
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: var(--font-weight-semibold);
-  font-size: 16px;
-}
-
-.gestaoTarefasContainer tbody td {
-  padding: 12px 15px;
-  font-size: 16px;
-  color: var(--text-color);
-  border-bottom: 1px solid #ddd;
-}
-
-.gestaoTarefasContainer tbody tr:hover {
-  background-color: #f3f3f3;
-  cursor: pointer;
-}
-
-/* Botões editar/deletar */
-.gestaoTarefasContainer .edit-btn,
-.gestaoTarefasContainer .delete-btn {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-right: 0.5rem;
-}
-
-.gestaoTarefasContainer .edit-btn i {
-  color: rgb(41, 123, 212);
-}
-
-.gestaoTarefasContainer .delete-btn i {
-  color: rgb(196, 35, 35);
-}
-
-/* Botão principal */
-.botao-criar-tarefa {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-weight: var(--font-weight-bold);
-  border-radius: var(--border-radius-small);
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.botao-criar-tarefa:hover {
-  background-color: var(--primary-hover);
-}
-
-/* Modal */
+/* ===========================
+   Modal/Blur
+=========================== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 100;
 }
 
 .modal-form {
-  background-color: white;
+  background-color: var(--white-color);
   padding: 2rem;
   border-radius: var(--border-radius-medium);
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
   position: relative;
+  animation: fadeIn 0.3s ease;
 }
 
-.modal-form h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--dark-color);
-}
-
-/* Botão fechar modal */
-.close-btn {
-  background-color: #dc3545;
-  color: white;
+.modal-form .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   border: none;
-  font-size: 24px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  background: none;
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.close-btn:hover {
-  background-color: #c82333;
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
 }
 
-/* Footer */
-.gestaoTarefasContainer .footer-container {
+/* Inputs e botões */
+.modal-form input,
+.modal-form select,
+.modal-form button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.modal-form button {
+  margin-top: 10px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+.configuration-page .footer-container {
   background-color: var(--dark-color);
-  color: var(--white-color);
+  color: #ffffff;
   text-align: center;
   padding: 2rem 1.5rem;
   border-radius: var(--border-radius-medium);
@@ -312,121 +253,9 @@
   box-shadow: 0 2px 10px var(--shadow-color);
 }
 
-.gestaoTarefasContainer .footer-container p {
-  font-size: var(--copyright-font-size);
+.configuration-page .footer-container p {
+  font-size: 14px !important;
   margin: 0.5rem 0;
-  font-weight: var(--font-weight-light);
-  color: #dadada;
-}
-
-.gestaoTarefasContainer .policy-title {
-  color: var(--primary-color);
-  font-size: var(--h4-font-size);
-  margin-top: 1rem;
-  font-weight: var(--font-weight-semibold);
-}
-
-.gestaoTarefasContainer .policy-text p {
-  font-size: 16px;
-  color: var(--white-color);
-  margin: 0.3rem 0;
-  line-height: 1.5;
-}
-
-
-
-
-
-
-
-.gestaoTarefasContainer .dash-2 {
-  background-color: #c8b6ff;
-  border-radius: var(--border-radius-medium);
-  padding: 2rem;
-}
-
-
-
-
-
-/* Responsividade */
-@media (max-width: 900px) {
-  .gestaoTarefasContainer .sidebar {
-    width: 180px;
-    padding: 1rem 0.5rem;
-  }
-
-  .gestaoTarefasContainer .main {
-    margin-left: 200px;
-    padding: 1.5rem 1.5rem;
-  }
-
-  .gestaoTarefasContainer .hero h1 {
-    font-size: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  .gestaoTarefasContainer {
-    flex-direction: column;
-  }
-
-  .gestaoTarefasContainer .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-    padding: 1rem;
-    box-shadow: none;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .gestaoTarefasContainer .menu {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0;
-    width: auto;
-  }
-
-  .gestaoTarefasContainer .menu li {
-    margin-bottom: 0;
-    margin-left: 10px;
-  }
-
-  .gestaoTarefasContainer .main {
-    margin-left: 0;
-    padding: 1rem;
-  }
-
-  .gestaoTarefasContainer .hero h1 {
-    font-size: 32px;
-  }
-}
-.gestaoTarefasContainer .sidebar {
-  width: 92px;
-  transition: width 0.3s ease;
-}
-
-.gestaoTarefasContainer .sidebar:hover {
-  width: 320px;
-}
-
-.gestaoTarefasContainer .sidebar .menu-text {
-  display: none;
-  transition: opacity 0.3s ease;
-}
-
-.gestaoTarefasContainer .sidebar:hover .menu-text {
-  display: inline;
-  opacity: 1;
-}
-
-.gestaoTarefasContainer .main {
-  margin-left: 92px;
-  transition: margin-left 0.3s ease;
-}
-
-.gestaoTarefasContainer .sidebar:hover ~ .main {
-  margin-left: 320px;
+  font-weight: 400;
+  color: #ffffff !important;
 }

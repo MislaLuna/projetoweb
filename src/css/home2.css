@@ -28,23 +28,33 @@
   --background-color: rgb(230, 230, 231);
   --text-color: #ffffff;
   --shadow-color: rgba(0, 0, 0, 0.1);
+
+  /* Cores dos cards */
+  --feature-green: #00c853;
+  --feature-blue: #2962ff;
+  --feature-yellow: #ffea00;
+  --feature-purple: #aa00ff;
 }
-
-
-
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f5fb; /* cinza */
+  font-family: 'League Spartan', sans-serif;
+} 
 
 /* Container geral flex para sidebar + main */
 .home2Container {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
+  background-color: #f7f5fb; /* branco, ou a cor que você quiser */
 }
 
 /* Sidebar fixa - recolhida e expandida ao hover */
 .home2Container .sidebar {
   background-color: var(--dark-color);
   padding: 0.5rem 0.5rem;
-  width: 92px; /* largura recolhida */
+  width: 92px;
   height: 100vh;
   border-radius: var(--border-radius-medium);
   color: var(--white-color);
@@ -53,7 +63,7 @@
   top: 15px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* centraliza ícones no recolhido */
+  align-items: center;
   box-shadow: 0 0 15px var(--shadow-color);
   z-index: 10;
   overflow: hidden;
@@ -61,10 +71,10 @@
 }
 
 .home2Container .sidebar:hover {
-  width: 320px; /* largura expandida */
+  width: 320px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  align-items: flex-start; /* texto alinhado à esquerda */
+  align-items: flex-start;
   overflow: visible;
 }
 
@@ -116,7 +126,7 @@
 
 /* Ícones do menu */
 .home2Container .menu li a i {
-  width: 28px; /* largura fixa para manter alinhamento */
+  width: 28px;
   flex-shrink: 0;
   font-size: 1.5rem;
   margin-right: 12px;
@@ -150,7 +160,7 @@
 
 /* Main content respeitando sidebar recolhida/expandida */
 .home2Container .main {
-  margin-left: 92px; /* distância inicial (sidebar recolhida) */
+  margin-left: 92px;
   padding: 2rem 3rem;
   flex-grow: 1;
   box-sizing: border-box;
@@ -180,13 +190,10 @@
 
 /* Hero section */
 .home2Container .hero {
-
   padding: 2.5rem;
-
   text-align: center;
   max-width: 890px;
   margin: 0 auto 3rem;
-
 }
 
 .home2Container .hero h1 {
@@ -205,38 +212,69 @@
 /* Features (cards) */
 .home2Container .features {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+justify-content: center; /* centraliza os cards horizontalmente */
+  gap: 5rem; /* diminui o espaço entre os cards */
   flex-wrap: wrap;
-  padding: 0 1rem 2rem;
+  padding: 2rem 1rem;
+
 }
 
 .home2Container .feature {
-  background-color: var(--white-color);
-  padding: 1.5rem 2rem;
+  background-color: #ffffff;
+  padding: 2rem 1.5rem;
   border-radius: var(--border-radius-medium);
   text-align: center;
   box-shadow: 0 2px 8px var(--shadow-color);
-  flex: 1 1 250px;
-  max-width: 300px;
-  min-width: 250px;
+  flex: 1 1 280px; /* diminui o espaço mínimo para os cards caberem mais juntos */
+  max-width: 500px; /* mantém limite para não expandir demais */
+  min-width: 300px;
+  height: 300px;
   transition: transform 0.3s ease;
   cursor: default;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+}
+
+.home2Container .feature:first-child {
+  border-left: none;
+}
+
+.home2Container .feature:last-child {
+  border-right: none;
 }
 
 .home2Container .feature:hover {
   transform: translateY(-5px);
 }
 
+/* Ícones e cores por tipo */
 .home2Container .feature i {
   font-size: 3.5rem;
-  color: var(--primary-color);
   margin-bottom: 1rem;
+}
+
+.home2Container .feature.green i,
+.home2Container .feature.green h3 {
+  color: var(--feature-green);
+}
+
+.home2Container .feature.blue i,
+.home2Container .feature.blue h3 {
+  color: var(--feature-blue);
+}
+
+.home2Container .feature.yellow i,
+.home2Container .feature.yellow h3 {
+  color: var(--feature-yellow);
+}
+
+.home2Container .feature.purple i,
+.home2Container .feature.purple h3 {
+  color: var(--feature-purple);
 }
 
 .home2Container .feature h3 {
   font-size: var(--h3-font-size);
-  color: #e0aaff;
   margin-bottom: 1rem;
 }
 
@@ -265,7 +303,7 @@
   background-color: var(--primary-hover);
 }
 
-/* Tabela estilo (se usar) */
+/* Tabela estilo */
 .home2Container table {
   width: 100%;
   border-collapse: collapse;
@@ -331,7 +369,7 @@
 
 .home2Container .policy-text p {
   font-size: 16px;
-  color: var(--white-color);
+  color: #ffffff;
   margin: 0.3rem 0;
   line-height: 1.5;
 }
@@ -392,8 +430,13 @@
   }
 
   .home2Container .hero h1 {
-    font-size: 32px;
+    font-size: 48px !important;  /* tamanho fixo */
+    line-height: 1.2 !important;
+    color: #240046 !important;
+    font-weight: 700 !important;
+    margin-bottom: 1rem !important;
   }
+  
 
   .home2Container .features {
     flex-direction: column;
@@ -403,4 +446,19 @@
   .home2Container .feature {
     max-width: 100%;
   }
+}
+/* Hero */
+.home2Container .hero p {
+  font-size: 20px !important; /* tamanho fixo */
+  color: #796f83;
+  font-weight: 300;
+}
+
+/* Cards (3 divs) */
+.home2Container .feature h3 {
+  color: inherit; /* mantém cor do tipo: verde, azul, amarelo */
+  
+}
+.home2Container .feature p {
+  color: #333333; /* cinza escuro legível no fundo branco do card */
 }

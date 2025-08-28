@@ -11,33 +11,34 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       alert('Por favor, preencha todos os campos.');
       return;
     }
-
+  
     try {
-      const response = await fetch('http://localhost:8080/usuarios/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha: password }),
       });
-
+  
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(errorText || 'Erro ao fazer login');
       }
-
+  
       const user = await response.json();
       console.log('Usuário logado:', user);
-
+  
       navigate('/home2'); // redireciona após login
       
     } catch (err) {
       alert(err.message);
     }
   };
+  
 
   return (
     <div className="login-page-exclusive">

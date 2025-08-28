@@ -1,89 +1,299 @@
+/* ===========================
+   Container principal
+=========================== */
 .configuration-page {
-    display: flex;
-    height: 100vh;
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-  }
-  
-  .sidebar {
-    background-color: #240046;
-    color: #fff;
+  display: flex;
+  height: 100vh;
+  background-color: #f7f5fb;
+  font-family: var(--body-font-family);
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+.configuration-page .sidebar {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: width 0.3s ease;
+  width: 92px;
+  min-height: 100vh;
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.configuration-page .sidebar:hover {
+  width: 260px;
+}
+
+.configuration-page .logo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.configuration-page .logo-link img {
+  width: 100px;
+  height: auto;
+  transition: width 0.3s ease;
+}
+
+.configuration-page .sidebar:hover .logo-link img {
+  width: 160px;
+}
+
+/* ===========================
+   Menu lateral
+=========================== */
+.configuration-page .menu {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.configuration-page .menu li {
+  margin-bottom: 1rem;
+}
+
+.configuration-page .menu li a {
+  display: flex;
+  align-items: center;
+  color: var(--white-color);
+  text-decoration: none;
+  padding: 0.7rem;
+  border-radius: var(--border-radius-small);
+  transition: 0.3s;
+}
+
+.configuration-page .menu li a:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: var(--primary-hover);
+}
+
+.configuration-page .menu li a.active {
+  background-color: rgba(255,255,255,0.2);
+  color: var(--primary-hover);
+}
+
+.configuration-page .menu li a i {
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+  transition: color 0.25s ease;
+}
+
+.configuration-page .menu li a:hover i,
+.configuration-page .menu li a.active i {
+  color: var(--primary-hover);
+}
+
+.configuration-page .menu-text {
+  margin-left: 0.6rem;
+  font-weight: var(--font-weight-semibold);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.configuration-page .sidebar:hover .menu-text {
+  opacity: 1;
+}
+
+/* ===========================
+   Main
+=========================== */
+.configuration-page .main {
+  flex-grow: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-left: 92px;
+  transition: margin-left 0.3s ease;
+}
+
+.configuration-page .sidebar:hover ~ .main {
+  margin-left: 260px;
+}
+
+/* ===========================
+   Dashboard
+=========================== */
+.configuration-page .dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* ===========================
+   Hero
+=========================== */
+.configuration-page .hero {
+  text-align: center;
+}
+
+.configuration-page .hero h1 {
+  color: var(--dark-color);
+  font-size: var(--h3-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.configuration-page .hero p {
+  color: var(--text-color);
+  font-size: var(--p-font-size);
+}
+
+/* ===========================
+   Cartão de configuração
+=========================== */
+.configuration-page .config-container {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  padding: 2rem;
+
+  width: 1600px;
+  height: 600px;
+  max-width: 100%;  
+  margin: -50px auto 0 auto; /* sobe 50px em relação ao normal */
+  box-sizing: border-box; 
+}
+
+/* Seções internas */
+.configuration-page .theme-section,
+.configuration-page .notifications-section {
+  margin-bottom: 2rem;
+}
+
+/* Opções de tema */
+.configuration-page .theme-options {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.configuration-page .theme-options label {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  color: var(--dark-color);
+}
+
+/* Lista de notificações */
+.configuration-page .notification-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.configuration-page .notification-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e3e3e3;
+  color: var(--text-color);
+}
+
+/* Inputs e botões */
+.configuration-page input[type="radio"] {
+  accent-color: var(--primary-hover);
+}
+
+.configuration-page button {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: var(--border-radius-small);
+  padding: 0.7rem 1.4rem;
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  transition: background-color 0.3s;
+}
+
+.configuration-page button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ===========================
+   Footer
+=========================== */
+.configuration-page .footer-container {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-medium);
+  margin-top: 3rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.configuration-page .footer-container p {
+  font-size: var(--copyright-font-size);
+  margin: 0.5rem 0;
+  color: var(--white-color) !important;
+}
+
+.configuration-page .policy-title {
+  color: var(--primary-color);
+  font-size: var(--h4-font-size);
+  margin-top: 1rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.configuration-page .policy-text p {
+  font-size: 14px;
+  color: var(--white-color);
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+/* ===========================
+   Responsividade
+=========================== */
+@media (max-width: 900px) {
+  .configuration-page .main {
     padding: 1.5rem;
-    display: flex;
+  }
+
+  .configuration-page .theme-options {
     flex-direction: column;
-    align-items: center;
+    gap: 1rem;
   }
-  
-  .logo {
-    margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+  .configuration-page {
+    flex-direction: column;
   }
-  
-  .logo-link img {
-    width: 100px;
-    height: auto;
-  }
-  
-  .menu {
-    list-style-type: none;
-    padding: 0;
+
+  .configuration-page .sidebar {
     width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1rem 0.5rem;
   }
-  
-  .menu li {
-    margin-bottom: 1rem;
-  }
-  
-  .menu li a {
+
+  .configuration-page .menu {
     display: flex;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem;
-    border-radius: 4px;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0;
+    justify-content: space-around;
   }
-  
-  .menu li a.active {
-    background-color: #3c096c;
-  }
-  
-  .menu-text {
+
+  .configuration-page .menu li {
+    margin-bottom: 0;
     margin-left: 0.5rem;
   }
-  
-  .main {
-    flex-grow: 1;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+
+  .configuration-page .main {
+    margin-left: 0;
+    padding: 1rem;
   }
-  
-  .configuration-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+
+  .configuration-page .hero h1 {
+    font-size: 1.5rem;
   }
-  
-  .theme-section,
-  .notifications-section {
-    margin-bottom: 2rem;
-  }
-  
-  .theme-options {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  .notification-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 1rem;
-  }
-  
-  .notification-list li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
+}
