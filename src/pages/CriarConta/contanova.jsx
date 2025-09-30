@@ -26,11 +26,17 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/usuarios', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, senha, origem: 'web' }),
-      });
+     const response = await fetch('http://localhost:8080/usuarios', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    nome,
+    email,
+    senha,
+    origem: "web",    // opcional, se quiser diferenciar
+    nivel: "ADMIN"    // 🔹 força criar como ADMIN
+  }),
+});
 
       if (response.ok) {
         alert('Cadastro realizado com sucesso!');

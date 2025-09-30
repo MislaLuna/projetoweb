@@ -75,12 +75,12 @@ function GestaoDepartamentos() {
     <div className="gestaoTarefasContainer">
       <aside className="sidebar">
         <div className="logo">
-          <Link to="/home2" className="logo-link">
+          <Link to="/equipe" className="logo-link">
             <img src={logo} alt="Logo TaskNavigation" />
           </Link>
         </div>
         <ul className="menu">
-          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></Link></li>
+          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></Link></li>
           <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span></Link></li>
           <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span></Link></li>
           <li><Link to="/pagina8" className={isActive('/pagina8')}><i className="bi bi-people-fill"></i> <span className="menu-text">Gestão de usuários</span></Link></li>

@@ -86,12 +86,12 @@ function GestaoTarefas() {
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="logo">
-          <Link to="/home2" className="logo-link">
+          <Link to="/equipe" className="logo-link">
             <img src={logo} alt="Logo TaskNavigation" />
           </Link>
         </div>
         <ul className="menu">
-          <li><Link to="/home2" className={location.pathname === '/home2' ? 'active' : ''}><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></Link></li>
+          <li><Link to="/equipe" className={location.pathname === '/equipe' ? 'active' : ''}><i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span></Link></li>
           <li><Link to="/gestaotarefas" className={location.pathname === '/gestaotarefas' ? 'active' : ''}><i className="bi bi-list-task"></i> <span className="menu-text">Tarefas</span></Link></li>
           <li><Link to="/gestaodepartamento" className={location.pathname === '/gestaodepartamento' ? 'active' : ''}><i className="bi bi-building"></i> <span className="menu-text">Departamentos</span></Link></li>
           <li><Link to="/pagina8" className={location.pathname === '/pagina8' ? 'active' : ''}><i className="bi bi-people-fill"></i> <span className="menu-text">Usuários</span></Link></li>

@@ -3,13 +3,15 @@
         import LoginPage from "./pages/Login/login";
         import RegisterPage from "./pages/CriarConta/contanova";
         import ForgotPasswordPage from "./pages/EsqueceuSenha/esqueceusenha";
-        import Home2 from "./pages/Home2/home2";
+        import Home2 from "./pages/Equipe/equipe";
         import GestaoTarefas from "./pages/GestaoTarefas/gestaotarefas";
         import GestaoDepartamentos from "./pages/GestãoDepartamento/gestaodepartamento";
         import Dashboard from "./pages/DashBoard/dashboard";
         import VerifyCodePage from "./pages/VerificarCodigoNovaSenha/verificaCodigo";
         import ResetPasswordPage from "./pages/CriaNovaSenha/crianovasenha";
         import ConfigurationPage from "./pages/Configuracao/configuracao";
+        import GestaoEquipes from "./pages/Equipe/equipe";
+
         
 
         function RoutesApp() {
@@ -23,11 +25,11 @@
                         <Route path="/esqueceusenha" element={<ForgotPasswordPage />} />
                         <Route path="/verificaCodigo" element={<VerifyCodePage />} />
                         <Route path="/crianovasenha" element={<ResetPasswordPage />} />
-                        <Route path="/home2" element={<Home2 />} />
                         <Route path="/gestaotarefas" element={<GestaoTarefas />} />
                         <Route path="/gestaodepartamento" element={<GestaoDepartamentos />} />
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/configuracao" element={<ConfigurationPage />} />
+                        <Route path="/equipe" element={<GestaoEquipes />} />
                         
                     </Routes>
                 </BrowserRouter>

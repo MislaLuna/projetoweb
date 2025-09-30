@@ -52,13 +52,13 @@ function Dashboard() {
     <div className="dashboardContainer">
       <aside className="sidebar">
         <div className="logo">
-          <Link to="/home2" className="logo-link">
+          <Link to="/equipe" className="logo-link">
             <img src={logo} alt="Logo TaskNavigation" />
           </Link>
         </div>
         <ul className="menu">
           <li>
-            <Link to="/home2" className={isActive('/home2')}>
+            <Link to="/equipe" className={isActive('/equipe')}>
               <i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span>
             </Link>
           </li>

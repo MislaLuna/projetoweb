@@ -1,261 +1,261 @@
-.configuration-page {
-  --body-font-family: 'League Spartan', sans-serif;
-  --h1-font-size: 62px;
-  --h2-font-size: 48px;
-  --h3-font-size: 36px;
-  --h4-font-size: 24px;
-  --p-font-size: 20px;
-  --btn-font-size: 16px;
-  --copyright-font-size: 14px;
+  .configuration-page {
+    --body-font-family: 'League Spartan', sans-serif;
+    --h1-font-size: 62px;
+    --h2-font-size: 48px;
+    --h3-font-size: 36px;
+    --h4-font-size: 24px;
+    --p-font-size: 20px;
+    --btn-font-size: 16px;
+    --copyright-font-size: 14px;
 
-  --border-radius-small: 10px;
-  --border-radius-medium: 10px;
-  --border-radius-large: 50px;
+    --border-radius-small: 10px;
+    --border-radius-medium: 10px;
+    --border-radius-large: 50px;
 
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
-  --white-color: #ffffff;
-  --dark-color: #240046;
-  --primary-color: #ecebff;
-  --primary-hover: #e0aaff;
-  --background-color: rgb(230, 230, 231);
-  --text-color: #606163;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+    --white-color: #ffffff;
+    --dark-color: #240046;
+    --primary-color: #ecebff;
+    --primary-hover: #e0aaff;
+    --background-color: rgb(230, 230, 231);
+    --text-color: #606163;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  font-family: var(--body-font-family);
-  background-color: var(--background-color);
-}
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    font-family: var(--body-font-family);
+    background-color: var(--background-color);
+  }
 
-/* ===========================
-   Sidebar
-=========================== */
-.configuration-page .sidebar {
-  background-color: var(--dark-color);
-  padding: 0.5rem;
-  width: 92px;
-  height: 100vh;
-  border-radius: var(--border-radius-medium);
-  color: var(--white-color);
-  position: fixed;
-  left: 15px;
-  top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 0 15px var(--shadow-color);
-  z-index: 10;
-  overflow: hidden;
-  transition: width 0.3s ease, padding 0.3s ease, align-items 0.3s ease;
-}
+  /* ===========================
+    Sidebar
+  =========================== */
+  .configuration-page .sidebar {
+    background-color: var(--dark-color);
+    padding: 0.5rem;
+    width: 92px;
+    height: 100vh;
+    border-radius: var(--border-radius-medium);
+    color: var(--white-color);
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 15px var(--shadow-color);
+    z-index: 10;
+    overflow: hidden;
+    transition: width 0.3s ease, padding 0.3s ease, align-items 0.3s ease;
+  }
 
-.configuration-page .sidebar:hover {
-  width: 320px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  align-items: flex-start;
-  overflow: visible;
-}
+  .configuration-page .sidebar:hover {
+    width: 320px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    align-items: flex-start;
+    overflow: visible;
+  }
 
-.configuration-page .logo img {
-  max-width: 90px;
-  margin-bottom: 1.5rem;
-  transition: max-width 0.3s ease, margin 0.3s ease;
-}
+  .configuration-page .logo img {
+    max-width: 90px;
+    margin-bottom: 1.5rem;
+    transition: max-width 0.3s ease, margin 0.3s ease;
+  }
 
-.configuration-page .sidebar:hover .logo img {
-  max-width: 160px;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 0 3px #7f6ecc);
-}
+  .configuration-page .sidebar:hover .logo img {
+    max-width: 160px;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 3px #7f6ecc);
+  }
 
-/* ===========================
-   Menu
-=========================== */
-.configuration-page .menu {
-  list-style: none;
-  padding-left: 0;
-  width: 100%;
-}
+  /* ===========================
+    Menu
+  =========================== */
+  .configuration-page .menu {
+    list-style: none;
+    padding-left: 0;
+    width: 100%;
+  }
 
-.configuration-page .menu li {
-  margin-bottom: 25px;
-  width: 100%;
-}
+  .configuration-page .menu li {
+    margin-bottom: 25px;
+    width: 100%;
+  }
 
-.configuration-page .menu li a {
-  padding: 12px 12px;
-  border-radius: var(--border-radius-small);
-  transition: background-color 0.25s ease, color 0.25s ease;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  overflow: hidden;
-  color: var(--white-color);
-  text-decoration: none;
-}
+  .configuration-page .menu li a {
+    padding: 12px 12px;
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.25s ease, color 0.25s ease;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    color: var(--white-color);
+    text-decoration: none;
+  }
 
-.configuration-page .menu li a i {
-  width: 28px;
-  flex-shrink: 0;
-  font-size: 1.5rem;
-  margin-right: 12px;
-  color: var(--primary-color);
-  transition: color 0.25s ease;
-}
+  .configuration-page .menu li a i {
+    width: 28px;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    margin-right: 12px;
+    color: var(--primary-color);
+    transition: color 0.25s ease;
+  }
 
-.configuration-page .menu li a span {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+  .configuration-page .menu li a span {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 
-.configuration-page .sidebar:hover .menu li a span {
-  opacity: 1;
-}
+  .configuration-page .sidebar:hover .menu li a span {
+    opacity: 1;
+  }
 
-.configuration-page .menu li a:hover,
-.configuration-page .menu li a.active {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: var(--primary-hover);
-  font-weight: var(--font-weight-bold);
-}
+  .configuration-page .menu li a:hover,
+  .configuration-page .menu li a.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--primary-hover);
+    font-weight: var(--font-weight-bold);
+  }
 
-.configuration-page .menu li a:hover i,
-.configuration-page .menu li a.active i {
-  color: var(--primary-hover);
-}
+  .configuration-page .menu li a:hover i,
+  .configuration-page .menu li a.active i {
+    color: var(--primary-hover);
+  }
 
-/* ===========================
-   Conteúdo principal
-=========================== */
-.configuration-page .main {
-  margin-left: 92px;
-  padding: 2rem 3rem;
-  flex-grow: 1;
-  transition: margin-left 0.3s ease;
-  box-sizing: border-box;
-}
+  /* ===========================
+    Conteúdo principal
+  =========================== */
+  .configuration-page .main {
+    margin-left: 92px;
+    padding: 2rem 3rem;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    box-sizing: border-box;
+  }
 
-.configuration-page .sidebar:hover ~ .main {
-  margin-left: 320px;
-}
+  .configuration-page .sidebar:hover ~ .main {
+    margin-left: 320px;
+  }
 
-/* ===========================
-   Hero
-=========================== */
-.configuration-page .hero {
-  padding: 2.5rem;
-  text-align: center;
-  max-width: 890px;
-  margin: 0 auto 3rem;
-}
+  /* ===========================
+    Hero
+  =========================== */
+  .configuration-page .hero {
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 890px;
+    margin: 0 auto 3rem;
+  }
 
-.configuration-page .hero h1 {
-  font-size: var(--h1-font-size);
-  color: var(--dark-color);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: 1rem;
-}
+  .configuration-page .hero h1 {
+    font-size: var(--h1-font-size);
+    color: var(--dark-color);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+  }
 
-.configuration-page .hero p {
-  font-size: var(--p-font-size);
-  color: var(--text-color);
-  font-weight: var(--font-weight-light);
-}
+  .configuration-page .hero p {
+    font-size: var(--p-font-size);
+    color: var(--text-color);
+    font-weight: var(--font-weight-light);
+  }
 
-/* ===========================
-   Cartão de configuração
-=========================== */
-.configuration-page .config-container {
-  background-color: var(--white-color);
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 2px 8px var(--shadow-color);
-  padding: 2rem;
-  max-width: 650px;
-  margin: 0 auto;
-}
+  /* ===========================
+    Cartão de configuração
+  =========================== */
+  .configuration-page .config-container {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    padding: 2rem;
+    max-width: 650px;
+    margin: 0 auto;
+  }
 
-/* Tabela e botões */
-.configuration-page .table-responsive .btn {
-  margin-right: 8px; /* espaço entre Editar e Excluir */
-}
+  /* Tabela e botões */
+  .configuration-page .table-responsive .btn {
+    margin-right: 8px; /* espaço entre Editar e Excluir */
+  }
 
-/* ===========================
-   Modal/Blur
-=========================== */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(6px);
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
+  /* ===========================
+    Modal/Blur
+  =========================== */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
 
-.modal-form {
-  background-color: var(--white-color);
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  width: 400px;
-  max-width: 90%;
-  position: relative;
-  animation: fadeIn 0.3s ease;
-}
+  .modal-form {
+    background-color: var(--white-color);
+    padding: 2rem;
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+  }
 
-.modal-form .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+  .modal-form .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
 
-@keyframes fadeIn {
-  from {opacity: 0; transform: scale(0.95);}
-  to {opacity: 1; transform: scale(1);}
-}
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
+  }
 
-/* Inputs e botões */
-.modal-form input,
-.modal-form select,
-.modal-form button {
-  width: 100%;
-  margin-bottom: 10px;
-}
+  /* Inputs e botões */
+  .modal-form input,
+  .modal-form select,
+  .modal-form button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 
-.modal-form button {
-  margin-top: 10px;
-}
+  .modal-form button {
+    margin-top: 10px;
+  }
 
-/* ===========================
-   Footer
-=========================== */
-.configuration-page .footer-container {
-  background-color: var(--dark-color);
-  color: #ffffff;
-  text-align: center;
-  padding: 2rem 1.5rem;
-  border-radius: var(--border-radius-medium);
-  margin-top: 3rem;
-  box-shadow: 0 2px 10px var(--shadow-color);
-}
+  /* ===========================
+    Footer
+  =========================== */
+  .configuration-page .footer-container {
+    background-color: var(--dark-color);
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: var(--border-radius-medium);
+    margin-top: 3rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+  }
 
-.configuration-page .footer-container p {
-  font-size: 14px !important;
-  margin: 0.5rem 0;
-  font-weight: 400;
-  color: #ffffff !important;
-}
+  .configuration-page .footer-container p {
+    font-size: 14px !important;
+    margin: 0.5rem 0;
+    font-weight: 400;
+    color: #ffffff !important;
+  }

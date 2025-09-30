@@ -29,10 +29,12 @@ const LoginPage = () => {
         throw new Error(errorText || 'Erro ao fazer login');
       }
   
-      const user = await response.json();
+     const user = await response.json();
+localStorage.setItem('token', user.token); // salva token
+
       console.log('Usuário logado:', user);
   
-      navigate('/home2'); // redireciona após login
+      navigate('/equipe'); // redireciona após login
       
     } catch (err) {
       alert(err.message);
