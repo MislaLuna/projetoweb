@@ -1,5 +1,7 @@
-.home2Container {
-  /* Fontes e tamanhos */
+/* ===========================
+   Variáveis globais
+=========================== */
+:root {
   --body-font-family: 'League Spartan', sans-serif;
   --h1-font-size: 62px;
   --h2-font-size: 48px;
@@ -9,51 +11,47 @@
   --btn-font-size: 16px;
   --copyright-font-size: 14px;
 
-  /* Bordas */
   --border-radius-small: 10px;
   --border-radius-medium: 10px;
   --border-radius-large: 50px;
 
-  /* Peso fonte */
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Cores */
-  --white-color: #240046;
+  --white-color: #fff;
   --dark-color: #240046;
-  --primary-color: #ffffff; /* azul dos ícones */
+  --primary-color: #7f6ecc;
   --primary-hover: #e0aaff;
-  --background-color: rgb(230, 230, 231);
-  --text-color: #ffffff;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --text-color: #333333;
+  --shadow-color: rgba(0,0,0,0.1);
 
-  /* Cores dos cards */
-  --feature-green: #00c853;
-  --feature-blue: #2962ff;
-  --feature-yellow: #ffea00;
-  --feature-purple: #aa00ff;
+
 }
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f7f5fb; /* cinza */
-  font-family: 'League Spartan', sans-serif;
-} 
 
-/* Container geral flex para sidebar + main */
+/* ===========================
+   Container geral
+=========================== */
 .home2Container {
   display: flex;
   min-height: 100vh;
   flex-direction: row;
-  background-color: #f7f5fb; /* branco, ou a cor que você quiser */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(rgb(22, 0, 63), rgba(22, 0, 51, 0.055)),
+              url('/img/photo1439792675105701e6a4ab6f0.jpg') no-repeat center center;
+  background-size: cover;
+  font-family: var(--body-font-family);
+  color: var(--text-color);
 }
 
-/* Sidebar fixa - recolhida e expandida ao hover */
+/* ===========================
+   Sidebar
+=========================== */
 .home2Container .sidebar {
   background-color: var(--dark-color);
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
   width: 92px;
   height: 100vh;
   border-radius: var(--border-radius-medium);
@@ -78,7 +76,6 @@ body {
   overflow: visible;
 }
 
-/* Logo na sidebar */
 .home2Container .logo img {
   max-width: 90px;
   margin-bottom: 1.5rem;
@@ -88,32 +85,28 @@ body {
 .home2Container .sidebar:hover .logo img {
   max-width: 160px;
   margin-bottom: 2rem;
-  filter: drop-shadow(0 0 3px #7f6ecc);
+  filter: drop-shadow(0 0 3px var(--primary-color));
 }
 
-/* Linha separadora da sidebar */
 .home2Container .sidebar-separator {
   width: 100%;
   border: 1px solid rgba(255,255,255,0.1);
   margin-bottom: 1.5rem;
 }
 
-/* Menu sidebar */
 .home2Container .menu {
   list-style: none;
   width: 100%;
   padding-left: 0;
 }
 
-/* Itens do menu */
 .home2Container .menu li {
   margin-bottom: 25px;
   width: 100%;
 }
 
-/* Links do menu */
 .home2Container .menu li a {
-  padding: 12px 12px;
+  padding: 12px;
   border-radius: var(--border-radius-small);
   transition: background-color 0.25s ease, color 0.25s ease;
   display: flex;
@@ -124,7 +117,6 @@ body {
   text-decoration: none;
 }
 
-/* Ícones do menu */
 .home2Container .menu li a i {
   width: 28px;
   flex-shrink: 0;
@@ -134,21 +126,18 @@ body {
   transition: color 0.25s ease;
 }
 
-/* Texto do link - escondido quando sidebar recolhida */
 .home2Container .menu li a span {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Ao expandir sidebar, mostra o texto */
 .home2Container .sidebar:hover .menu li a span {
   opacity: 1;
 }
 
-/* Efeitos hover e ativo */
 .home2Container .menu li a:hover,
 .home2Container .menu li a.active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255,255,255,0.15);
   color: var(--primary-hover);
   font-weight: var(--font-weight-bold);
 }
@@ -158,7 +147,9 @@ body {
   color: var(--primary-hover);
 }
 
-/* Main content respeitando sidebar recolhida/expandida */
+/* ===========================
+   Main
+=========================== */
 .home2Container .main {
   margin-left: 92px;
   padding: 2rem 3rem;
@@ -167,240 +158,274 @@ body {
   transition: margin-left 0.3s ease;
 }
 
-/* Quando sidebar é expandida, main acompanha */
+
+
+
+
+
+
+.hero-badge {
+  display: inline-block;
+  background-color: #ffffff;
+  margin-top: 25px;
+  color: #37055ffb; /* texto dentro da bolinha, pode ajustar */
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px; /* deixa totalmente arredondado */
+  margin-left: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+
+
+
+
+
 .home2Container .sidebar:hover ~ .main {
   margin-left: 320px;
 }
 
-/* Dashboard geral */
 .home2Container .dashboard {
-  background-color: #e4c1f900;
+  background-color: #fff;
   border-radius: var(--border-radius-medium);
   padding: 2rem;
   min-height: 85vh;
   box-shadow: 0 2px 6px var(--shadow-color);
 }
 
-/* Container interno da dash */
-.home2Container .dash-2 {
-  background-color: #c8b6ff;
-  border-radius: var(--border-radius-medium);
-  padding: 2rem;
+
+
+
+
+
+/* ===========================
+   Hero
+=========================== */
+
+
+
+
+.hero-features-wrapper {
+  display: flex;
+  gap: 2rem; /* espaço entre hero e carrossel */
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap; /* garante responsividade */
 }
 
-/* Hero section */
+/* Ajusta hero para ocupar menos largura */
+.hero-features-wrapper .hero {
+  flex: 1 1 350px; /* largura mínima 350px, cresce conforme disponível */
+  max-width: 450px;
+  text-align: left;
+  margin: 0;
+}
+
+/* Carrossel ocupa o restante */
+.hero-features-wrapper .carousel-wrapper {
+  flex: 2 1 500px; /* ocupa mais espaço que o hero */
+}
+
+/* Responsividade: empilha em telas pequenas */
+@media (max-width: 900px) {
+  .hero-features-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-features-wrapper .hero {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-features-wrapper .carousel-wrapper {
+    flex: 1 1 100%;
+  }
+}
+
+
+
+
 .home2Container .hero {
-  padding: 2.5rem;
-  text-align: center;
-  max-width: 890px;
+  padding: 1.5rem;
+  text-align: left;
+  max-width: 500px;
   margin: 0 auto 3rem;
+  background-color: #37055f00;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  color: #ffffff;
+  margin-top: 250px;
 }
 
 .home2Container .hero h1 {
-  font-size: var(--h1-font-size);
-  color: var(--dark-color);
-  font-weight: var(--font-weight-bold);
+  font-size: 40px !important;
+  font-weight: var(--font-weight-semibold);
   margin-bottom: 1rem;
+  color: #ffffff;
+    letter-spacing: 0.5px; /* ajusta a distância entre letras */
 }
 
 .home2Container .hero p {
-  font-size: var(--p-font-size);
-  color: var(--text-color);
-  font-weight: var(--font-weight-light);
+  font-size: 17px !important;
+    color: #d8d3d3;
 }
 
-/* Features (cards) */
-.home2Container .features {
-  display: flex;
-justify-content: center; /* centraliza os cards horizontalmente */
-  gap: 5rem; /* diminui o espaço entre os cards */
-  flex-wrap: wrap;
-  padding: 2rem 1rem;
-
-}
-
-.home2Container .feature {
-  background-color: #ffffff;
-  padding: 2rem 1.5rem;
-  border-radius: var(--border-radius-medium);
-  text-align: center;
-  box-shadow: 0 2px 8px var(--shadow-color);
-  flex: 1 1 280px; /* diminui o espaço mínimo para os cards caberem mais juntos */
-  max-width: 500px; /* mantém limite para não expandir demais */
-  min-width: 300px;
-  height: 300px;
-  transition: transform 0.3s ease;
-  cursor: default;
-  border-left: 2px solid #ddd;
-  border-right: 2px solid #ddd;
-}
-
-.home2Container .feature:first-child {
-  border-left: none;
-}
-
-.home2Container .feature:last-child {
-  border-right: none;
-}
-
-.home2Container .feature:hover {
-  transform: translateY(-5px);
-}
-
-/* Ícones e cores por tipo */
-.home2Container .feature i {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-}
-
-.home2Container .feature.green i,
-.home2Container .feature.green h3 {
-  color: var(--feature-green);
-}
-
-.home2Container .feature.blue i,
-.home2Container .feature.blue h3 {
-  color: var(--feature-blue);
-}
-
-.home2Container .feature.yellow i,
-.home2Container .feature.yellow h3 {
-  color: var(--feature-yellow);
-}
-
-.home2Container .feature.purple i,
-.home2Container .feature.purple h3 {
-  color: var(--feature-purple);
-}
-
-.home2Container .feature h3 {
-  font-size: var(--h3-font-size);
-  margin-bottom: 1rem;
-}
-
-.home2Container .feature p {
-  font-size: var(--p-font-size);
-  color: var(--text-color);
-}
-
-/* Botões padrão (caso use) */
-.home2Container button,
-.home2Container .btn {
-  font-family: var(--body-font-family);
-  font-size: var(--btn-font-size);
-  font-weight: var(--font-weight-semibold);
-  color: var(--white-color);
-  background-color: var(--primary-color);
-  border: none;
+/* Botão discreto */
+.home2Container .btn-hero {
+  background-color: #7f6ecc;
+  color: #fff;
+  padding: 0.4rem 1rem;
   border-radius: var(--border-radius-small);
-  padding: 0.6rem 1.4rem;
+  font-weight: var(--font-weight-semibold);
+  border: none;
   cursor: pointer;
+  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
-.home2Container button:hover,
-.home2Container .btn:hover {
-  background-color: var(--primary-hover);
+.home2Container .btn-hero:hover {
+  background-color: #6b57c5;
 }
 
-/* Tabela estilo */
-.home2Container table {
-  width: 100%;
-  border-collapse: collapse;
+
+.dot.active { background-color: #661eaa; }
+/* ===========================
+   Carrossel
+=========================== */
+.carousel-wrapper {
+  position: relative;
+  margin: 1rem auto;
+  max-width: 700px;
+  margin-top: 250px;
+}
+
+.carousel-scroll {
+  display: flex;
+  gap: 1rem; /* menor gap, para caber a prévia */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  padding-left: 1rem;  /* ajusta centralização */
+  padding-right: 1rem;
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.feature {
+  flex: 0 0 50%;
+  scroll-snap-align: center;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  padding: 4rem 1.5rem;
+  margin: 2rem 0; /* garante espaço em cima e embaixo */
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  color: #333;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5;
+}
+.feature.active {
+  transform: scale(1.05); /* destaca slide ativo */
+  opacity: 1;
+}
+
+.feature i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  color: #7f6ecc; /* ícones com cor padrão suave */
+}
+
+.feature h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 1rem;
+}
+
+/* botões de navegação */
+.nav {
+  position: absolute;
+  top: 40%;                /* centraliza verticalmente */
+  transform: translateY(-45%);
+  background-color: rgb(175, 137, 236);
+  color: #23004b;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+
+  display: flex;           /* centraliza conteúdo */
+  align-items: center;     /* vertical */
+  justify-content: center; /* horizontal */
+  font-size: 1.2rem;       /* tamanho da seta */
+}
+
+.nav.prev { left: -80px; }
+.nav.next { right: -80px; }
+
+/* indicadores */
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 1rem;
-  background-color: var(--white-color);
-  border-radius: var(--border-radius-small);
-  overflow: hidden;
-  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-.home2Container thead {
-  background-color: var(--dark-color);
-  color: var(--white-color);
-}
-
-.home2Container thead th {
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: var(--font-weight-semibold);
-  font-size: 16px;
-}
-
-.home2Container tbody tr {
-  border-bottom: 1px solid #ddd;
-  transition: background-color 0.2s ease;
-}
-
-.home2Container tbody tr:hover {
-  background-color: #f3f3f3;
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 50%;
   cursor: pointer;
 }
 
-.home2Container tbody td {
-  padding: 12px 15px;
-  font-size: 16px;
-  color: var(--text-color);
-}
+.dot.active { background-color: #7f6ecc; } /* destaque suave para ativo */
 
-/* Footer estilizado */
+/* ===========================
+   Footer
+=========================== */
 .home2Container .footer-container {
   background-color: var(--dark-color);
   color: var(--white-color);
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: 1rem 1.5rem;
   border-radius: var(--border-radius-medium);
   margin-top: 3rem;
   box-shadow: 0 2px 10px var(--shadow-color);
+  position: relative; /* adiciona position */
+  top: 120px; /* agora funciona */
 }
 
 .home2Container .footer-container p {
   font-size: var(--copyright-font-size);
-  margin: 0.5rem 0;
+  margin: 0.2rem 0;
   font-weight: var(--font-weight-light);
   color: #dadada;
 }
 
-.home2Container .policy-title {
-  color: var(--primary-color);
-  font-size: var(--h4-font-size);
-  margin-top: 1rem;
-  font-weight: var(--font-weight-semibold);
-}
-
-.home2Container .policy-text p {
-  font-size: 16px;
-  color: #ffffff;
-  margin: 0.3rem 0;
-  line-height: 1.5;
-}
-
-/* Responsividade simples */
+/* ===========================
+   Responsividade
+=========================== */
 @media (max-width: 900px) {
-  .home2Container .sidebar {
-    width: 180px;
-    padding: 1rem 0.5rem;
-  }
-
-  .home2Container .menu li a {
-    font-size: 16px;
-    padding: 8px 10px;
-  }
-
-  .home2Container .main {
-    margin-left: 200px;
-    padding: 1.5rem 1.5rem;
-  }
-
-  .home2Container .hero h1 {
-    font-size: 40px;
-  }
+  .home2Container .sidebar { width: 180px; }
+  .home2Container .menu li a { font-size: 16px; padding: 8px 10px; }
+  .home2Container .main { margin-left: 200px; padding: 1.5rem; }
+  .home2Container .hero h1 { font-size: 40px; }
 }
 
 @media (max-width: 600px) {
-  .home2Container {
-    flex-direction: column;
-  }
-
+  .home2Container { flex-direction: column; }
   .home2Container .sidebar {
     position: relative;
     width: 100%;
@@ -411,54 +436,9 @@ justify-content: center; /* centraliza os cards horizontalmente */
     flex-direction: row;
     justify-content: space-around;
   }
-
-  .home2Container .menu {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0;
-    width: auto;
-  }
-
-  .home2Container .menu li {
-    margin-bottom: 0;
-    margin-left: 10px;
-  }
-
-  .home2Container .main {
-    margin-left: 0;
-    padding: 1rem;
-  }
-
-  .home2Container .hero h1 {
-    font-size: 48px !important;  /* tamanho fixo */
-    line-height: 1.2 !important;
-    color: #240046 !important;
-    font-weight: 700 !important;
-    margin-bottom: 1rem !important;
-  }
-  
-
-  .home2Container .features {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .home2Container .feature {
-    max-width: 100%;
-  }
-}
-/* Hero */
-.home2Container .hero p {
-  font-size: 20px !important; /* tamanho fixo */
-  color: #796f83;
-  font-weight: 300;
-}
-
-/* Cards (3 divs) */
-.home2Container .feature h3 {
-  color: inherit; /* mantém cor do tipo: verde, azul, amarelo */
-  
-}
-.home2Container .feature p {
-  color: #333333; /* cinza escuro legível no fundo branco do card */
+  .home2Container .menu { display: flex; flex-direction: row; margin-top: 0; }
+  .home2Container .menu li { margin: 0 10px; }
+  .home2Container .main { margin-left: 0; padding: 1rem; }
+  .home2Container .features { flex-direction: column; gap: 1.5rem; }
+  .home2Container .feature { max-width: 100%; }
 }

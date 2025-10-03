@@ -3,7 +3,6 @@
         import LoginPage from "./pages/Login/login";
         import RegisterPage from "./pages/CriarConta/contanova";
         import ForgotPasswordPage from "./pages/EsqueceuSenha/esqueceusenha";
-        import Home2 from "./pages/Equipe/equipe";
         import GestaoTarefas from "./pages/GestaoTarefas/gestaotarefas";
         import GestaoDepartamentos from "./pages/GestãoDepartamento/gestaodepartamento";
         import Dashboard from "./pages/DashBoard/dashboard";
@@ -11,6 +10,8 @@
         import ResetPasswordPage from "./pages/CriaNovaSenha/crianovasenha";
         import ConfigurationPage from "./pages/Configuracao/configuracao";
         import GestaoEquipes from "./pages/Equipe/equipe";
+        import Home2 from "./pages/Home2/home2";
+        import Gestaousuarios from "./pages/GestaoUsuario/gestaousuario";
 
         
 
@@ -30,6 +31,9 @@
                         <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/configuracao" element={<ConfigurationPage />} />
                         <Route path="/equipe" element={<GestaoEquipes />} />
+                        <Route path="/home2" element={<Home2 />} />
+                        <Route path="/gestaousuario" element={<Gestaousuarios />} />
+
                         
                     </Routes>
                 </BrowserRouter>

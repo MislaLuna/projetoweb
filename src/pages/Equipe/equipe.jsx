@@ -99,29 +99,94 @@ function GestaoEquipes() {
           <li>
             <Link to="/equipe" className={isActive('/equipe')}>
               <i className="bi bi-house-door-fill"></i>
-              <span className="menu-text">Gestão de Equipes</span>
+              <span className="menu-text">Equipe</span>
             </Link>
           </li>
           <li>
             <Link to="/gestaotarefas" className={isActive('/gestaotarefas')}>
               <i className="bi bi-list-task"></i>
-              <span className="menu-text">Gestão de tarefas</span>
+              <span className="menu-text">Tarefas</span>
             </Link>
           </li>
           <li>
             <Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}>
               <i className="bi bi-building"></i>
-              <span className="menu-text">Gestão de departamentos</span>
+              <span className="menu-text">Departamentos</span>
             </Link>
           </li>
           <li>
-            <Link to="/pagina8" className={isActive('/pagina8')}>
+            <Link to="/gestaousuario" className={isActive('/pagina8')}>
               <i className="bi bi-people-fill"></i>
-              <span className="menu-text">Gestão de usuários</span>
+              <span className="menu-text">Usuários</span>
             </Link>
           </li>
         </ul>
-      </aside>
+      </aside><aside className="sidebar">
+  <div className="logo">
+    <Link to="/equipe" className="logo-link">
+      <img src={logo} alt="Logo TaskNavigation" />
+    </Link>
+  </div>
+
+  <ul className="menu">
+    <li>
+      <Link to="/home2" className={isActive('/home2')}>
+        <i className="bi bi-house-door-fill"></i>
+        <span className="menu-text">Início</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/equipe" className={isActive('/equipe')}>
+        <i className="bi bi-people"></i>
+        <span className="menu-text">Equipe</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/gestaotarefas" className={isActive('/gestaotarefas')}>
+        <i className="bi bi-list-task"></i>
+        <span className="menu-text">Tarefas</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}>
+        <i className="bi bi-building"></i>
+        <span className="menu-text">Departamentos</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/gestaousuario" className={isActive('/gestaousuario')}>
+        <i className="bi bi-people-fill"></i>
+        <span className="menu-text">Usuários</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/dashboard" className={isActive('/dashboard')}>
+        <i className="bi bi-speedometer2"></i>
+        <span className="menu-text">DashBoard</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/relatorios" className={isActive('/relatorios')}>
+        <i className="bi bi-graph-up"></i>
+        <span className="menu-text">Relatórios</span>
+      </Link>
+    </li>
+
+    <li>
+      <Link to="/configuracao" className={isActive('/configuracao')}>
+        <i className="bi bi-gear-fill"></i>
+        <span className="menu-text">Configurações</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
+
 
       {/* Main */}
       <main className="main">
@@ -135,19 +200,20 @@ function GestaoEquipes() {
 
               {/* Botões */}
               <div className="mb-3">
-                <button
-                  className="botao-criar-tarefa me-2"
-                  onClick={() => setShowFormEquipe(true)}
-                >
-                  Criar nova equipe
-                </button>
-                <button
-                  className="botao-criar-tarefa"
-                  onClick={() => setShowFormColaborador(true)}
-                >
-                  Adicionar colaborador
-                </button>
-              </div>
+  <button
+    className="botao-criar-tarefa"
+    onClick={() => setShowFormEquipe(true)}
+  >
+    Criar nova equipe
+  </button>
+  <button
+    className="botao-criar-tarefa"
+    onClick={() => setShowFormColaborador(true)}
+  >
+    Adicionar colaborador
+  </button>
+</div>
+
 
               {/* Tabela */}
               <div className="table-wrapper">
@@ -177,9 +243,18 @@ function GestaoEquipes() {
             </div>
           </div>
 
-          <footer className="footer-container">
-            <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-          </footer>
+            <footer className="footer-container">
+  <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
+  <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
+
+  <div className="privacy-policy">
+    <h4 className="policy-title">Política de Privacidade</h4>
+    <div className="policy-text">
+      <p>Protegemos seus dados com criptografia e boas práticas de segurança.</p>
+      <p>Coletamos apenas as informações necessárias para o funcionamento da plataforma.</p>
+    </div>
+  </div>
+</footer>
         </div>
       </main>
 

@@ -26,7 +26,6 @@ function Dashboard() {
           axios.get('http://localhost:8080/usuarios'),
           axios.get('http://localhost:8080/tarefas'),
         ]);
-    
 
         const usuarios = usuariosRes.data;
         const tarefas = tarefasRes.data;
@@ -49,93 +48,92 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="dashboardContainer">
-      <aside className="sidebar">
-        <div className="logo">
-          <Link to="/equipe" className="logo-link">
+    <div className="dashboardPage">
+      <aside className="dashboardSidebar">
+        <div className="dashboardLogo">
+          <Link to="/equipe">
             <img src={logo} alt="Logo TaskNavigation" />
           </Link>
         </div>
-        <ul className="menu">
+        <ul className="dashboardMenu">
+          <li>
+            <Link to="/home2" className={isActive('/home2')}>
+              <i className="bi bi-house-door-fill"></i> <span>Início</span>
+            </Link>
+          </li>
           <li>
             <Link to="/equipe" className={isActive('/equipe')}>
-              <i className="bi bi-house-door-fill"></i> <span className="menu-text">Início</span>
+              <i className="bi bi-house-door-fill"></i> <span>Equipe</span>
             </Link>
           </li>
           <li>
             <Link to="/gestaotarefas" className={isActive('/gestaotarefas')}>
-              <i className="bi bi-list-task"></i> <span className="menu-text">Gestão de tarefas</span>
+              <i className="bi bi-list-task"></i> <span>Tarefas</span>
             </Link>
           </li>
           <li>
             <Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}>
-              <i className="bi bi-building"></i> <span className="menu-text">Gestão de departamentos</span>
+              <i className="bi bi-building"></i> <span>Departamentos</span>
             </Link>
           </li>
           <li>
             <Link to="/pagina8" className={isActive('/pagina8')}>
-              <i className="bi bi-person-badge-fill"></i> <span className="menu-text">Gestão de usuários</span>
+              <i className="bi bi-person-badge-fill"></i> <span>Usuários</span>
             </Link>
           </li>
           <li>
             <Link to="/dashboard" className={isActive('/dashboard')}>
-              <i className="bi bi-speedometer2"></i> <span className="menu-text">DashBoard</span>
+              <i className="bi bi-speedometer2"></i> <span>DashBoard</span>
             </Link>
           </li>
           <li>
             <Link to="/relatorios" className={isActive('/relatorios')}>
-              <i className="bi bi-bar-chart-fill"></i> <span className="menu-text">Relatórios</span>
+              <i className="bi bi-bar-chart-fill"></i> <span>Relatórios</span>
             </Link>
           </li>
           <li>
             <Link to="/configuracao" className={isActive('/configuracoes')}>
-              <i className="bi bi-gear-fill"></i> <span className="menu-text">Configurações</span>
+              <i className="bi bi-gear-fill"></i> <span>Configurações</span>
             </Link>
           </li>
         </ul>
       </aside>
 
-      <main className="main">
-        <div className="dashboard">
-          <div className="dash-2">
-            <div className="hero">
-              <h1>DashBoard</h1>
-              <p>Visão geral de métricas importantes.</p>
-            </div>
+      <main className="dashboardMain">
+        <div className="dashboardHero">
+          <h1>DashBoard</h1>
+          <p>Visão geral de métricas importantes.</p>
+        </div>
 
-            <section className="features">
-              <div className="feature">
-                <i className="bi bi-people-fill fs-2 mb-2 text-primary"></i>
-                <h3>Usuários Ativos</h3>
-                <p>{stats.usuariosAtivos}</p>
-              </div>
-
-              <div className="feature">
-                <i className="bi bi-check2-circle fs-2 mb-2 text-success"></i>
-                <h3>Tarefas Finalizadas</h3>
-                <p>{stats.tarefasFinalizadas}</p>
-              </div>
-
-              <div className="feature">
-                <i className="bi bi-list-check fs-2 mb-2 text-warning"></i>
-                <h3>Tarefas Criadas</h3>
-                <p>{stats.tarefasCriadas}</p>
-              </div>
-            </section>
+        <section className="dashboardFeatures">
+          <div className="dashboardFeature">
+            <i className="bi bi-people-fill fs-2 mb-2 text-primary"></i>
+            <h3>Usuários Ativos</h3>
+            <p>{stats.usuariosAtivos}</p>
           </div>
 
-          <footer className="footer-container">
-            <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-            <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
-            <div className="privacy-policy">
-              <h4 className="policy-title">Política de Privacidade</h4>
-              <div className="policy-text">
-                <p>Protegemos seus dados com criptografia e boas práticas de segurança.</p>
-                <p>Coletamos apenas as informações necessárias para o funcionamento da plataforma.</p>
-              </div>
-            </div>
-          </footer>
-        </div>
+          <div className="dashboardFeature">
+            <i className="bi bi-check2-circle fs-2 mb-2 text-success"></i>
+            <h3>Tarefas Finalizadas</h3>
+            <p>{stats.tarefasFinalizadas}</p>
+          </div>
+
+          <div className="dashboardFeature">
+            <i className="bi bi-list-check fs-2 mb-2 text-warning"></i>
+            <h3>Tarefas Criadas</h3>
+            <p>{stats.tarefasCriadas}</p>
+          </div>
+        </section>
+
+        <footer className="dashboardFooter">
+          <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
+          <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
+          <div className="dashboardPolicyText">
+            <h4 className="dashboardPolicyTitle">Política de Privacidade</h4>
+            <p>Protegemos seus dados com criptografia e boas práticas de segurança.</p>
+            <p>Coletamos apenas as informações necessárias para o funcionamento da plataforma.</p>
+          </div>
+        </footer>
       </main>
     </div>
   );
