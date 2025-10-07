@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/login-exclusive.css'; // CSS exclusivo do login
+import '../../css/login-exclusive.css';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,36 +11,41 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     if (!email || !password) {
       alert('Por favor, preencha todos os campos.');
       return;
     }
-  
+
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, senha: password }),
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(errorText || 'Erro ao fazer login');
       }
-  
-     const user = await response.json();
-localStorage.setItem('token', user.token); // salva token
+
+      const user = await response.json();
+
+      // ✅ SALVA O TOKEN CORRETO DO OBJETO authenticationResponse
+      if (user.authenticationResponse && user.authenticationResponse.access_token) {
+        localStorage.setItem('token', user.authenticationResponse.access_token);
+        console.log('Token armazenado:', user.authenticationResponse.access_token);
+      } else {
+        throw new Error('Token não encontrado no login.');
+      }
 
       console.log('Usuário logado:', user);
-  
       navigate('/equipe'); // redireciona após login
-      
+
     } catch (err) {
       alert(err.message);
     }
   };
-  
 
   return (
     <div className="login-page-exclusive">

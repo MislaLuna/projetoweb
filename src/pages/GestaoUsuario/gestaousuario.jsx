@@ -99,8 +99,9 @@ function GestaoUsuarios() {
           <li><Link to="/home2" className={isActive('/home2') ? 'active' : ''}><i className="bi bi-house-door-fill"></i> <span>Início</span></Link></li>
           <li><Link to="/equipe" className={isActive('/equipe') ? 'active' : ''}><i className="bi bi-people"></i> <span>Equipe</span></Link></li>
           <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas') ? 'active' : ''}><i className="bi bi-list-task"></i> <span>Tarefas</span></Link></li>
+          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
           <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento') ? 'active' : ''}><i className="bi bi-building"></i> <span>Departamentos</span></Link></li>
-          <li><Link to="/usuarios" className={isActive('/usuarios') ? 'active' : ''}><i className="bi bi-people-fill"></i> <span>Usuários</span></Link></li>
+          <li><Link to="/gestaousuario" className={isActive('/gestaousuario') ? 'active' : ''}><i className="bi bi-people-fill"></i> <span>Usuários</span></Link></li>
           <li><Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}><i className="bi bi-speedometer2"></i> <span>DashBoard</span></Link></li>
           <li><Link to="/relatorios" className={isActive('/relatorios') ? 'active' : ''}><i className="bi bi-graph-up"></i> <span>Relatórios</span></Link></li>
           <li><Link to="/configuracao" className={isActive('/configuracao') ? 'active' : ''}><i className="bi bi-gear-fill"></i> <span>Configurações</span></Link></li>

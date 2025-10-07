@@ -71,6 +71,11 @@ function Dashboard() {
               <i className="bi bi-list-task"></i> <span>Tarefas</span>
             </Link>
           </li>
+
+
+          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
+
+
           <li>
             <Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}>
               <i className="bi bi-building"></i> <span>Departamentos</span>

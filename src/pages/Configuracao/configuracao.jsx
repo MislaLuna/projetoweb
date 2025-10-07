@@ -31,12 +31,14 @@ function ConfigurationPage() {
         </div>
         <ul className="menu">
           <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
-          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i><span className="menu-text">Gestão de tarefas</span></Link></li>
-          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i><span className="menu-text">Gestão de departamentos</span></Link></li>
-          <li><Link to="/pagina8" className={isActive('/gestaousuario')}><i className="bi bi-person-badge-fill"></i><span className="menu-text">Gestão de usuários</span></Link></li>
+          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span></Link></li>
+           <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
+          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i><span className="menu-text">Departamentos</span></Link></li>
+          <li><Link to="/pagina8" className={isActive('/gestaousuario')}><i className="bi bi-person-badge-fill"></i><span className="menu-text">Usuários</span></Link></li>
           <li><Link to="/dashboard" className={isActive('/dashboard')}><i className="bi bi-speedometer2"></i><span className="menu-text">DashBoard</span></Link></li>
           <li><Link to="/relatorios" className={isActive('/relatorios')}><i className="bi bi-bar-chart-fill"></i><span className="menu-text">Relatórios</span></Link></li>
           <li><Link to="/configuracao" className={isActive('/configuracao')}><i className="bi bi-gear-fill"></i><span className="menu-text">Configurações</span></Link></li>
+          
         </ul>
       </aside>
 

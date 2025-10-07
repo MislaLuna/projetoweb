@@ -85,6 +85,7 @@ function Home2() {
             { path: '/home2', icon: 'bi bi-house-door-fill', label: 'Início' },
             { path: '/equipe', icon: 'bi bi-people', label: 'Equipe' },
             { path: '/gestaotarefas', icon: 'bi bi-list-task', label: 'Tarefas' },
+            { path: '/gestaoprojeto', icon: 'bi bi-folder2-open', label: 'Projetos' },
             { path: '/gestaodepartamento', icon: 'bi bi-building', label: 'Departamentos' },
             { path: '/gestaousuario', icon: 'bi bi-people-fill', label: 'Usuários' },
             { path: '/dashboard', icon: 'bi bi-speedometer2', label: 'Dashboard' },
