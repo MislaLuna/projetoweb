@@ -23,6 +23,11 @@ function GestaoTarefas() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
+    if (!token) {
+      alert("Você não está autenticado!");
+      return;
+    }
+
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
     axios.get(`${import.meta.env.VITE_API_URL}/usuarios`, config)
@@ -34,7 +39,7 @@ function GestaoTarefas() {
       .catch(err => console.error("Erro ao carregar projetos:", err));
 
     carregarTarefas();
-  }, []);
+  }, [token]);
 
   const carregarTarefas = async () => {
     try {
@@ -60,10 +65,12 @@ function GestaoTarefas() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!usuarioId || isNaN(Number(usuarioId))) {
-      alert("Selecione um usuário válido antes de salvar a tarefa!");
-      return;
-    }
+
+if (!usuarioId) {
+  alert("Selecione um usuário válido antes de salvar a tarefa!");
+  return;
+}
+
 
     const tarefaPayload = {
       titulo: titulo.trim(),
@@ -158,8 +165,8 @@ function GestaoTarefas() {
               </thead>
               <tbody>
                 {tarefas.length > 0 ? (
-                  tarefas.map((tarefa, index) => (
-                    <tr key={tarefa.idTarefa ?? index}>
+                  tarefas.map((tarefa) => (
+                    <tr key={tarefa.idTarefa}>
                       <td>{tarefa.usuario?.nome || '---'}</td>
                       <td>{tarefa.projeto?.nome || '---'}</td>
                       <td>{tarefa.titulo}</td>
@@ -201,13 +208,32 @@ function GestaoTarefas() {
               <button className="close-btn" onClick={() => setShowForm(false)}>&times;</button>
               <form onSubmit={handleSubmit}>
                 <h3>{modoEdicao ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h3>
-                <select className="form-control mb-2" value={usuarioId} onChange={e => setUsuarioId(e.target.value)} required>
-                  <option value="">Selecione o usuário</option>
-                  {usuarios.map(u => <option key={u.idUsuario} value={u.idUsuario}>{u.nome}</option>)}
-                </select>
+                
+                
+       <select
+  className="form-control mb-2"
+  value={usuarioId}
+  onChange={e => setUsuarioId(Number(e.target.value))}
+  required
+>
+  <option value="">Selecione o usuário</option>
+  {usuarios.map(u => (
+    <option key={u.idUsuario} value={u.idUsuario}>
+      {u.nome}
+    </option>
+  ))}
+</select>
+
+
+
+
                 <select className="form-control mb-2" value={projetoId} onChange={e => setProjetoId(e.target.value)}>
                   <option value="">Selecione o projeto (opcional)</option>
-                  {projetos.map(p => <option key={p.idProjeto} value={p.idProjeto}>{p.nome}</option>)}
+                  {projetos.map((p, index) => (
+                    <option key={p.idProjeto ?? index} value={p.idProjeto}>
+                      {p.nome}
+                    </option>
+                  ))}
                 </select>
                 <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
                 <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
@@ -222,14 +248,14 @@ function GestaoTarefas() {
                   <option value="Baixa">Baixa</option>
                 </select>
                 <button type="submit" className="btn btn-success w-100">{modoEdicao ? 'Atualizar' : 'Salvar'}</button>
-              </form>
+              </form> 
             </div>
           </div>
         )}
 
         <footer className="footer-container">
           <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-          <p>Este sistema foi desenvolvido para facilitar a gestão de tarefas e usuários.</p>
+          <p>Este sistema foi desenvolvido para faci  litar a gestão de tarefas e usuários.</p>
         </footer>
       </main>
     </div>

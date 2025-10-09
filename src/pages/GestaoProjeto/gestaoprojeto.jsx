@@ -118,22 +118,68 @@ function GestaoProjetos() {
   return (
     <div className="configuration-page">
       <aside className="sidebar">
-        <div className="logo">
-          <Link to="/equipe">
-            <img src={logo} alt="Logo TaskNavigation" />
-          </Link>
-        </div>
-        <ul className="menu">
-          <li><Link to="/home2" className={location.pathname === '/home2' ? 'active' : ''}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
-          <li><Link to="/equipe" className={location.pathname === '/equipe' ? 'active' : ''}><i className="bi bi-people"></i><span className="menu-text">Equipe</span></Link></li>
-          <li><Link to="/gestaotarefas" className={location.pathname === '/gestaotarefas' ? 'active' : ''}><i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span></Link></li>
-          <li><Link to="/gestaoprojeto" className={location.pathname === '/gestaoprojeto' ? 'active' : ''}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
-          <li><Link to="/gestaousuario" className={location.pathname === '/gestaousuario' ? 'active' : ''}><i className="bi bi-people-fill"></i><span className="menu-text">Usuários</span></Link></li>
-          <li><Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}><i className="bi bi-speedometer2"></i><span className="menu-text">DashBoard</span></Link></li>
-          <li><Link to="/relatorios" className={location.pathname === '/relatorios' ? 'active' : ''}><i className="bi bi-graph-up"></i><span className="menu-text">Relatórios</span></Link></li>
-          <li><Link to="/configuracao" className={location.pathname === '/configuracao' ? 'active' : ''}><i className="bi bi-gear-fill"></i><span className="menu-text">Configurações</span></Link></li>
-        </ul>
-      </aside>
+  <div className="logo">
+    <Link to="/equipe">
+      <img src={logo} alt="Logo TaskNavigation" />
+    </Link>
+  </div>
+  <ul className="menu">
+    <li>
+      <Link to="/home2" className={location.pathname === '/home2' ? 'active' : ''}>
+        <i className="bi bi-house-door-fill"></i>
+        <span className="menu-text">Início</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/equipe" className={location.pathname === '/equipe' ? 'active' : ''}>
+        <i className="bi bi-people"></i>
+        <span className="menu-text">Equipe</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/gestaotarefas" className={location.pathname === '/gestaotarefas' ? 'active' : ''}>
+        <i className="bi bi-list-task"></i>
+        <span className="menu-text">Tarefas</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/gestaoprojeto" className={location.pathname === '/gestaoprojeto' ? 'active' : ''}>
+        <i className="bi bi-folder2-open"></i>
+        <span className="menu-text">Projetos</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/gestaousuario" className={location.pathname === '/gestaousuario' ? 'active' : ''}>
+        <i className="bi bi-people-fill"></i>
+        <span className="menu-text">Usuários</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/gestaodepartamento" className={location.pathname === '/gestaodepartamento' ? 'active' : ''}>
+        <i className="bi bi-building"></i>
+        <span className="menu-text">Departamentos</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+        <i className="bi bi-speedometer2"></i>
+        <span className="menu-text">Dashboard</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/relatorios" className={location.pathname === '/relatorios' ? 'active' : ''}>
+        <i className="bi bi-graph-up"></i>
+        <span className="menu-text">Relatórios</span>
+      </Link>
+    </li>
+    <li>
+      <Link to="/configuracao" className={location.pathname === '/configuracao' ? 'active' : ''}>
+        <i className="bi bi-gear-fill"></i>
+        <span className="menu-text">Configurações</span>
+      </Link>
+    </li>
+  </ul>
+</aside>
 
       <main className="main">
         <div className="hero">

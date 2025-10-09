@@ -13,6 +13,7 @@
         import Home2 from "./pages/Home2/home2";
         import Gestaousuarios from "./pages/GestaoUsuario/gestaousuario";
         import GestaoProjetos from "./pages/GestaoProjeto/gestaoprojeto";
+        import Relatorios from "./pages/Relatorios/relatorios";
 
         
 
@@ -35,6 +36,7 @@
                         <Route path="/home2" element={<Home2 />} />
                         <Route path="/gestaousuario" element={<Gestaousuarios />} />
                         <Route path="/gestaoprojeto" element={<GestaoProjetos />} />
+                        <Route path="/relatorios" element={<Relatorios />} />
 
                         
                     </Routes>

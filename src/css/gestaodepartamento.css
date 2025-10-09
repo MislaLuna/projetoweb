@@ -1,0 +1,149 @@
+.departamento-page {
+  --dark: #240046;
+  --white: #fff;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --radius: 10px;
+  display: flex;
+  background-color: #f3f4f8;
+  font-family: 'League Spartan', sans-serif;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.departamento-sidebar {
+  background-color: var(--dark);
+  padding: 0.5rem;
+  width: 92px;
+  height: 100vh;
+  border-radius: var(--radius);
+  color: var(--white);
+  position: fixed;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 15px var(--shadow);
+  transition: width 0.3s ease;
+}
+
+.departamento-sidebar:hover {
+  width: 280px;
+  align-items: flex-start;
+}
+
+.departamento-logo img {
+  max-width: 90px;
+  margin-bottom: 1.5rem;
+}
+
+/* Menu */
+.departamento-menu {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+}
+
+.departamento-menu li {
+  margin-bottom: 20px;
+}
+
+.departamento-menu li a {
+  text-decoration: none;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: var(--radius);
+  transition: 0.3s;
+}
+
+.departamento-menu li a:hover,
+.departamento-menu li a.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e0aaff;
+}
+
+.departamento-menu li a i {
+  font-size: 1.4rem;
+  margin-right: 12px;
+}
+
+/* Main */
+.departamento-main {
+  flex-grow: 1;
+  margin-left: 92px;
+  padding: 2rem 3rem;
+  transition: margin-left 0.3s ease;
+}
+
+.departamento-sidebar:hover ~ .departamento-main {
+  margin-left: 280px;
+}
+
+/* Hero */
+.departamento-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.departamento-hero h1 {
+  font-size: 3rem;
+  color: var(--dark);
+  font-weight: bold;
+}
+
+.departamento-hero p {
+  color: #555;
+}
+
+/* Container */
+.departamento-container {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 10px var(--shadow);
+  padding: 2rem;
+}
+
+/* Modal */
+.departamento-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.departamento-modal-form {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+}
+
+.departamento-modal-form .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+
+/* Footer */
+.departamento-footer {
+  background-color: var(--dark);
+  color: var(--white);
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-top: 2rem;
+  box-shadow: 0 2px 10px var(--shadow);
+}

@@ -63,7 +63,7 @@ function Dashboard() {
           </li>
           <li>
             <Link to="/equipe" className={isActive('/equipe')}>
-              <i className="bi bi-house-door-fill"></i> <span>Equipe</span>
+              <i className="bi bi-people"></i> <span>Equipe</span>
             </Link>
           </li>
           <li>
@@ -82,7 +82,7 @@ function Dashboard() {
             </Link>
           </li>
           <li>
-            <Link to="/pagina8" className={isActive('/pagina8')}>
+            <Link to="/gestaousuario" className={isActive('/gestaousuario')}>
               <i className="bi bi-person-badge-fill"></i> <span>Usuários</span>
             </Link>
           </li>

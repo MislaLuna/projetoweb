@@ -1,114 +1,181 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import '../../css/bootstrap.min.css';
-import '../../css/bootstrap-icons.css';
-import '../../css/owl.carousel.min.css';
-import '../../css/owl.theme.default.min.css';
-import '../../css/dashboard.css';
-import logo from '../img/image.png';
+import React, { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import axios from "axios";
+import "../../css/gestaotarefa.css";
+import logo from "../img/image.png";
 
-function Dashboard() {
+function Departamentos() {
   const location = useLocation();
-
-  const isActive = (path) => (location.pathname === path ? 'active' : '');
-
-  const [stats, setStats] = useState({
-    usuariosAtivos: 0,
-    tarefasFinalizadas: 0,
-    tarefasCriadas: 0,
-  });
+  const [departamentos, setDepartamentos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [novoDepartamento, setNovoDepartamento] = useState({ nome: "", descricao: "" });
 
   useEffect(() => {
-    const fetchDashboardStats = async () => {
+    const buscarDepartamentos = async () => {
       try {
-        const [usuariosRes, tarefasRes] = await Promise.all([
-          axios.get('http://localhost:8080/usuarios'),
-          axios.get('http://localhost:8080/tarefas'),
-        ]);
-
-        const usuarios = usuariosRes.data;
-        const tarefas = tarefasRes.data;
-
-        const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
-        const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
-        const tarefasCriadas = tarefas.length;
-
-        setStats({
-          usuariosAtivos,
-          tarefasFinalizadas,
-          tarefasCriadas,
-        });
+        const response = await axios.get("http://localhost:8080/departamentos");
+        setDepartamentos(response.data);
       } catch (error) {
-        console.error('Erro ao buscar dados do dashboard:', error);
+        console.error("Erro ao buscar departamentos:", error);
       }
     };
-
-    fetchDashboardStats();
+    buscarDepartamentos();
   }, []);
 
-  return (
-    <div className="dashboardPage">
+  const handleAddDepartamento = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:8080/departamentos", novoDepartamento);
+      setShowModal(false);
+      setNovoDepartamento({ nome: "", descricao: "" });
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao adicionar departamento:", error);
+    }
+  };
 
-      {/* Mantendo o aside exatamente como você pediu */}
+  const handleDelete = async (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este departamento?")) {
+      try {
+        await axios.delete(`http://localhost:8080/departamentos/${id}`);
+        setDepartamentos(departamentos.filter((d) => d.id !== id));
+      } catch (error) {
+        console.error("Erro ao excluir:", error);
+      }
+    }
+  };
+
+  return (
+    <div className="configuration-page">
+      {/* Sidebar igual à página GestaoTarefas */}
       <aside className="sidebar">
         <div className="logo">
-          <Link to="/equipe">
-            <img src={logo} alt="Logo TaskNavigation" />
-          </Link>
+          <Link to="/home2"><img src={logo} alt="Logo TaskNavigation" /></Link>
         </div>
         <ul className="menu">
-          <li><Link to="/home2" className={isActive('/home2') ? 'active' : ''}><i className="bi bi-house-door-fill"></i> <span>Início</span></Link></li>
-          <li><Link to="/equipe" className={isActive('/equipe') ? 'active' : ''}><i className="bi bi-people"></i> <span>Equipe</span></Link></li>
-          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas') ? 'active' : ''}><i className="bi bi-list-task"></i> <span>Tarefas</span></Link></li>
-          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
-          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento') ? 'active' : ''}><i className="bi bi-building"></i> <span>Departamentos</span></Link></li>
-          <li><Link to="/gestaousuario" className={isActive('/gestaousuario') ? 'active' : ''}><i className="bi bi-people-fill"></i> <span>Usuários</span></Link></li>
-          <li><Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}><i className="bi bi-speedometer2"></i> <span>DashBoard</span></Link></li>
-          <li><Link to="/relatorios" className={isActive('/relatorios') ? 'active' : ''}><i className="bi bi-graph-up"></i> <span>Relatórios</span></Link></li>
-          <li><Link to="/configuracao" className={isActive('/configuracao') ? 'active' : ''}><i className="bi bi-gear-fill"></i> <span>Configurações</span></Link></li>
+          <li>
+            <Link to="/home2" className={location.pathname === "/home2" ? "active" : ""}>
+              <i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/equipe" className={location.pathname === "/equipe" ? "active" : ""}>
+              <i className="bi bi-people"></i><span className="menu-text">Equipe</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaotarefas" className={location.pathname === "/gestaotarefas" ? "active" : ""}>
+              <i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaoprojeto" className={location.pathname === "/gestaoprojeto" ? "active" : ""}>
+              <i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaodepartamento" className={location.pathname === "/gestaodepartamento" ? "active" : ""}>
+              <i className="bi bi-building"></i><span className="menu-text">Departamentos</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/gestaousuario" className={location.pathname === "/gestaousuario" ? "active" : ""}>
+              <i className="bi bi-people-fill"></i><span className="menu-text">Usuários</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/dashboard" className={location.pathname === "/dashboard" ? "active" : ""}>
+              <i className="bi bi-speedometer2"></i><span className="menu-text">DashBoard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/relatorios" className={location.pathname === "/relatorios" ? "active" : ""}>
+              <i className="bi bi-graph-up"></i><span className="menu-text">Relatórios</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/configuracao" className={location.pathname === "/configuracao" ? "active" : ""}>
+              <i className="bi bi-gear-fill"></i><span className="menu-text">Configurações</span>
+            </Link>
+          </li>
         </ul>
       </aside>
 
-      {/* Conteúdo principal da Dashboard com classes exclusivas */}
-      <main className="dashboardMain">
-        <div className="dashboardHero">
-          <h1>DashBoard</h1>
-          <p>Visão geral de métricas importantes.</p>
-        </div>
-
-        <section className="dashboardFeatures">
-          <div className="dashboardFeature">
-            <i className="bi bi-people-fill fs-2 mb-2 text-primary"></i>
-            <h3>Usuários Ativos</h3>
-            <p>{stats.usuariosAtivos}</p>
-          </div>
-
-          <div className="dashboardFeature">
-            <i className="bi bi-check2-circle fs-2 mb-2 text-success"></i>
-            <h3>Tarefas Finalizadas</h3>
-            <p>{stats.tarefasFinalizadas}</p>
-          </div>
-
-          <div className="dashboardFeature">
-            <i className="bi bi-list-check fs-2 mb-2 text-warning"></i>
-            <h3>Tarefas Criadas</h3>
-            <p>{stats.tarefasCriadas}</p>
-          </div>
+      {/* Conteúdo principal */}
+      <main className="main">
+        <section className="hero">
+          <h1>Departamentos</h1>
+          <p>Gerencie os setores da sua empresa de forma simples e organizada.</p>
         </section>
 
-        <footer className="dashboardFooter">
-          <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-          <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
-          <div className="dashboardPolicyText">
-            <h4 className="dashboardPolicyTitle">Política de Privacidade</h4>
-            <p>Protegemos seus dados com criptografia e boas práticas de segurança.</p>
-            <p>Coletamos apenas as informações necessárias para o funcionamento da plataforma.</p>
+        <div className="config-container">
+          <button className="btn btn-success mb-3" onClick={() => setShowModal(true)}>
+            ➕ Adicionar Departamento
+          </button>
+
+          <div className="table-responsive mt-4">
+            <table className="table table-striped table-bordered">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {departamentos.length > 0 ? (
+                  departamentos.map((dep) => (
+                    <tr key={dep.id}>
+                      <td>{dep.nome}</td>
+                      <td>{dep.descricao}</td>
+                      <td>
+                        <button className="btn btn-danger" onClick={() => handleDelete(dep.id)}>
+                          <i className="bi bi-trash-fill"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="3" className="text-center">Nenhum departamento encontrado.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+        </div>
+
+        {showModal && (
+          <div className="modal-overlay">
+            <form className="modal-form" onSubmit={handleAddDepartamento}>
+              <button type="button" className="close-btn" onClick={() => setShowModal(false)}>✕</button>
+              <h3>Adicionar Departamento</h3>
+              <input
+                type="text"
+                className="form-control mb-2"
+                placeholder="Nome do departamento"
+                value={novoDepartamento.nome}
+                onChange={(e) => setNovoDepartamento({ ...novoDepartamento, nome: e.target.value })}
+                required
+              />
+              <input
+                type="text"
+                className="form-control mb-2"
+                placeholder="Descrição"
+                value={novoDepartamento.descricao}
+                onChange={(e) => setNovoDepartamento({ ...novoDepartamento, descricao: e.target.value })}
+              />
+              <button type="submit" className="btn btn-success w-100">Salvar</button>
+            </form>
+          </div>
+        )}
+
+        <footer className="footer-container">
+          <p>© 2025 TaskNavigation — Todos os direitos reservados</p>
         </footer>
       </main>
     </div>
   );
 }
 
-export default Dashboard;
+export default Departamentos;
