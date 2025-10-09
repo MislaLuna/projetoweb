@@ -30,7 +30,8 @@ function ConfigurationPage() {
           </Link>
         </div>
         <ul className="menu">
-          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
+          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
+          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-people"></i> <span>Equipe</span></Link></li>
           <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span></Link></li>
            <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
           <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i><span className="menu-text">Departamentos</span></Link></li>

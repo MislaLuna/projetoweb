@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
-import '../../css/owl.carousel.min.css';
-import '../../css/owl.theme.default.min.css';
 import '../../css/dashboard.css';
 import logo from '../img/image.png';
 
@@ -22,23 +20,38 @@ function Dashboard() {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
+        const token = localStorage.getItem('token');
+        const idUsuarioLogado = localStorage.getItem('idUsuario');
+
+        // Pegar usuário logado e descobrir equipe
+        const usuarioRes = await axios.get(`http://localhost:8080/usuarios/${idUsuarioLogado}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const equipeId = usuarioRes.data?.equipe?.id;
+        if (!equipeId) {
+          console.warn("Usuário logado não possui equipe vinculada.");
+          return;
+        }
+
+        // Buscar usuários da equipe e todas as tarefas
         const [usuariosRes, tarefasRes] = await Promise.all([
-          axios.get('http://localhost:8080/usuarios'),
-          axios.get('http://localhost:8080/tarefas'),
+          axios.get(`http://localhost:8080/usuarios/equipe/${equipeId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://localhost:8080/tarefas', {
+            headers: { Authorization: `Bearer ${token}` }
+          })
         ]);
 
         const usuarios = usuariosRes.data;
-        const tarefas = tarefasRes.data;
+        const tarefas = tarefasRes.data.filter(t => t.usuario?.equipe?.id === equipeId);
 
         const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
         const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
         const tarefasCriadas = tarefas.length;
 
-        setStats({
-          usuariosAtivos,
-          tarefasFinalizadas,
-          tarefasCriadas,
-        });
+        setStats({ usuariosAtivos, tarefasFinalizadas, tarefasCriadas });
       } catch (error) {
         console.error('Erro ao buscar dados do dashboard:', error);
       }
@@ -51,56 +64,18 @@ function Dashboard() {
     <div className="dashboardPage">
       <aside className="dashboardSidebar">
         <div className="dashboardLogo">
-          <Link to="/equipe">
-            <img src={logo} alt="Logo TaskNavigation" />
-          </Link>
+          <Link to="/equipe"><img src={logo} alt="Logo TaskNavigation" /></Link>
         </div>
         <ul className="dashboardMenu">
-          <li>
-            <Link to="/home2" className={isActive('/home2')}>
-              <i className="bi bi-house-door-fill"></i> <span>Início</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/equipe" className={isActive('/equipe')}>
-              <i className="bi bi-people"></i> <span>Equipe</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/gestaotarefas" className={isActive('/gestaotarefas')}>
-              <i className="bi bi-list-task"></i> <span>Tarefas</span>
-            </Link>
-          </li>
-
-
-          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
-
-
-          <li>
-            <Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}>
-              <i className="bi bi-building"></i> <span>Departamentos</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/gestaousuario" className={isActive('/gestaousuario')}>
-              <i className="bi bi-person-badge-fill"></i> <span>Usuários</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/dashboard" className={isActive('/dashboard')}>
-              <i className="bi bi-speedometer2"></i> <span>DashBoard</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/relatorios" className={isActive('/relatorios')}>
-              <i className="bi bi-bar-chart-fill"></i> <span>Relatórios</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/configuracao" className={isActive('/configuracoes')}>
-              <i className="bi bi-gear-fill"></i> <span>Configurações</span>
-            </Link>
-          </li>
+          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i><span> Início</span></Link></li>
+          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-people"></i><span>Equipe</span></Link></li>
+          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i><span>Tarefas</span></Link></li>
+          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span>Projetos</span></Link></li>
+          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i><span>Departamentos</span></Link></li>
+          <li><Link to="/gestaousuario" className={isActive('/gestaousuario')}><i className="bi bi-person-badge-fill"></i><span>Usuários</span></Link></li>
+          <li><Link to="/dashboard" className={isActive('/dashboard')}><i className="bi bi-speedometer2"></i> <span>DashBoard</span></Link></li>
+          <li><Link to="/relatorios" className={isActive('/relatorios')}><i className="bi bi-bar-chart-fill"></i><span>Relatórios</span></Link></li>
+          <li><Link to="/configuracao" className={isActive('/configuracoes')}><i className="bi bi-gear-fill"></i><span>Configurações</span></Link></li>
         </ul>
       </aside>
 
@@ -116,13 +91,11 @@ function Dashboard() {
             <h3>Usuários Ativos</h3>
             <p>{stats.usuariosAtivos}</p>
           </div>
-
           <div className="dashboardFeature">
             <i className="bi bi-check2-circle fs-2 mb-2 text-success"></i>
             <h3>Tarefas Finalizadas</h3>
             <p>{stats.tarefasFinalizadas}</p>
           </div>
-
           <div className="dashboardFeature">
             <i className="bi bi-list-check fs-2 mb-2 text-warning"></i>
             <h3>Tarefas Criadas</h3>
@@ -132,12 +105,6 @@ function Dashboard() {
 
         <footer className="dashboardFooter">
           <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-          <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
-          <div className="dashboardPolicyText">
-            <h4 className="dashboardPolicyTitle">Política de Privacidade</h4>
-            <p>Protegemos seus dados com criptografia e boas práticas de segurança.</p>
-            <p>Coletamos apenas as informações necessárias para o funcionamento da plataforma.</p>
-          </div>
         </footer>
       </main>
     </div>

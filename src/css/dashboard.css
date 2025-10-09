@@ -298,3 +298,21 @@
     gap: 1.5rem;
   }
 }
+
+
+
+
+
+
+:root {
+  --icon-size-menu: 1.2rem;
+  --icon-size-card: 2rem;
+}
+
+.dashboardPage .dashboardMenu li a i {
+  font-size: var(--icon-size-menu);
+}
+
+.dashboardPage .dashboardFeature i {
+  font-size: var(--icon-size-card);
+}
