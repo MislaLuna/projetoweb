@@ -30,6 +30,42 @@
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+:root {
+  --icon-size-menu: 1.2rem;
+  --icon-size-feature: 2rem;
+}
+
+.home2Container .menu li a i {
+  font-size: var(--icon-size-menu);
+}
+
+.feature i {
+  font-size: var(--icon-size-feature);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===========================
    Container geral
 =========================== */

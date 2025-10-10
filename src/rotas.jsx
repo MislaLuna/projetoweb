@@ -8,7 +8,7 @@
         import Dashboard from "./pages/DashBoard/dashboard";
         import VerifyCodePage from "./pages/VerificarCodigoNovaSenha/verificaCodigo";
         import ResetPasswordPage from "./pages/CriaNovaSenha/crianovasenha";
-        import ConfigurationPage from "./pages/Configuracao/configuracao";
+        import ConfigurationPageIOS from "./pages/Configuracao/configuracao";
         import GestaoEquipes from "./pages/Equipe/equipe";
         import Home2 from "./pages/Home2/home2";
         import Gestaousuarios from "./pages/GestaoUsuario/gestaousuario";
@@ -31,7 +31,7 @@
                         <Route path="/gestaotarefas" element={<GestaoTarefas />} />
                         <Route path="/gestaodepartamento" element={<GestaoDepartamentos />} />
                         <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/configuracao" element={<ConfigurationPage />} />
+                        <Route path="/configuracao" element={<ConfigurationPageIOS />} />
                         <Route path="/equipe" element={<GestaoEquipes />} />
                         <Route path="/home2" element={<Home2 />} />
                         <Route path="/gestaousuario" element={<Gestaousuarios />} />

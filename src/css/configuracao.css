@@ -1,299 +1,201 @@
-/* ===========================
-   Container principal
-=========================== */
-.configuration-page {
-  display: flex;
-  height: 100vh;
-  background-color: #f7f5fb;
-  font-family: var(--body-font-family);
+:root {
+  --white-ios: #f9f9f9;
+  --gray-light-ios: #e5e5ea;
+  --gray-dark-ios: #555;
+  --blue-ios: #007aff;
+  --orange-ios: #ff9500;
+  --green-ios: #34c759;
+  --rounded-ios: 15px;
+  --shadow-ios: rgba(0,0,0,0.08);
+  --font-ios: 'Arial', sans-serif;
 }
 
-/* ===========================
-   Sidebar
-=========================== */
-.configuration-page .sidebar {
-  background-color: var(--dark-color);
-  color: var(--white-color);
-  padding: 1.5rem;
+/* Container principal */
+.config-ios-page {
+  display: flex;
+  height: 100vh;
+  font-family: var(--font-ios);
+  background-color: var(--white-ios);
+}
+
+/* Sidebar exclusiva */
+.sidebar-ios {
+  width: 92px;
+  background-color: #100e4a;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: width 0.3s ease;
-  width: 92px;
-  min-height: 100vh;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 15px var(--shadow-color);
+  padding: 1.5rem;
+  border-radius: var(--rounded-ios);
+  box-shadow: 0 4px 15px var(--shadow-ios);
 }
-
-.configuration-page .sidebar:hover {
+.sidebar-ios:hover {
   width: 260px;
 }
-
-.configuration-page .logo {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.configuration-page .logo-link img {
+.sidebar-ios .logo-sidebar-ios img {
   width: 100px;
-  height: auto;
-  transition: width 0.3s ease;
-}
-
-.configuration-page .sidebar:hover .logo-link img {
-  width: 160px;
-}
-
-/* ===========================
-   Menu lateral
-=========================== */
-.configuration-page .menu {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-}
-
-.configuration-page .menu li {
-  margin-bottom: 1rem;
-}
-
-.configuration-page .menu li a {
-  display: flex;
-  align-items: center;
-  color: var(--white-color);
-  text-decoration: none;
-  padding: 0.7rem;
-  border-radius: var(--border-radius-small);
   transition: 0.3s;
 }
-
-.configuration-page .menu li a:hover {
-  background-color: rgba(255,255,255,0.1);
-  color: var(--primary-hover);
+.sidebar-ios:hover .logo-sidebar-ios img {
+  width: 160px;
 }
-
-.configuration-page .menu li a.active {
+.menu-sidebar-ios {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  width: 100%;
+}
+.menu-sidebar-ios li {
+  margin-bottom: 1rem;
+}
+.menu-sidebar-ios li a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem;
+  border-radius: 5px;
+}
+.menu-sidebar-ios li a.active, .menu-sidebar-ios li a:hover {
   background-color: rgba(255,255,255,0.2);
-  color: var(--primary-hover);
+  color: #d8345c;
 }
-
-.configuration-page .menu li a i {
-  font-size: 1.3rem;
+.menu-sidebar-ios li a i {
   margin-right: 0.5rem;
-  color: var(--primary-color);
-  transition: color 0.25s ease;
+  color: #007aff;
 }
 
-.configuration-page .menu li a:hover i,
-.configuration-page .menu li a.active i {
-  color: var(--primary-hover);
-}
-
-.configuration-page .menu-text {
-  margin-left: 0.6rem;
-  font-weight: var(--font-weight-semibold);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.configuration-page .sidebar:hover .menu-text {
-  opacity: 1;
-}
-
-/* ===========================
-   Main
-=========================== */
-.configuration-page .main {
+/* Main content */
+.main-ios {
   flex-grow: 1;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-left: 92px;
-  transition: margin-left 0.3s ease;
 }
-
-.configuration-page .sidebar:hover ~ .main {
+.sidebar-ios:hover ~ .main-ios {
   margin-left: 260px;
 }
 
-/* ===========================
-   Dashboard
-=========================== */
-.configuration-page .dashboard {
+/* Status bar */
+.status-bar-ios {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--gray-dark-ios);
 }
 
-/* ===========================
-   Hero
-=========================== */
-.configuration-page .hero {
-  text-align: center;
+/* Cabeçalho */
+.header-ios h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
-
-.configuration-page .hero h1 {
-  color: var(--dark-color);
-  font-size: var(--h3-font-size);
-  margin-bottom: 0.5rem;
-}
-
-.configuration-page .hero p {
-  color: var(--text-color);
-  font-size: var(--p-font-size);
-}
-
-/* ===========================
-   Cartão de configuração
-=========================== */
-.configuration-page .config-container {
-  background-color: var(--white-color);
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 2px 8px var(--shadow-color);
-  padding: 2rem;
-
-  width: 1600px;
-  height: 600px;
-  max-width: 100%;  
-  margin: -50px auto 0 auto; /* sobe 50px em relação ao normal */
-  box-sizing: border-box; 
-}
-
-/* Seções internas */
-.configuration-page .theme-section,
-.configuration-page .notifications-section {
+.profile-card-ios {
+  display: flex;
+  align-items: center;
+  background-color: var(--gray-light-ios);
+  border-radius: var(--rounded-ios);
+  padding: 1rem;
   margin-bottom: 2rem;
 }
+.user-icon-ios img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+.profile-info-ios .login-link-ios {
+  color: var(--blue-ios);
+  font-weight: bold;
+  cursor: pointer;
+}
+.profile-info-ios .subtext-ios {
+  color: var(--gray-dark-ios);
+  font-size: 0.85rem;
+}
 
-/* Opções de tema */
-.configuration-page .theme-options {
+/* Settings cards */
+.settings-ios {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+.setting-card-ios {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white-ios);
+  padding: 0.8rem 1rem;
+  border-radius: var(--rounded-ios);
+  box-shadow: 0 2px 6px var(--shadow-ios);
+}
+.icon-ios i {
+  font-size: 1.5rem;
+}
+.icon-ios.airplane { color: var(--orange-ios); }
+.icon-ios.wifi { color: var(--blue-ios); }
+.icon-ios.bluetooth { color: var(--blue-ios); }
+.icon-ios.celular { color: var(--green-ios); }
+.text-ios {
+  flex: 1;
+  margin-left: 1rem;
+  font-weight: 500;
+}
+.subtext-ios {
+  color: var(--gray-dark-ios);
+  font-size: 0.85rem;
+}
+.switch-ios input[type="checkbox"] {
+  width: 40px;
+  height: 20px;
+  accent-color: var(--green-ios);
+}
+.arrow-ios {
+  font-size: 1.5rem;
+  color: var(--gray-dark-ios);
 }
 
-.configuration-page .theme-options label {
-  cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-  color: var(--dark-color);
+/* Buttons */
+.actions-ios {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
 }
-
-/* Lista de notificações */
-.configuration-page .notification-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 1rem;
-}
-
-.configuration-page .notification-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e3e3e3;
-  color: var(--text-color);
-}
-
-/* Inputs e botões */
-.configuration-page input[type="radio"] {
-  accent-color: var(--primary-hover);
-}
-
-.configuration-page button {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+.btn-ios-save {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: var(--rounded-ios);
+  background-color: var(--blue-ios);
+  color: #fff;
+  font-weight: bold;
   border: none;
-  border-radius: var(--border-radius-small);
-  padding: 0.7rem 1.4rem;
   cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-  transition: background-color 0.3s;
+}
+.btn-ios-save:hover {
+  background-color: #0056cc;
+}
+.btn-ios-logout {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: var(--rounded-ios);
+  background-color: #ff3b30;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.btn-ios-logout:hover {
+  background-color: #cc2a25;
 }
 
-.configuration-page button:hover {
-  background-color: var(--primary-hover);
-}
-
-/* ===========================
-   Footer
-=========================== */
-.configuration-page .footer-container {
-  background-color: var(--dark-color);
-  color: var(--white-color);
+/* Footer */
+.footer-ios {
+  margin-top: auto;
   text-align: center;
-  padding: 2rem 1.5rem;
-  border-radius: var(--border-radius-medium);
-  margin-top: 3rem;
-  box-shadow: 0 2px 10px var(--shadow-color);
-}
-
-.configuration-page .footer-container p {
-  font-size: var(--copyright-font-size);
-  margin: 0.5rem 0;
-  color: var(--white-color) !important;
-}
-
-.configuration-page .policy-title {
-  color: var(--primary-color);
-  font-size: var(--h4-font-size);
-  margin-top: 1rem;
-  font-weight: var(--font-weight-semibold);
-}
-
-.configuration-page .policy-text p {
-  font-size: 14px;
-  color: var(--white-color);
-  margin: 0.3rem 0;
-  line-height: 1.5;
-}
-
-/* ===========================
-   Responsividade
-=========================== */
-@media (max-width: 900px) {
-  .configuration-page .main {
-    padding: 1.5rem;
-  }
-
-  .configuration-page .theme-options {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .configuration-page {
-    flex-direction: column;
-  }
-
-  .configuration-page .sidebar {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 1rem 0.5rem;
-  }
-
-  .configuration-page .menu {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    margin-top: 0;
-    justify-content: space-around;
-  }
-
-  .configuration-page .menu li {
-    margin-bottom: 0;
-    margin-left: 0.5rem;
-  }
-
-  .configuration-page .main {
-    margin-left: 0;
-    padding: 1rem;
-  }
-
-  .configuration-page .hero h1 {
-    font-size: 1.5rem;
-  }
+  font-size: 0.85rem;
+  color: var(--gray-dark-ios);
 }
