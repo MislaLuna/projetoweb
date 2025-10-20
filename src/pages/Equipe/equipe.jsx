@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react'; 
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
@@ -55,32 +55,38 @@ function GestaoEquipes() {
     }
   };
 
-  const handleCriarEquipe = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('⚠️ Você precisa estar logado para criar equipes!');
-      navigate('/login');
-      return;
-    }
+const handleCriarEquipe = async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('⚠️ Você precisa estar logado para criar equipes!');
+    navigate('/login');
+    return;
+  }
 
-    try {
-      await axiosJWT.post('http://localhost:8080/equipes', { nome: nomeEquipe });
-      setNomeEquipe('');
-      setShowFormEquipe(false);
-      buscarEquipes();
-      alert('✅ Equipe criada com sucesso!');
-    } catch (err) {
-      if (err.response) {
-        if (err.response.status === 401) alert('⚠️ Não autorizado! Faça login novamente.');
-        else if (err.response.status === 400) alert('⚠️ Nome da equipe é obrigatório.');
-        else alert(`❌ Erro ao criar equipe: ${err.response.data}`);
+  try {
+    await axiosJWT.post('http://localhost:8080/equipes', { nome: nomeEquipe });
+    setNomeEquipe('');
+    setShowFormEquipe(false);
+    buscarEquipes();
+    alert('✅ Equipe criada com sucesso!');
+  } catch (err) {
+    if (err.response) {
+      if (err.response.status === 401) {
+        alert('⚠️ Nome da equipe inválido ou já existente.');
+      } else if (err.response.status === 400) {
+        // Aqui você mostra a mensagem específica que veio do backend
+        const mensagem = err.response.data || 'Nome da equipe inválido ou já existente.';
+        alert(`❌ ${mensagem}`);
       } else {
-        alert(`❌ Erro ao criar equipe: ${err.message}`);
+        alert(`❌ Erro ao criar equipe: ${err.response.data}`);
       }
-      console.error('Erro ao criar equipe:', err);
+    } else {
+      alert(`❌ Erro ao criar equipe: ${err.message}`);
     }
-  };
+    console.error('Erro ao criar equipe:', err);
+  }
+};
 
   const handleAdicionarColaborador = async (e) => {
     e.preventDefault();
