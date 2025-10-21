@@ -24,10 +24,7 @@ function GestaoTarefas() {
 
   // Token e config de autenticação
   const token = localStorage.getItem('token');
-  const config = { 
-    headers: { Authorization: `Bearer ${token}` },
-    withCredentials: true
-  };
+  const config = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     if (!token) {
@@ -43,6 +40,7 @@ function GestaoTarefas() {
   const carregarUsuarios = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/usuarios`, config);
+      console.log("Usuários carregados:", res.data);
       setUsuarios(res.data || []);
     } catch (err) {
       console.error("Erro ao carregar usuários:", err);
@@ -52,6 +50,7 @@ function GestaoTarefas() {
   const carregarProjetos = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/projetos`, config);
+      console.log("Projetos carregados:", res.data);
       setProjetos(res.data || []);
     } catch (err) {
       console.error("Erro ao carregar projetos:", err);
@@ -66,6 +65,7 @@ function GestaoTarefas() {
         usuario: t.usuario || { nome: '---', idUsuario: '' },
         projeto: t.projeto || { nome: '---', idProjeto: '' }
       }));
+      console.log("Tarefas carregadas:", tarefasFormatadas);
       setTarefas(tarefasFormatadas);
     } catch (err) {
       console.error("Erro ao carregar tarefas:", err);
@@ -91,16 +91,17 @@ function GestaoTarefas() {
       return;
     }
 
-const tarefaPayload = {
-  titulo: titulo.trim(),
-  descricao: descricao.trim(),
-  status,
-  prioridade,
-  prazo: prazo || null,
-  idUsuario: usuarioId ? Number(usuarioId) : null,
-  idProjeto: projetoId ? Number(projetoId) : null
-};
+    const tarefaPayload = {
+      titulo: titulo.trim(),
+      descricao: descricao.trim(),
+      status,
+      prioridade,
+      prazo: prazo || null,
+      usuario: usuarioId ? { idUsuario: Number(usuarioId) } : null,
+      projeto: projetoId ? { idProjeto: Number(projetoId) } : null
+    };
 
+    console.log("Payload enviado:", tarefaPayload);
 
     try {
       if (modoEdicao && idEditando) {
@@ -117,6 +118,7 @@ const tarefaPayload = {
     } catch (error) {
       const msg = error.response?.data?.mensagem || error.response?.data || "Erro ao salvar tarefa. Tente novamente.";
       alert(msg);
+      console.error("Erro ao salvar tarefa:", error);
     }
   };
 
@@ -125,7 +127,6 @@ const tarefaPayload = {
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}/tarefas/${id}`, config);
       setTarefas(prev => prev.filter(t => t.idTarefa !== id));
-    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       alert("Erro ao deletar tarefa. Tente novamente.");
     }
@@ -149,7 +150,6 @@ const tarefaPayload = {
       <aside className="sidebar">
         <div className="logo"><Link to="/equipe"><img src={logo} alt="Logo TaskNavigation" /></Link></div>
         <ul className="menu">
-          {/* Menu lateral */}
           <li><Link to="/home2" className={location.pathname === '/home2' ? 'active' : ''}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
           <li><Link to="/equipe" className={location.pathname === '/equipe' ? 'active' : ''}><i className="bi bi-people"></i><span className="menu-text">Equipe</span></Link></li>
           <li><Link to="/gestaotarefas" className={location.pathname === '/gestaotarefas' ? 'active' : ''}><i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span></Link></li>
@@ -190,7 +190,7 @@ const tarefaPayload = {
               <tbody>
                 {tarefas.length > 0 ? (
                   tarefas.map((tarefa) => (
-                    <tr key={tarefa.idTarefa ?? Math.random()}>
+                    <tr key={tarefa.idTarefa}>
                       <td>{tarefa.usuario?.nome || '---'}</td>
                       <td>{tarefa.projeto?.nome || '---'}</td>
                       <td>{tarefa.titulo}</td>
@@ -225,19 +225,32 @@ const tarefaPayload = {
               <form onSubmit={handleSubmit}>
                 <h3>{modoEdicao ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h3>
 
-                <select className="form-control mb-2" value={usuarioId} onChange={e => setUsuarioId(Number(e.target.value) || '')} required>
-                  <option value="">Selecione o usuário</option>   
-                  {usuarios.map(u => <option key={u.idUsuario} value={u.idUsuario}>{u.nome}</option>)}
+                <select
+                  className="form-control mb-2"
+                  value={usuarioId}
+                  onChange={e => setUsuarioId(e.target.value)}
+                  required
+                >
+                  <option value="">Selecione o usuário</option>
+                  {usuarios.map(u => (
+                    <option key={u.idUsuario} value={u.idUsuario}>{u.nome}</option>
+                  ))}
                 </select>
 
-                <select className="form-control mb-2" value={projetoId} onChange={e => setProjetoId(e.target.value)}>
+                <select
+                  className="form-control mb-2"
+                  value={projetoId}
+                  onChange={e => setProjetoId(e.target.value)}
+                >
                   <option value="">Selecione o projeto (opcional)</option>
-                  {projetos.map(p => <option key={p.idProjeto} value={p.idProjeto}>{p.nome}</option>)}
+                  {projetos.map(p => (
+                    <option key={p.idProjeto} value={p.idProjeto}>{p.nome}</option>
+                  ))}
                 </select>
 
                 <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
                 <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-                <input type="date" className="form-control mb-2" value={prazo?.slice(0, 10) || ''} onChange={e => setPrazo(e.target.value)} />
+                <input type="date" className="form-control mb-2" value={prazo ? prazo.slice(0, 10) : ''} onChange={e => setPrazo(e.target.value)} />
                 <select className="form-control mb-2" value={status} onChange={e => setStatus(e.target.value)} required>
                   <option value="Pendente">Pendente</option>
                   <option value="Concluída">Concluída</option>

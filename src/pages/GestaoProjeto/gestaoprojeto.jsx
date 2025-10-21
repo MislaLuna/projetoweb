@@ -64,16 +64,21 @@ function GestaoProjetos() {
       nome: nome.trim(),
       descricao: descricao.trim(),
       prazo: prazo || null,
-      usuario: { id: Number(usuarioId) }
+      idUsuario: parseJwt(token).id
     };
 
+    const tokenTraducao = parseJwt(token);
+
+
+
     try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ${token}`} };
 
       if (modoEdicao && idEditando !== null) {
         await axios.put(`${import.meta.env.VITE_API_URL}/projetos/${idEditando}`, { ...payload, idProjeto: idEditando }, config);
         console.log("Projeto atualizado:", payload);
       } else {
+        console.log("Salvando... token: " + token)
         await axios.post(`${import.meta.env.VITE_API_URL}/projetos`, payload, config);
         console.log("Projeto criado:", payload);
       }
@@ -114,6 +119,29 @@ function GestaoProjetos() {
     setPrazo(projeto.prazo);
     setUsuarioId(projeto.usuario?.id?.toString() || '');
   };
+
+  function parseJwt(token) {
+    if (!token) return null;
+
+    // Divide o token em partes
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+
+    // Pega o payload (segunda parte) e decodifica Base64Url
+    const payload = parts[1]
+        .replace(/-/g, '+')  // base64url -> base64
+        .replace(/_/g, '/');
+    
+    // Decodifica e transforma em objeto
+    try {
+        const decoded = atob(payload); // decodifica base64
+        return JSON.parse(decoded);    // transforma em objeto JS
+    } catch (err) {
+        console.error('Erro ao decodificar JWT:', err);
+        return null;
+    }
+}
+
 
   return (
     <div className="configuration-page">
