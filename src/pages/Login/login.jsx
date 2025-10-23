@@ -39,8 +39,15 @@ const LoginPage = () => {
         throw new Error('Token não encontrado no login.');
       }
 
-      console.log('Usuário logado:', user);
-      navigate('/equipe'); // redireciona após login
+
+// ✅ Salva o objeto do usuário no localStorage
+if (user.usuario) { // depende de como o backend retorna os dados
+  localStorage.setItem('usuario', JSON.stringify(user.usuario));
+} else {
+  localStorage.setItem('usuario', JSON.stringify(user)); // se o user já for o objeto completo
+}
+
+      navigate('/home2'); // redireciona após login
 
     } catch (err) {
       alert(err.message);

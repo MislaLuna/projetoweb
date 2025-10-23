@@ -18,47 +18,52 @@ function Dashboard() {
   });
 
   useEffect(() => {
-    const fetchDashboardStats = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const idUsuarioLogado = localStorage.getItem('idUsuario');
+  const fetchDashboardStats = async () => {
+    const token = localStorage.getItem('token');
+    const idUsuarioLogado = localStorage.getItem('idUsuario');
 
-        // Pegar usuário logado e descobrir equipe
-        const usuarioRes = await axios.get(`http://localhost:8080/usuarios/${idUsuarioLogado}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+    if (!idUsuarioLogado) {
+      console.warn("Nenhum usuário logado encontrado.");
+      return; // sai sem tentar fazer fetch
+    }
 
-        const equipeId = usuarioRes.data?.equipe?.id;
-        if (!equipeId) {
-          console.warn("Usuário logado não possui equipe vinculada.");
-          return;
-        }
+    try {
+      // Pegar usuário logado e descobrir equipe
+      const usuarioRes = await axios.get(`http://localhost:8080/usuarios/${idUsuarioLogado}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-        // Buscar usuários da equipe e todas as tarefas
-        const [usuariosRes, tarefasRes] = await Promise.all([
-          axios.get(`http://localhost:8080/usuarios/equipe/${equipeId}`, {
-            headers: { Authorization: `Bearer ${token}` }
-          }),
-          axios.get('http://localhost:8080/tarefas', {
-            headers: { Authorization: `Bearer ${token}` }
-          })
-        ]);
-
-        const usuarios = usuariosRes.data;
-        const tarefas = tarefasRes.data.filter(t => t.usuario?.equipe?.id === equipeId);
-
-        const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
-        const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
-        const tarefasCriadas = tarefas.length;
-
-        setStats({ usuariosAtivos, tarefasFinalizadas, tarefasCriadas });
-      } catch (error) {
-        console.error('Erro ao buscar dados do dashboard:', error);
+      const equipeId = usuarioRes.data?.equipe?.id;
+      if (!equipeId) {
+        console.warn("Usuário logado não possui equipe vinculada.");
+        return;
       }
-    };
 
-    fetchDashboardStats();
-  }, []);
+      // Buscar usuários da equipe e todas as tarefas
+      const [usuariosRes, tarefasRes] = await Promise.all([
+        axios.get(`http://localhost:8080/usuarios/equipe/${equipeId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        }),
+        axios.get('http://localhost:8080/tarefas', {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      ]);
+
+      const usuarios = usuariosRes.data;
+      const tarefas = tarefasRes.data.filter(t => t.usuario?.equipe?.id === equipeId);
+
+      const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
+      const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
+      const tarefasCriadas = tarefas.length;
+
+      setStats({ usuariosAtivos, tarefasFinalizadas, tarefasCriadas });
+    } catch (error) {
+      console.error('Erro ao buscar dados do dashboard:', error);
+    }
+  };
+
+  fetchDashboardStats();
+}, []);
 
   return (
     <div className="dashboardPage">
