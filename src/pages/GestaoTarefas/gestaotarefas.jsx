@@ -22,7 +22,6 @@ function GestaoTarefas() {
   const [usuarioId, setUsuarioId] = useState('');
   const [projetoId, setProjetoId] = useState('');
 
-  // Token e config de autenticação
   const token = localStorage.getItem('token');
   const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -37,23 +36,22 @@ function GestaoTarefas() {
     carregarTarefas();
   }, [token]);
 
+  // Funções de carregamento
   const carregarUsuarios = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/usuarios`, config);
-      console.log("Usuários carregados:", res.data);
       setUsuarios(res.data || []);
     } catch (err) {
-      console.error("Erro ao carregar usuários:", err);
+      console.error("Erro ao carregar usuários:", err.response || err);
     }
   };
 
   const carregarProjetos = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/projetos`, config);
-      console.log("Projetos carregados:", res.data);
       setProjetos(res.data || []);
     } catch (err) {
-      console.error("Erro ao carregar projetos:", err);
+      console.error("Erro ao carregar projetos:", err.response || err);
     }
   };
 
@@ -63,15 +61,16 @@ function GestaoTarefas() {
       const tarefasFormatadas = (res.data || []).map(t => ({
         ...t,
         usuario: t.usuario || { nome: '---', idUsuario: '' },
-        projeto: t.projeto || { nome: '---', idProjeto: '' }
+        projeto: t.projeto || { nome: '---', idProjeto: '' },
+        prazo: t.prazo ? new Date(t.prazo).toISOString().slice(0, 10) : null
       }));
-      console.log("Tarefas carregadas:", tarefasFormatadas);
       setTarefas(tarefasFormatadas);
     } catch (err) {
-      console.error("Erro ao carregar tarefas:", err);
+      console.error("Erro ao carregar tarefas:", err.response || err);
     }
   };
 
+  // Reset form
   const resetForm = () => {
     setTitulo('');
     setDescricao('');
@@ -84,12 +83,32 @@ function GestaoTarefas() {
     setModoEdicao(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!usuarioId) {
-      alert("Selecione um usuário válido antes de salvar a tarefa!");
+  // Edit
+  const handleEdit = (tarefa) => {
+    if (!usuarios.length || !projetos.length) {
+      alert("Usuários ou projetos ainda não carregados. Aguarde alguns segundos.");
       return;
     }
+
+    setShowForm(true);
+    setModoEdicao(true);
+    setIdEditando(tarefa.idTarefa);
+    setTitulo(tarefa.titulo);
+    setDescricao(tarefa.descricao);
+    setPrazo(tarefa.prazo);
+    setStatus(tarefa.status);
+    setPrioridade(tarefa.prioridade);
+    setUsuarioId(tarefa.usuario?.idUsuario?.toString() || '');
+    setProjetoId(tarefa.projeto?.idProjeto?.toString() || '');
+  };
+
+  // Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Se nenhum usuário selecionado, envia null para backend usar usuário logado
+    const usuarioIdNumber = usuarioId ? Number(usuarioId) : null;
+    const projetoIdNumber = projetoId ? Number(projetoId) : null;
 
     const tarefaPayload = {
       titulo: titulo.trim(),
@@ -97,8 +116,8 @@ function GestaoTarefas() {
       status,
       prioridade,
       prazo: prazo || null,
-      usuario: usuarioId ? { idUsuario: Number(usuarioId) } : null,
-      projeto: projetoId ? { idProjeto: Number(projetoId) } : null
+      usuarioId: usuarioIdNumber,
+      projetoId: projetoIdNumber
     };
 
     console.log("Payload enviado:", tarefaPayload);
@@ -111,14 +130,13 @@ function GestaoTarefas() {
         await axios.post(`${import.meta.env.VITE_API_URL}/tarefas`, tarefaPayload, config);
         alert("Tarefa criada com sucesso!");
       }
-
-      await carregarTarefas();
+      await carregarTarefas(); // Atualiza lista
       resetForm();
       setShowForm(false);
     } catch (error) {
       const msg = error.response?.data?.mensagem || error.response?.data || "Erro ao salvar tarefa. Tente novamente.";
       alert(msg);
-      console.error("Erro ao salvar tarefa:", error);
+      console.error("Erro ao salvar tarefa:", error.response || error);
     }
   };
 
@@ -130,19 +148,6 @@ function GestaoTarefas() {
     } catch (error) {
       alert("Erro ao deletar tarefa. Tente novamente.");
     }
-  };
-
-  const handleEdit = (tarefa) => {
-    setShowForm(true);
-    setModoEdicao(true);
-    setIdEditando(tarefa.idTarefa);
-    setTitulo(tarefa.titulo);
-    setDescricao(tarefa.descricao);
-    setPrazo(tarefa.prazo);
-    setStatus(tarefa.status);
-    setPrioridade(tarefa.prioridade);
-    setUsuarioId(tarefa.usuario?.idUsuario?.toString() || '');
-    setProjetoId(tarefa.projeto?.idProjeto?.toString() || '');
   };
 
   return (
@@ -250,7 +255,7 @@ function GestaoTarefas() {
 
                 <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
                 <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-                <input type="date" className="form-control mb-2" value={prazo ? prazo.slice(0, 10) : ''} onChange={e => setPrazo(e.target.value)} />
+                <input type="date" className="form-control mb-2" value={prazo || ''} onChange={e => setPrazo(e.target.value)} />
                 <select className="form-control mb-2" value={status} onChange={e => setStatus(e.target.value)} required>
                   <option value="Pendente">Pendente</option>
                   <option value="Concluída">Concluída</option>
