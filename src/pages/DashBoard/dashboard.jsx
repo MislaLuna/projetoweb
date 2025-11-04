@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/bootstrap.min.css';
 import '../../css/bootstrap-icons.css';
@@ -8,6 +8,7 @@ import logo from '../img/image.png';
 
 function Dashboard() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => (location.pathname === path ? 'active' : '');
 
@@ -17,54 +18,66 @@ function Dashboard() {
     tarefasCriadas: 0,
   });
 
+  // ======== VERIFICAÇÃO DE PLANO ========
+  const isPaid = localStorage.getItem('planoPago'); // "true" ou "false"
+
   useEffect(() => {
-  const fetchDashboardStats = async () => {
-    const token = localStorage.getItem('token');
-    const idUsuarioLogado = localStorage.getItem('idUsuario');
-
-    if (!idUsuarioLogado) {
-      console.warn("Nenhum usuário logado encontrado.");
-      return; // sai sem tentar fazer fetch
+    if (!isPaid || isPaid !== 'true') {
+      alert('Você precisa ter um plano ativo para acessar esta página!');
+      navigate('/home2'); // redireciona para outra página
     }
+  }, [isPaid, navigate]);
 
-    try {
-      // Pegar usuário logado e descobrir equipe
-      const usuarioRes = await axios.get(`http://localhost:8080/usuarios/${idUsuarioLogado}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+  // ======== FETCH DASHBOARD ========
+  useEffect(() => {
+    const fetchDashboardStats = async () => {
+      const token = localStorage.getItem('token');
+      const idUsuarioLogado = localStorage.getItem('idUsuario');
 
-      const equipeId = usuarioRes.data?.equipe?.id;
-      if (!equipeId) {
-        console.warn("Usuário logado não possui equipe vinculada.");
-        return;
+      if (!idUsuarioLogado) {
+        console.warn("Nenhum usuário logado encontrado.");
+        return; // sai sem tentar fazer fetch
       }
 
-      // Buscar usuários da equipe e todas as tarefas
-      const [usuariosRes, tarefasRes] = await Promise.all([
-        axios.get(`http://localhost:8080/usuarios/equipe/${equipeId}`, {
+      try {
+        // Pegar usuário logado e descobrir equipe
+        const usuarioRes = await axios.get(`http://localhost:8080/usuarios/${idUsuarioLogado}`, {
           headers: { Authorization: `Bearer ${token}` }
-        }),
-        axios.get('http://localhost:8080/tarefas', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-      ]);
+        });
 
-      const usuarios = usuariosRes.data;
-      const tarefas = tarefasRes.data.filter(t => t.usuario?.equipe?.id === equipeId);
+        const equipeId = usuarioRes.data?.equipe?.id;
+        if (!equipeId) {
+          console.warn("Usuário logado não possui equipe vinculada.");
+          return;
+        }
 
-      const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
-      const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
-      const tarefasCriadas = tarefas.length;
+        // Buscar usuários da equipe e todas as tarefas
+        const [usuariosRes, tarefasRes] = await Promise.all([
+          axios.get(`http://localhost:8080/usuarios/equipe/${equipeId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          axios.get('http://localhost:8080/tarefas', {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+        ]);
 
-      setStats({ usuariosAtivos, tarefasFinalizadas, tarefasCriadas });
-    } catch (error) {
-      console.error('Erro ao buscar dados do dashboard:', error);
-    }
-  };
+        const usuarios = usuariosRes.data;
+        const tarefas = tarefasRes.data.filter(t => t.usuario?.equipe?.id === equipeId);
 
-  fetchDashboardStats();
-}, []);
+        const usuariosAtivos = usuarios.filter(u => u.statusUsuario === 'ATIVO').length;
+        const tarefasFinalizadas = tarefas.filter(t => t.status === 'FINALIZADA').length;
+        const tarefasCriadas = tarefas.length;
 
+        setStats({ usuariosAtivos, tarefasFinalizadas, tarefasCriadas });
+      } catch (error) {
+        console.error('Erro ao buscar dados do dashboard:', error);
+      }
+    };
+
+    fetchDashboardStats();
+  }, []);
+
+  // ======== JSX ========
   return (
     <div className="dashboardPage">
       <aside className="dashboardSidebar">

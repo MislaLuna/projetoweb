@@ -25,7 +25,7 @@ function GestaoEquipes() {
       const token = localStorage.getItem('token');
       if (!token) {
         console.warn('❌ Token não encontrado no localStorage');
-        return config; // segue sem token, backend retorna 401
+        return config;
       }
       config.headers['Authorization'] = `Bearer ${token}`;
       console.log('🔑 Token enviado no header:', token.substring(0, 15) + '...');
@@ -34,7 +34,33 @@ function GestaoEquipes() {
     (error) => Promise.reject(error)
   );
 
-  // Checa token ao carregar a página
+
+
+
+
+
+const buscarEquipes = async () => {
+  try {
+    const res = await axiosJWT.get('http://localhost:8080/equipes');
+    console.log('📦 Todas as equipes retornadas da API:', res.data);
+
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    // 🔍 Filtra só equipes do criador logado
+    const equipesDoUsuario = res.data.filter(eq => eq.criador?.id === usuario?.id);
+
+    console.log('✅ Equipes do usuário logado:', equipesDoUsuario);
+    setEquipes(equipesDoUsuario);
+  } catch (err) {
+    console.error('Erro ao buscar equipes:', err);
+    alert('❌ Erro ao carregar equipes.');
+  }
+};
+
+
+
+
+  // 🔹 Checa token e carrega equipes ao abrir a página
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -42,52 +68,44 @@ function GestaoEquipes() {
       navigate('/login');
       return;
     }
+
     buscarEquipes(); // só chama se existir token
   }, [navigate]);
 
-  const buscarEquipes = async () => {
+  // 🔹 Criar nova equipe
+  const handleCriarEquipe = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('⚠️ Você precisa estar logado para criar equipes!');
+      navigate('/login');
+      return;
+    }
+
     try {
-      const res = await axiosJWT.get('http://localhost:8080/equipes');
-      setEquipes(res.data);
+      await axiosJWT.post('http://localhost:8080/equipes', { nome: nomeEquipe });
+      setNomeEquipe('');
+      setShowFormEquipe(false);
+      buscarEquipes();
+      alert('✅ Equipe criada com sucesso!');
     } catch (err) {
-      console.error('Erro ao buscar equipes:', err);
-      alert('❌ Não foi possível buscar as equipes. Faça login novamente ou verifique a conexão.');
+      if (err.response) {
+        if (err.response.status === 401) {
+          alert('⚠️ Nome da equipe inválido ou já existente.');
+        } else if (err.response.status === 400) {
+          const mensagem = err.response.data || 'Nome da equipe inválido ou já existente.';
+          alert(`❌ ${mensagem}`);
+        } else {
+          alert(`❌ Erro ao criar equipe: ${err.response.data}`);
+        }
+      } else {
+        alert(`❌ Erro ao criar equipe: ${err.message}`);
+      }
+      console.error('Erro ao criar equipe:', err);
     }
   };
 
-const handleCriarEquipe = async (e) => {
-  e.preventDefault();
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('⚠️ Você precisa estar logado para criar equipes!');
-    navigate('/login');
-    return;
-  }
-
-  try {
-    await axiosJWT.post('http://localhost:8080/equipes', { nome: nomeEquipe });
-    setNomeEquipe('');
-    setShowFormEquipe(false);
-    buscarEquipes();
-    alert('✅ Equipe criada com sucesso!');
-  } catch (err) {
-    if (err.response) {
-      if (err.response.status === 401) {
-        alert('⚠️ Nome da equipe inválido ou já existente.');
-      } else if (err.response.status === 400) {
-        // Aqui você mostra a mensagem específica que veio do backend
-        const mensagem = err.response.data || 'Nome da equipe inválido ou já existente.';
-        alert(`❌ ${mensagem}`);
-      } else {
-        alert(`❌ Erro ao criar equipe: ${err.response.data}`);
-      }
-    } else {
-      alert(`❌ Erro ao criar equipe: ${err.message}`);
-    }
-    console.error('Erro ao criar equipe:', err);
-  }
-};
-
+  // 🔹 Adicionar colaborador
   const handleAdicionarColaborador = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
@@ -122,6 +140,7 @@ const handleCriarEquipe = async (e) => {
     }
   };
 
+  // 🔹 Excluir equipe
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -190,17 +209,23 @@ const handleCriarEquipe = async (e) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {equipes.map(eq => (
-                      <tr key={eq.id}>
-                        <td>{eq.nome}</td>
-                        <td>{eq.codigoConvite}</td>
-                        <td>
-                          <button className="delete-btn" onClick={() => handleDelete(eq.id)}>
-                            <i className="bi bi-trash-fill"></i>
-                          </button>
-                        </td>
+                    {equipes.length > 0 ? (
+                      equipes.map(eq => (
+                        <tr key={eq.id}>
+                          <td>{eq.nome}</td>
+                          <td>{eq.codigoConvite}</td>
+                          <td>
+                            <button className="delete-btn" onClick={() => handleDelete(eq.id)}>
+                              <i className="bi bi-trash-fill"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="3" className="text-center">Nenhuma equipe encontrada</td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>

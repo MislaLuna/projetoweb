@@ -316,3 +316,22 @@
 .dashboardPage .dashboardFeature i {
   font-size: var(--icon-size-card);
 }
+
+
+.plansGrid {
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.planCard {
+  min-width:260px;
+  max-width:320px;
+  padding:20px;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  text-align:center;
+}
+.planCard h3 { margin-top:0; }
+.planCard button { margin-top:12px; }
