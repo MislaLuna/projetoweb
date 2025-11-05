@@ -10,40 +10,44 @@ const ResetPasswordPage = () => {
   const location = useLocation();
   const email = location.state?.email;
 
-  const handleReset = async (e) => {
-    e.preventDefault();
+ const handleReset = async (e) => {
+  e.preventDefault();
 
-    if (senha !== confirmar) {
-      alert('As senhas não coincidem.');
+  if (senha !== confirmar) {
+    alert('As senhas não coincidem.');
+    return;
+  }
+
+  if (!email || !location.state?.token) {
+    alert('Dados inválidos. Por favor, refaça o processo.');
+    navigate('/recuperar-senha');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:8080/usuarios/recuperar-senha', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email, 
+        codigo: location.state.token, // ✅ enviar o código
+        novaSenha: senha 
+      }),
+    });
+
+    if (!response.ok) {
+      const msg = await response.text();
+      alert(`Erro: ${msg}`);
       return;
     }
 
-    if (!email) {
-      alert('Dados inválidos. Por favor, refaça o processo.');
-      navigate('/recuperar-senha');
-      return;
-    }
-
-    try {
-      const response = await fetch('http://localhost:8080/usuarios/recuperar-senha', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, novaSenha: senha }),
-      });
-
-      if (!response.ok) {
-        const msg = await response.text();
-        alert(`Erro: ${msg}`);
-        return;
-      }
-
-      alert('Senha redefinida com sucesso.');
-      navigate('/login');
-    } catch (err) {
-      alert('Erro ao redefinir senha.');
-      console.error(err);
-    }
-  };
+    alert('Senha redefinida com sucesso.');
+    navigate('/login');
+  } catch (err) {
+    alert('Erro ao redefinir senha.');
+    console.error(err);
+  }
+};
 
   return (
     <div className="reset-password-page">

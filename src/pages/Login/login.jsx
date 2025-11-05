@@ -17,37 +17,46 @@ const LoginPage = () => {
       return;
     }
 
+    const trimmedEmail = email.trim().toLowerCase();
+    const trimmedPassword = password.trim();
+
+    console.log("DEBUG - Email enviado:", trimmedEmail);
+    console.log("DEBUG - Senha enviada:", trimmedPassword);
+
     try { 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/usuarios/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha: password }),
+        body: JSON.stringify({ 
+          email: trimmedEmail, 
+          senha: trimmedPassword,
+          isWebLogin: true  
+        }),
       });
 
       if (!response.ok) {
         const errorText = await response.text();
+        console.error("DEBUG - Erro no login:", errorText);
         throw new Error(errorText || 'Erro ao fazer login');
       }
 
       const user = await response.json();
 
-      // ✅ SALVA O TOKEN CORRETO DO OBJETO authenticationResponse
-      if (user.authenticationResponse && user.authenticationResponse.access_token) {
-        localStorage.setItem('token', user.authenticationResponse.access_token);
-        console.log('Token armazenado:', user.authenticationResponse.access_token);
+      if (user.token) {
+        localStorage.setItem('token', user.token);
+        console.log('DEBUG - Token armazenado:', user.token);
       } else {
         throw new Error('Token não encontrado no login.');
       }
 
+      if (user.usuario) {
+        localStorage.setItem('usuario', JSON.stringify(user.usuario));
+      } else {
+        localStorage.setItem('usuario', JSON.stringify(user));
+      }
 
-// ✅ Salva o objeto do usuário no localStorage
-if (user.usuario) { // depende de como o backend retorna os dados
-  localStorage.setItem('usuario', JSON.stringify(user.usuario));
-} else {
-  localStorage.setItem('usuario', JSON.stringify(user)); // se o user já for o objeto completo
-}
-
-      navigate('/home2'); // redireciona após login
+      // ✅ redireciona após login bem-sucedido
+      navigate('/home2');
 
     } catch (err) {
       alert(err.message);
@@ -87,6 +96,7 @@ if (user.usuario) { // depende de como o backend retorna os dados
             <button type="submit">Entrar</button>
           </form>
         </div>
+
         <div className="login-image-exclusive">
           <img 
             src="/src/pages/img/Design sem nome (3).png" 

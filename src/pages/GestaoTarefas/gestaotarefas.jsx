@@ -7,7 +7,6 @@ import logo from '../img/image.png';
 function GestaoTarefas() {
   const location = useLocation();
 
-  // Estados gerais
   const [usuarios, setUsuarios] = useState([]);
   const [projetos, setProjetos] = useState([]);
   const [tarefas, setTarefas] = useState([]);
@@ -23,54 +22,60 @@ function GestaoTarefas() {
   const [projetoId, setProjetoId] = useState('');
 
   const token = localStorage.getItem('token');
-  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  // cria uma instância do axios com o token automaticamente
+  const api = axios.create({
+    baseURL: import.meta.env.VITE_API_URL,
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 
   useEffect(() => {
     if (!token) {
       window.location.href = "/login";
       return;
     }
-
     carregarUsuarios();
     carregarProjetos();
     carregarTarefas();
   }, [token]);
 
-  // Funções de carregamento
   const carregarUsuarios = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/usuarios`, config);
+      const res = await api.get('/usuarios');
       setUsuarios(res.data || []);
     } catch (err) {
       console.error("Erro ao carregar usuários:", err.response || err);
+      setUsuarios([]);
     }
   };
 
   const carregarProjetos = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/projetos`, config);
+      const res = await api.get('/projetos');
       setProjetos(res.data || []);
     } catch (err) {
       console.error("Erro ao carregar projetos:", err.response || err);
+      setProjetos([]);
     }
   };
 
   const carregarTarefas = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tarefas`, config);
-      const tarefasFormatadas = (res.data || []).map(t => ({
-        ...t,
-        usuario: t.usuario || { nome: '---', idUsuario: '' },
-        projeto: t.projeto || { nome: '---', idProjeto: '' },
-        prazo: t.prazo ? new Date(t.prazo).toISOString().slice(0, 10) : null
-      }));
-      setTarefas(tarefasFormatadas);
-    } catch (err) {
-      console.error("Erro ao carregar tarefas:", err.response || err);
+      const res = await api.get('/tarefas');
+      if (Array.isArray(res.data)) {
+        setTarefas(res.data);
+      } else {
+        console.error("Resposta inesperada:", res.data);
+        setTarefas([]);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar tarefas:", error);
+      setTarefas([]);
     }
   };
 
-  // Reset form
   const resetForm = () => {
     setTitulo('');
     setDescricao('');
@@ -83,30 +88,25 @@ function GestaoTarefas() {
     setModoEdicao(false);
   };
 
-  // Edit
   const handleEdit = (tarefa) => {
     if (!usuarios.length || !projetos.length) {
       alert("Usuários ou projetos ainda não carregados. Aguarde alguns segundos.");
       return;
     }
-
     setShowForm(true);
     setModoEdicao(true);
-    setIdEditando(tarefa.idTarefa);
-    setTitulo(tarefa.titulo);
-    setDescricao(tarefa.descricao);
-    setPrazo(tarefa.prazo);
-    setStatus(tarefa.status);
-    setPrioridade(tarefa.prioridade);
-    setUsuarioId(tarefa.usuario?.idUsuario?.toString() || '');
-    setProjetoId(tarefa.projeto?.idProjeto?.toString() || '');
+    setIdEditando(tarefa.idTarefa || tarefa.id || null);
+    setTitulo(tarefa.titulo || '');
+    setDescricao(tarefa.descricao || '');
+    setPrazo(tarefa.prazo || '');
+    setStatus(tarefa.status || 'Pendente');
+    setPrioridade(tarefa.prioridade || 'Média');
+    setUsuarioId(tarefa.usuario?.idUsuario?.toString() || tarefa.usuario?.id?.toString() || '');
+    setProjetoId(tarefa.projeto?.idProjeto?.toString() || tarefa.projeto?.id?.toString() || '');
   };
 
-  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Se nenhum usuário selecionado, envia null para backend usar usuário logado
     const usuarioIdNumber = usuarioId ? Number(usuarioId) : null;
     const projetoIdNumber = projetoId ? Number(projetoId) : null;
 
@@ -120,17 +120,15 @@ function GestaoTarefas() {
       projetoId: projetoIdNumber
     };
 
-    console.log("Payload enviado:", tarefaPayload);
-
     try {
       if (modoEdicao && idEditando) {
-        await axios.put(`${import.meta.env.VITE_API_URL}/tarefas/${idEditando}`, tarefaPayload, config);
+        await api.put(`/tarefas/${idEditando}`, tarefaPayload);
         alert("Tarefa atualizada com sucesso!");
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}/tarefas`, tarefaPayload, config);
+        await api.post('/tarefas', tarefaPayload);
         alert("Tarefa criada com sucesso!");
       }
-      await carregarTarefas(); // Atualiza lista
+      await carregarTarefas();
       resetForm();
       setShowForm(false);
     } catch (error) {
@@ -143,8 +141,8 @@ function GestaoTarefas() {
   const handleDelete = async (id) => {
     if (!window.confirm("Deseja realmente deletar esta tarefa?")) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/tarefas/${id}`, config);
-      setTarefas(prev => prev.filter(t => t.idTarefa !== id));
+      await api.delete(`/tarefas/${id}`);
+      setTarefas(prev => prev.filter(t => t.idTarefa !== id && t.id !== id));
     } catch (error) {
       alert("Erro ao deletar tarefa. Tente novamente.");
     }
@@ -195,21 +193,21 @@ function GestaoTarefas() {
               <tbody>
                 {tarefas.length > 0 ? (
                   tarefas.map((tarefa) => (
-                    <tr key={tarefa.idTarefa}>
+                    <tr key={tarefa.idTarefa || tarefa.id}>
                       <td>{tarefa.usuario?.nome || '---'}</td>
                       <td>{tarefa.projeto?.nome || '---'}</td>
-                      <td>{tarefa.titulo}</td>
-                      <td>{tarefa.descricao}</td>
+                      <td>{tarefa.titulo || '---'}</td>
+                      <td>{tarefa.descricao || '---'}</td>
                       <td>
                         <span className={`badge ${tarefa.status === 'Concluída' ? 'bg-success' : 'bg-warning text-dark'}`}>{tarefa.status}</span>
                       </td>
                       <td>
                         <span className={`badge ${tarefa.prioridade === 'Alta' ? 'bg-danger' : tarefa.prioridade === 'Média' ? 'bg-primary' : 'bg-secondary'}`}>{tarefa.prioridade}</span>
                       </td>
-                      <td>{tarefa.prazo?.slice(0, 10) || '---'}</td>
+                      <td>{tarefa.prazo || '---'}</td>
                       <td className="action-buttons">
                         <button className="btn btn-primary" onClick={() => handleEdit(tarefa)}><i className="bi bi-pencil-fill"></i></button>
-                        <button className="btn btn-danger" onClick={() => handleDelete(tarefa.idTarefa)}><i className="bi bi-trash-fill"></i></button>
+                        <button className="btn btn-danger" onClick={() => handleDelete(tarefa.idTarefa || tarefa.id)}><i className="bi bi-trash-fill"></i></button>
                       </td>
                     </tr>
                   ))
@@ -232,35 +230,52 @@ function GestaoTarefas() {
 
                 <select
                   className="form-control mb-2"
-                  value={usuarioId}
+                  value={usuarioId || ''}
                   onChange={e => setUsuarioId(e.target.value)}
                   required
                 >
                   <option value="">Selecione o usuário</option>
                   {usuarios.map(u => (
-                    <option key={u.idUsuario} value={u.idUsuario}>{u.nome}</option>
+                    <option key={u.idUsuario || u.id} value={u.idUsuario || u.id}>{u.nome}</option>
                   ))}
                 </select>
 
                 <select
                   className="form-control mb-2"
-                  value={projetoId}
+                  value={projetoId || ''}
                   onChange={e => setProjetoId(e.target.value)}
                 >
                   <option value="">Selecione o projeto (opcional)</option>
                   {projetos.map(p => (
-                    <option key={p.idProjeto} value={p.idProjeto}>{p.nome}</option>
+                    <option key={p.idProjeto || p.id} value={p.idProjeto || p.id}>{p.nome}</option>
                   ))}
                 </select>
 
-                <input className="form-control mb-2" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} required />
-                <input className="form-control mb-2" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)} required />
-                <input type="date" className="form-control mb-2" value={prazo || ''} onChange={e => setPrazo(e.target.value)} />
-                <select className="form-control mb-2" value={status} onChange={e => setStatus(e.target.value)} required>
+                <input
+                  className="form-control mb-2"
+                  placeholder="Título"
+                  value={titulo || ''}
+                  onChange={e => setTitulo(e.target.value)}
+                  required
+                />
+                <input
+                  className="form-control mb-2"
+                  placeholder="Descrição"
+                  value={descricao || ''}
+                  onChange={e => setDescricao(e.target.value)}
+                  required
+                />
+                <input
+                  type="date"
+                  className="form-control mb-2"
+                  value={prazo || ''}
+                  onChange={e => setPrazo(e.target.value)}
+                />
+                <select className="form-control mb-2" value={status || 'Pendente'} onChange={e => setStatus(e.target.value)} required>
                   <option value="Pendente">Pendente</option>
                   <option value="Concluída">Concluída</option>
                 </select>
-                <select className="form-control mb-3" value={prioridade} onChange={e => setPrioridade(e.target.value)} required>
+                <select className="form-control mb-3" value={prioridade || 'Média'} onChange={e => setPrioridade(e.target.value)} required>
                   <option value="Alta">Alta</option>
                   <option value="Média">Média</option>
                   <option value="Baixa">Baixa</option>

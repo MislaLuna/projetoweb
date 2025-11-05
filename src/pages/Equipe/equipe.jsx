@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../../css/bootstrap.min.css';
@@ -18,49 +18,42 @@ function GestaoEquipes() {
   const navigate = useNavigate();
 
   // Axios com JWT sempre atualizado
-  const axiosJWT = axios.create();
-
-  axiosJWT.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        console.warn('❌ Token não encontrado no localStorage');
-        return config;
-      }
+const axiosJWT = axios.create();
+axiosJWT.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
-      console.log('🔑 Token enviado no header:', token.substring(0, 15) + '...');
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
+    }
+    // Sempre define Content-Type JSON
+    config.headers['Content-Type'] = 'application/json';
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 
 
+  // 🔹 Buscar equipes do usuário logado
+  const buscarEquipes = async () => {
+    try {
+      const res = await axiosJWT.get('http://localhost:8080/equipes/minhas');
+      const data = Array.isArray(res.data) ? res.data : res.data.equipes || [];
+      const usuario = JSON.parse(localStorage.getItem('usuario'));
 
+      // Filtra só equipes do usuário logado como criador ou participante
+      const equipesDoUsuario = data.filter(eq => 
+        eq.criador?.id === usuario.id || eq.usuarios?.some(u => u.id === usuario.id)
+      );
 
+      setEquipes(res.data);
+    } catch (err) {
+      console.error('Erro ao buscar equipes:', err);
+      alert('❌ Erro ao carregar equipes.');
+    }
+  };
 
-const buscarEquipes = async () => {
-  try {
-    const res = await axiosJWT.get('http://localhost:8080/equipes');
-    console.log('📦 Todas as equipes retornadas da API:', res.data);
-
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-
-    // 🔍 Filtra só equipes do criador logado
-    const equipesDoUsuario = res.data.filter(eq => eq.criador?.id === usuario?.id);
-
-    console.log('✅ Equipes do usuário logado:', equipesDoUsuario);
-    setEquipes(equipesDoUsuario);
-  } catch (err) {
-    console.error('Erro ao buscar equipes:', err);
-    alert('❌ Erro ao carregar equipes.');
-  }
-};
-
-
-
-
-  // 🔹 Checa token e carrega equipes ao abrir a página
+  // 🔹 Carrega equipes ao abrir a página
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -68,54 +61,48 @@ const buscarEquipes = async () => {
       navigate('/login');
       return;
     }
-
-    buscarEquipes(); // só chama se existir token
+    buscarEquipes();
   }, [navigate]);
 
-  // 🔹 Criar nova equipe
-  const handleCriarEquipe = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('⚠️ Você precisa estar logado para criar equipes!');
-      navigate('/login');
-      return;
-    }
 
-    try {
-      await axiosJWT.post('http://localhost:8080/equipes', { nome: nomeEquipe });
-      setNomeEquipe('');
-      setShowFormEquipe(false);
-      buscarEquipes();
-      alert('✅ Equipe criada com sucesso!');
-    } catch (err) {
-      if (err.response) {
-        if (err.response.status === 401) {
-          alert('⚠️ Nome da equipe inválido ou já existente.');
-        } else if (err.response.status === 400) {
-          const mensagem = err.response.data || 'Nome da equipe inválido ou já existente.';
-          alert(`❌ ${mensagem}`);
-        } else {
-          alert(`❌ Erro ao criar equipe: ${err.response.data}`);
-        }
-      } else {
-        alert(`❌ Erro ao criar equipe: ${err.message}`);
+
+  // 🔹 Criar nova equipe
+const handleCriarEquipe = async (e) => {
+  e.preventDefault();
+  if (!nomeEquipe) return;
+
+  try {
+    await axiosJWT.post('http://localhost:8080/equipes', {
+      nome: nomeEquipe,
+      descricao: ""
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-      console.error('Erro ao criar equipe:', err);
-    }
-  };
+    });
+
+    setNomeEquipe('');
+    setShowFormEquipe(false);
+
+    // 🔹 Atualiza a lista de equipes após criar
+    buscarEquipes();
+
+    alert('✅ Equipe criada com sucesso!');
+  } catch (err) {
+    console.error('Erro ao criar equipe:', err);
+    alert(`❌ Erro ao criar equipe: ${err.response?.data || err.message}`);
+  }
+};
+
+
+
+
 
   // 🔹 Adicionar colaborador
   const handleAdicionarColaborador = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('⚠️ Você precisa estar logado para adicionar colaboradores!');
-      navigate('/login');
-      return;
-    }
-    if (!equipeSelecionada) {
-      alert('Selecione uma equipe!');
+    if (!emailColaborador || !equipeSelecionada) {
+      alert('⚠️ Preencha todos os campos!');
       return;
     }
 
@@ -124,39 +111,26 @@ const buscarEquipes = async () => {
         `http://localhost:8080/equipes/${equipeSelecionada}/convidar`,
         { email: emailColaborador }
       );
+
       setEmailColaborador('');
       setEquipeSelecionada('');
       setShowFormColaborador(false);
-      alert('✅ Convite enviado com sucesso! O colaborador receberá um e-mail.');
+      alert('✅ Convite enviado com sucesso!');
     } catch (err) {
-      if (err.response) {
-        if (err.response.status === 401) alert('⚠️ Não autorizado! Faça login novamente.');
-        else if (err.response.status === 400) alert('⚠️ Usuário já é membro ou email inválido.');
-        else alert(`❌ Erro ao enviar convite: ${err.response.data}`);
-      } else {
-        alert(`❌ Erro ao enviar convite: ${err.message}`);
-      }
       console.error('Erro ao adicionar colaborador:', err);
+      alert(`❌ Erro ao enviar convite: ${err.response?.data || err.message}`);
     }
   };
 
   // 🔹 Excluir equipe
   const handleDelete = async (id) => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('⚠️ Você precisa estar logado para deletar equipes!');
-      navigate('/login');
-      return;
-    }
-
     try {
       await axiosJWT.delete(`http://localhost:8080/equipes/${id}`);
       setEquipes(prev => prev.filter(e => e.id !== id));
       alert('✅ Equipe deletada com sucesso!');
     } catch (err) {
-      if (err.response && err.response.status === 401) alert('⚠️ Não autorizado! Faça login com um ADMIN.');
-      else alert('❌ Não foi possível excluir a equipe.');
       console.error('Erro ao excluir equipe:', err);
+      alert(`❌ Não foi possível excluir a equipe: ${err.response?.data || err.message}`);
     }
   };
 
@@ -172,19 +146,19 @@ const buscarEquipes = async () => {
           </Link>
         </div>
         <ul className="menu">
-          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i><span className="menu-text">Início</span></Link></li>
-          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-people"></i><span className="menu-text">Equipe</span></Link></li>
-          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i><span className="menu-text">Tarefas</span></Link></li>
-          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i><span className="menu-text">Projetos</span></Link></li>
-          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i><span className="menu-text">Departamentos</span></Link></li>
-          <li><Link to="/gestaousuario" className={isActive('/gestaousuario')}><i className="bi bi-people-fill"></i><span className="menu-text">Usuários</span></Link></li>
-          <li><Link to="/dashboard" className={isActive('/dashboard')}><i className="bi bi-speedometer2"></i><span className="menu-text">Dashboard</span></Link></li>
-          <li><Link to="/relatorios" className={isActive('/relatorios')}><i className="bi bi-graph-up"></i><span className="menu-text">Relatórios</span></Link></li>
-          <li><Link to="/configuracao" className={isActive('/configuracao')}><i className="bi bi-gear-fill"></i><span className="menu-text">Configurações</span></Link></li>
+          <li><Link to="/home2" className={isActive('/home2')}><i className="bi bi-house-door-fill"></i> Início</Link></li>
+          <li><Link to="/equipe" className={isActive('/equipe')}><i className="bi bi-people"></i> Equipe</Link></li>
+          <li><Link to="/gestaotarefas" className={isActive('/gestaotarefas')}><i className="bi bi-list-task"></i> Tarefas</Link></li>
+          <li><Link to="/gestaoprojeto" className={isActive('/gestaoprojeto')}><i className="bi bi-folder2-open"></i> Projetos</Link></li>
+          <li><Link to="/gestaodepartamento" className={isActive('/gestaodepartamento')}><i className="bi bi-building"></i> Departamentos</Link></li>
+          <li><Link to="/gestaousuario" className={isActive('/gestaousuario')}><i className="bi bi-people-fill"></i> Usuários</Link></li>
+          <li><Link to="/dashboard" className={isActive('/dashboard')}><i className="bi bi-speedometer2"></i> Dashboard</Link></li>
+          <li><Link to="/relatorios" className={isActive('/relatorios')}><i className="bi bi-graph-up"></i> Relatórios</Link></li>
+          <li><Link to="/configuracao" className={isActive('/configuracao')}><i className="bi bi-gear-fill"></i> Configurações</Link></li>
         </ul>
       </aside>
 
-      {/* Conteúdo Principal */}
+      {/* Conteúdo */}
       <main className="main">
         <div className="dashboard">
           <div className="dash-2">
@@ -209,19 +183,17 @@ const buscarEquipes = async () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {equipes.length > 0 ? (
-                      equipes.map(eq => (
-                        <tr key={eq.id}>
-                          <td>{eq.nome}</td>
-                          <td>{eq.codigoConvite}</td>
-                          <td>
-                            <button className="delete-btn" onClick={() => handleDelete(eq.id)}>
-                              <i className="bi bi-trash-fill"></i>
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
+                    {equipes.length > 0 ? equipes.map(eq => (
+                      <tr key={eq.id}>
+                        <td>{eq.nome}</td>
+                        <td>{eq.codigoConvite}</td>
+                        <td>
+                          <button className="delete-btn" onClick={() => handleDelete(eq.id)}>
+                            <i className="bi bi-trash-fill"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    )) : (
                       <tr>
                         <td colSpan="3" className="text-center">Nenhuma equipe encontrada</td>
                       </tr>
@@ -234,57 +206,36 @@ const buscarEquipes = async () => {
 
           <footer className="footer-container">
             <p>&copy; 2024 TaskNavigation. Todos os direitos reservados.</p>
-            <p>Este painel fornece visão rápida das funcionalidades principais do sistema.</p>
           </footer>
         </div>
       </main>
 
-      {/* Modal - Criar Equipe */}
+      {/* Modal Criar Equipe */}
       {showFormEquipe && (
         <div className="modal-overlay">
           <div className="modal-form">
             <button className="close-btn" onClick={() => setShowFormEquipe(false)}>×</button>
             <form onSubmit={handleCriarEquipe}>
               <h3>Nova Equipe</h3>
-              <input
-                className="form-control mb-2"
-                placeholder="Nome da Equipe"
-                value={nomeEquipe}
-                onChange={(e) => setNomeEquipe(e.target.value)}
-                required
-              />
+              <input className="form-control mb-2" placeholder="Nome da Equipe" value={nomeEquipe} onChange={e => setNomeEquipe(e.target.value)} required />
               <button type="submit" className="btn btn-success w-100">Salvar</button>
             </form>
           </div>
         </div>
       )}
 
-      {/* Modal - Adicionar Colaborador */}
+      {/* Modal Adicionar Colaborador */}
       {showFormColaborador && (
         <div className="modal-overlay">
           <div className="modal-form">
             <button className="close-btn" onClick={() => setShowFormColaborador(false)}>×</button>
             <form onSubmit={handleAdicionarColaborador}>
               <h3>Adicionar Colaborador</h3>
-              <select
-                className="form-control mb-2"
-                value={equipeSelecionada}
-                onChange={(e) => setEquipeSelecionada(e.target.value)}
-                required
-              >
+              <select className="form-control mb-2" value={equipeSelecionada} onChange={e => setEquipeSelecionada(e.target.value)} required>
                 <option value="">Selecione uma equipe</option>
-                {equipes.map(eq => (
-                  <option key={eq.id} value={eq.id}>{eq.nome}</option>
-                ))}
+                {equipes.map(eq => <option key={eq.id} value={eq.id}>{eq.nome}</option>)}
               </select>
-              <input
-                type="email"
-                className="form-control mb-2"
-                placeholder="Email do colaborador"
-                value={emailColaborador}
-                onChange={(e) => setEmailColaborador(e.target.value)}
-                required
-              />
+              <input type="email" className="form-control mb-2" placeholder="Email do colaborador" value={emailColaborador} onChange={e => setEmailColaborador(e.target.value)} required />
               <button type="submit" className="btn btn-primary w-100">Enviar Convite</button>
             </form>
           </div>
